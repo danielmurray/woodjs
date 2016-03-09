@@ -1,0 +1,41 @@
+@mixin flexbox{
+	display: flex;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+}
+
+@mixin justify-content($jc) {
+	justify-content: $jc;
+	-ms-justify-content: $jc;
+	-webkit-justify-content: $jc;
+}
+
+@mixin align-items($ai) {
+	align-items: $ai;
+	-ms-align-items: $ai;
+	-webkit-align-items: $ai;
+}
+
+@mixin flex-direction($fd) {
+	flex-direction: $fd;
+	-ms-flex-direction: $fd;
+	-webkit-flex-direction: $fd;
+}
+
+@mixin flex-wrap($fw) {
+	flex-wrap: $fw;
+	-ms-flex-wrap: $fw;
+	-webkit-flex-wrap: $fw;
+}
+
+@mixin flex-grow($fg) {
+	flex-grow: $fg;
+	-ms-flex-grow: $fg;
+	-webkit-flex-grow: $fg;
+}
+
+@mixin align-content($ac) {
+	align-content: $ac;
+	-ms-align-content: $ac;
+	-webkit-align-content: $ac;
+}

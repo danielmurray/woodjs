@@ -1,0 +1,40 @@
+.card{
+  width: 300px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
+  border-radius: 2px;
+  overflow: hidden;
+  z-index: 1;
+
+  .card-header{
+    height: 50px;
+    background-color: rgb(232,232,232);
+    @include flexbox;
+    @include align-items(center);
+    color: rgba(0, 0, 0, .40);
+
+    .avatar-wrapper{
+      height: 32px;
+      width: 32px;
+      margin: 0 10px;
+    }
+
+    .title{
+    }
+  }
+
+  .card-content{
+    background-color: rgb(255,255,255);
+    padding: 10px;
+  }
+
+  .card-footer{
+    @include flexbox;
+    @include justify-content(flex-end);
+  }
+}

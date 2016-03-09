@@ -1,0 +1,78 @@
+<html style="width:100%;height:100%;">
+    <head>
+        <!-- dependencies -->
+        <link rel="stylesheet" href="../bower_components/datatables-scroller/css/dataTables.scroller.css"/>
+        <link rel="stylesheet" href="../bower_components/datatables-tabletools/css/dataTables.tableTools.css"/>
+
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../bower_components/bootstrap-dialog/dist/css/bootstrap-dialog.min.css"/>
+        <link rel="stylesheet" href="../bower_components/bootstrap-select/dist/css/bootstrap-select.min.css"/>
+        <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="../bower_components/fuelux/dist/css/fuelux.min.css"/>
+
+        <!-- library -->
+        <link rel="stylesheet" href="../dist/css/Wood.css"/>
+    </head>
+    <body style="width:100%;height:100%;">
+        <style>
+          #viewport1{
+            height:100%;
+            width:100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background-color: rgba(0,0,0,0.16)
+          }
+        </style>
+        <div id="viewport1"></div>
+
+        <!-- dependencies -->
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <script type="text/javascript" src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../bower_components/datatables-scroller/js/dataTables.scroller.js"></script>
+        <script type="text/javascript" src="../bower_components/datatables-tableTools/js/dataTables.tableTools.js"></script>
+        <script type="text/javascript" src="../bower_components/datatables-colResize/dataTables.colResize.js"></script>
+
+        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+        <script type="text/javascript" src="../bower_components/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+        <script type="text/javascript" src="../bower_components/fuelux/dist/js/fuelux.min.js"></script>
+
+        <script type="text/javascript" src="../bower_components/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="../bower_components/underscore.string/dist/underscore.string.min.js"></script>
+        <script type="text/javascript" src="../bower_components/backbone/backbone.js"></script>
+        <script type="text/javascript" src="../bower_components/backbone.babysitter/lib/backbone.babysitter.js"></script>
+        <script type="text/javascript" src="../bower_components/backbone.wreqr/lib/backbone.wreqr.js"></script>
+        <script type="text/javascript" src="../bower_components/marionette/lib/backbone.marionette.min.js"></script>
+
+        <!-- library -->
+        <script type="text/javascript" src="../dist/js/Wood.js"></script>
+
+        <!-- initialization -->
+        <script type="text/javascript">
+          var range = function(start,end){
+            var range = [];
+            for (var i = start; i <= end; i++) {
+                range.push(i);
+            }
+            return range;
+          };
+
+
+          var app = new Backbone.Marionette.Application();
+          app.addRegions({
+          	testRegion1: '#viewport1'
+          });
+
+          $(document).ready(function() {
+            var combo = new Wood.inputs.Text({
+              defaultValue: '',
+              hintText: 'Or Email',
+              floatingLabelText: 'Username',
+            });
+            app.testRegion1.show(combo)
+          });
+        </script>
+    </body>
+</html>

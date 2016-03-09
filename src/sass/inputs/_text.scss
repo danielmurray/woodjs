@@ -1,0 +1,123 @@
+.input-text{
+  position: relative;
+  min-width: 256px;
+  height: 48px;
+  font-family: Roboto;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.298039);
+  line-height: 24px;
+
+  &.filled{
+    .label-text{
+      transform: perspective(1px) scale(0.75) translate3d(2px, -28px, 0px);
+    }
+
+    .hint-text{
+      opacity: 0;
+    }
+  }
+
+  &.focused{
+    .label-text{
+      color: rgb(0, 188, 212);
+      transform: perspective(1px) scale(0.75) translate3d(2px, -28px, 0px);
+    }
+
+    .border-bottom{
+      .border-bottom-active{
+        width: 100%;
+      }
+    }
+
+    &.filled{
+      .label-text{
+        color: inherit;
+      }
+    }
+  }
+
+  &.labeled{
+    height: 58px;
+
+    .label-text{
+      display: block;
+    }
+
+    .hint-text{
+      opacity: 0;
+    }
+
+    &.focused{
+      .hint-text{
+        opacity: 1;
+      }
+
+      &.filled{
+        .hint-text{
+          opacity: 0;
+        }
+      }
+    }
+
+    input{
+      margin-top: 5px;
+    }
+  }
+
+  .label-text{
+    display: none;
+    position: absolute;
+    top: 24px;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    transform: scale(1) translate3d(0px, 0px, 0px);
+    transform-origin: left top 0px;
+
+    line-height: 22px;
+    z-index: 1;
+    cursor: text;
+    pointer-events: auto;
+    -webkit-user-select: none;
+  }
+
+  .hint-text{
+    position: absolute;
+    bottom: 12px;
+    opacity: 1;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  }
+
+  input{
+    padding: 0;
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.87);
+    font: inherit;
+    z-index: 2;
+  }
+
+  .border-bottom{
+    position: absolute;
+    bottom: 8px;
+    height: 0px;
+    width: 100%;
+
+    .border-bottom-inactive{
+      border: none;
+      border-bottom: solid 1px;
+      border-color: #e0e0e0;
+    }
+
+    .border-bottom-active{
+      margin: 0 auto;
+      width: 0%;
+      border: none;
+      border-bottom: solid 2px;
+      border-color: rgb(0, 188, 212);
+      transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+.navbar{
+  height: 55px;
+  background-image: linear-gradient(to top,
+    rgba(69,69,69,0.75),rgba(51,51,51,0.75));
+
+  .container{
+    .navbar-wrapper{
+      @include flexbox;
+      @include justify-content(space-between);
+
+      .navbar-header{
+        .navbar-brand{
+          @include flexbox;
+          @include align-items(center);
+          padding: 0px;
+          margin-left: 0px;
+
+          .icon-pair{
+            @include flexbox;
+
+            .icon-shape{
+              @include flexbox;
+              @include justify-content(center);
+              @include align-items(center);
+              @include hexagon-rotate(32px);
+              background-color: whitesmoke;
+              .icon{
+
+              }
+            }
+
+            .plus-icon{
+              color: whitesmoke;
+              padding: 6px;
+            }
+          }
+
+          .tesla-logo{
+            margin: 0px 15px;
+            width: 100px;
+            height: 13px;
+            background: transparent url("https://www.teslamotors.com/tesla_theme/assets/img/logo.svg?1") no-repeat center;
+            background-size: 100px 13px;
+          }
+        }
+      }
+
+      .login-menu{
+        @include flexbox;
+        @include align-items(center);
+
+        .login-icon{
+          color: whitesmoke;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

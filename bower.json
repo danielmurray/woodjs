@@ -1,0 +1,27 @@
+{
+  "name": "woodjs",
+  "authors": [
+    "Dan Murray <daniel.phillip.murray@gmail.com>"
+  ],
+  "private": true,
+  "dependencies": {
+    "bootstrap-sass": "3.3.5",
+    "bootstrap-dialog": "",
+    "bootstrap-select": "1.6.4",
+    "backbone": "1.1.2",
+    "datatables": "1.10.7",
+    "datatables-scroller": "1.2.1",
+    "datatables-tabletools": "2.2.2",
+    "datatables-colresize": "0.0.10",
+    "font-awesome": "",
+    "fuelux": "",
+    "marionette": "2.4.2",
+    "underscore.string": "3.0.3"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "samples"
+  ]
+}
