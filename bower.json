@@ -1,9 +1,24 @@
 {
   "name": "woodjs",
-  "authors": [
-    "Dan Murray <daniel.phillip.murray@gmail.com>"
+  "description": "M@terial for M@arionette... Wood",
+  "version": "0.0.1",
+  "license": "ISC",
+  "author": {
+    "name": "Dan Murray",
+    "email": "daniel.phillip.murray@gmail.com",
+    "url": "http://danielmurray.github.io/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielmurray/woodjs.git"
+  },
+  "github": "https://github.com/danielmurray/woodjs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "samples"
   ],
-  "private": true,
   "dependencies": {
     "bootstrap-sass": "3.3.5",
     "bootstrap-dialog": "",
@@ -17,11 +32,5 @@
     "fuelux": "",
     "marionette": "2.4.2",
     "underscore.string": "3.0.3"
-  },
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "samples"
-  ]
+  }
 }
