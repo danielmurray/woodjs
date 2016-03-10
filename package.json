@@ -1,7 +1,7 @@
 {
   "name": "woodjs",
   "description": "M@terial for M@arionette... Wood",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "ISC",
   "author": {
     "name": "Dan Murray",
@@ -17,15 +17,12 @@
     "watch-sass": "npm run build-sass & node-sass -wr src/sass/all.scss dist/css/wood.css",
     "watch-js": "watchify src/js/all.js -o dist/js/wood.js -dv",
     "watch": "npm run watch-sass & npm run watch-js",
-
     "build-sass": "node-sass src/sass/all.scss dist/css/wood.css",
     "build-js": "browserify src/js/all.js > dist/js/wood.js",
     "build": "npm run build-sass & npm run build-js",
-
     "bdist-sass": "node-sass --output-style compressed src/sass/all.scss dist/css/wood.min.css",
     "bdist-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
     "bdist": "npm run build-sass & npm run build-js",
-
     "deploy:prod": "npm run bdist && npm run version:patch && npm run push:git",
     "version:patch": "npm version patch && npm publish",
     "push:git": "git push --tags origin HEAD:master"
