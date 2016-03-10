@@ -1,22 +1,49 @@
 {
   "name": "woodjs",
   "description": "M@terial for M@arionette... Wood",
+  "version": "0.0.0",
+  "license": "ISC",
+  "author": {
+    "name": "Dan Murray",
+    "email": "daniel.phillip.murray@gmail.com",
+    "url": "http://danielmurray.github.io/"
+  },
   "repository": {
     "type": "git",
+    "url": "https://github.com/danielmurray/woodjs.git"
   },
-  "publishConfig": {
-  },
-  "version": "0.0.0",
+  "github": "https://github.com/danielmurray/woodjs",
   "scripts": {
-    "watch-sass":  "node-sass -wr src/sass/all.scss dist/css/wood.css",
+    "watch-sass":  "npm run build-sass & node-sass -wr src/sass/all.scss dist/css/wood.css",
     "watch-js": "watchify src/js/all.js -o dist/js/wood.js -dv",
     "watch": "npm run watch-sass & npm run watch-js",
-    "build-sass":  "node-sass --output-style compressed src/sass/all.scss dist/css/wood.min.css",
-    "build-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
-    "build": "npm run build-sass & npm run build-js"
+
+    "build-sass":  "node-sass src/sass/all.scss dist/css/wood.css",
+    "build-js": "browserify src/js/all.js > dist/js/wood.js",
+    "build": "npm run build-sass & npm run build-js",
+
+    "bdist-sass":  "node-sass --output-style compressed src/sass/all.scss dist/css/wood.min.css",
+    "bdist-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
+    "bdist": "npm run build-sass & npm run build-js",
+
+    "deploy:prod"     : "npm run bdist && npm run version:patch && npm run push:git",
+    "version:patch"   : "npm version patch",
+    "push:git"        : "git push --tags origin HEAD:master"
   },
-  "author": "Dan Murray",
-  "license": "ISC",
+  "dependencies": {
+    "bootstrap-sass": "3.3.5",
+    "bootstrap-dialog": "",
+    "bootstrap-select": "1.6.4",
+    "backbone": "1.1.2",
+    "datatables": "1.10.7",
+    "datatables-scroller": "1.2.1",
+    "datatables-tabletools": "2.2.2",
+    "datatables-colresize": "0.0.10",
+    "font-awesome": "",
+    "fuelux": "",
+    "marionette": "2.4.2",
+    "underscore.string": "3.0.3"
+  },
   "devDependencies": {
     "browserify": "",
     "express": "^4.13.0",
