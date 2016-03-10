@@ -24,7 +24,7 @@
     "bdist-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
     "bdist": "npm run bdist-sass & npm run bdist-js",
     "deploy": "npm run bdist && npm run version:patch && npm run push:git && npm run publish",
-    "version:patch": "npm version patch && bower version patch",
+    "version:patch": "npm version patch",
     "publish": "npm publish",
     "push:git": "git push --tags origin HEAD:master"
   },
