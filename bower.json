@@ -20,7 +20,7 @@
     "samples"
   ],
   "dependencies": {
-    "bootstrap-sass": "3.3.5",
+    "bootstrap-sass": "3.3.6",
     "bootstrap-dialog": "",
     "bootstrap-select": "1.6.4",
     "backbone": "1.1.2",
