@@ -1,0 +1,41 @@
+.appbar{
+  height: 55px;
+  padding: 0 10px;
+
+  @include flexbox;
+  @include justify-content(space-between);
+
+  background-image: linear-gradient(to top, rgba(69,69,69,0.75),rgba(51,51,51,0.75));
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
+
+  .appbar-brand{
+    @include flexbox;
+    @include align-items(center);
+
+    padding: 0px;
+    margin-left: 0px;
+
+    .avatar-wrapper{
+      height: 32px;
+      width: 32px;
+    }
+
+    .tesla-logo{
+      margin: 0px 10px;
+      width: 100px;
+      height: 13px;
+      background: transparent url("https://www.teslamotors.com/tesla_theme/assets/img/logo.svg?1") no-repeat center;
+      background-size: 100px 13px;
+    }
+  }
+
+  .login-menu{
+    @include flexbox;
+    @include align-items(center);
+
+    .login-icon{
+      color: whitesmoke;
+      font-size: 20px;
+    }
+  }
+}
