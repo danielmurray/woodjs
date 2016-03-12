@@ -20,7 +20,7 @@
                       '<i class="fa fa-icon fa-briefcase"></i>' +
                     '</div>' +
                   '</div>' +
-                  '<div class="tesla-logo"></div>' +
+                  '<div class="logo"></div>' +
                 '</a>' +
               '</div>' +
               '<a class="login-menu" href="/login">' +
