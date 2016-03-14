@@ -11,10 +11,10 @@ module.exports = function (grunt) {
                 },
                 files: {
                   // material icons
-                  'MaterialIcons-Regular.eot': 'material-design-icons/iconfont/MaterialIcons-Regular.eot',
-                  'MaterialIcons-Regular.woff': 'material-design-icons/iconfont/MaterialIcons-Regular.woff',
-                  'MaterialIcons-Regular.woff2': 'material-design-icons/iconfont/MaterialIcons-Regular.woff2',
-                  'MaterialIcons-Regular.truetype': 'material-design-icons/iconfont/MaterialIcons-Regular.ttf'
+                  'MaterialIcons-Regular.eot': 'material-design-iconic-font/dist/fonts/Material-Design-Iconic-Font.eot',
+                  'MaterialIcons-Regular.woff': 'material-design-iconic-font/dist/fonts/Material-Design-Iconic-Font.woff',
+                  'MaterialIcons-Regular.woff2': 'material-design-iconic-font/dist/fonts/Material-Design-Iconic-Font.woff2',
+                  'MaterialIcons-Regular.truetype': 'material-design-iconic-font/dist/fonts/Material-Design-Iconic-Font.ttf'
                 }
             },
         }
