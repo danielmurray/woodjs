@@ -7,7 +7,7 @@
       template: _.template(''+
         '<div class="appbar-brand" href="#">' +
           '<div id="avatar-wrapper" class="avatar-wrapper"></div>' +
-          '<div class="tesla-logo"></div>' +
+          '<div class="logo"></div>' +
         '</div>' +
         '<div class="login-menu" href="/login">' +
           '<i class="fa fa-icon fa-sign-in login-icon"></i>' +
