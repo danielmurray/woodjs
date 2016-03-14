@@ -24,7 +24,7 @@
     "bdist-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
     "bdist": "npm run bdist-sass & npm run bdist-js",
     "deploy": "npm run bdist && npm run build && npm run version:patch && npm run push:git && npm publish",
-    "version:patch": "bower version patch -m \"Release v%s\"",
+    "version:patch": "mversion version patch -m \"Release v%s\"",
     "push:git": "git push --tags origin HEAD:master"
   },
   "devDependencies": {
@@ -33,8 +33,9 @@
     "grunt": "",
     "grunt-cli": "",
     "grunt-bowercopy": "",
+    "mversion": "1.10.1",
+    "node-sass": "",
     "uglify-js": "",
-    "watchify": "",
-    "node-sass": ""
+    "watchify": ""
   }
 }
