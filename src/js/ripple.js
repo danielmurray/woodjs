@@ -1,6 +1,6 @@
 Wood.Ripple = Marionette.ItemView.extend({
   attributes: {
-    class: 'ripple-wrapper',
+    class: 'wood ripple-wrapper',
   },
   template: _.template(
   ''),

@@ -4,7 +4,7 @@
  (function (toolbox) {
     Wood.Icon = Marionette.LayoutView.extend({
         attributes: {
-          class: 'icon-wrapper',
+          class: 'wood icon-wrapper',
         },
         iconTemplates: {
           'fa': '<i class="fa fa-icon fa-<%-icon%>"></i>',

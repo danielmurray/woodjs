@@ -4,12 +4,12 @@
 (function (toolbox) {
   Wood.Tooltip = Marionette.LayoutView.extend({
     attributes: {
-      class: 'tooltip-anchor-wrapper',
+      class: 'wood tooltip-anchor-wrapper',
     },
     template: _.template(
       '<div class="tooltip-anchor">' +
         '<div class="tooltip-wrapper">' +
-          '<div class="wood-tooltip"><%- text %></div>' +
+          '<div class="wood tooltip"><%- text %></div>' +
         '</div>' +
       '</div>' +
     ''),
