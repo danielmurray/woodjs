@@ -165,10 +165,10 @@
       color: whitesmoke;
       font-size: 20px; }
 
-.avatar {
+.wood.avatar {
   height: 100%;
   width: 100%; }
-  .avatar .shape {
+  .wood.avatar .shape {
     display: flex;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -181,7 +181,7 @@
     margin: auto;
     background-color: white; }
 
-.button {
+.wood.button {
   border: 10px;
   border-radius: 2px;
   margin: 6px;
@@ -195,21 +195,21 @@
   background-color: transparent;
   box-sizing: border-box;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
-  .button:hover, .button.pressed, .button.focused {
+  .wood.button:hover, .wood.button.pressed, .wood.button.focused {
     background-color: rgba(153, 153, 153, 0.4); }
-  .button.raised {
+  .wood.button.raised {
     color: white;
     background-color: #00bcd4;
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px; }
-    .button.raised:hover, .button.raised.focused {
+    .wood.button.raised:hover, .wood.button.raised.focused {
       box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px; }
-  .button .ripple-container {
+  .wood.button .ripple-container {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%; }
-  .button .btnlabel {
+  .wood.button .btnlabel {
     margin: 0;
     padding: 0 16px;
     position: relative;
@@ -260,7 +260,7 @@
 /**
  * Created by danmurray on 2/26/15.
  */
-.icon-wrapper {
+.wood.icon-wrapper {
   border: 0px;
   outline: none;
   padding: 12px;
@@ -268,7 +268,7 @@
   font-size: 18px;
   background-color: transparent;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
-  .icon-wrapper .icon {
+  .wood.icon-wrapper .icon {
     font-size: 24px; }
 
 @keyframes ripple {
@@ -285,7 +285,7 @@
   100% {
     transform: scale(0.75); } }
 
-.ripple-wrapper {
+.wood.ripple-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -300,35 +300,35 @@
   align-items: center;
   -ms-align-items: center;
   -webkit-align-items: center; }
-  .ripple-wrapper .ripple {
+  .wood.ripple-wrapper .ripple {
     position: absolute;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 50%;
     opacity: 1; }
-    .ripple-wrapper .ripple.propagating {
+    .wood.ripple-wrapper .ripple.propagating {
       animation: ripple 1s cubic-bezier(0.23, 1, 0.32, 1); }
-    .ripple-wrapper .ripple.pulsing {
+    .wood.ripple-wrapper .ripple.pulsing {
       animation: pulse 1.5s ease-in-out infinite;
       transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
 
-.tooltip-anchor-wrapper {
+.wood.tooltip-anchor-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%; }
-  .tooltip-anchor-wrapper:hover .tooltip-anchor .tooltip-wrapper, .tooltip-anchor-wrapper.focused .tooltip-anchor .tooltip-wrapper {
+  .wood.tooltip-anchor-wrapper:hover .tooltip-anchor .tooltip-wrapper, .wood.tooltip-anchor-wrapper.focused .tooltip-anchor .tooltip-wrapper {
     bottom: -24px;
     opacity: 0.9; }
-    .tooltip-anchor-wrapper:hover .tooltip-anchor .tooltip-wrapper .wood-tooltip, .tooltip-anchor-wrapper.focused .tooltip-anchor .tooltip-wrapper .wood-tooltip {
+    .wood.tooltip-anchor-wrapper:hover .tooltip-anchor .tooltip-wrapper .wood-tooltip, .wood.tooltip-anchor-wrapper.focused .tooltip-anchor .tooltip-wrapper .wood-tooltip {
       height: 22px; }
-  .tooltip-anchor-wrapper .tooltip-anchor {
+  .wood.tooltip-anchor-wrapper .tooltip-anchor {
     position: relative;
     height: 100%;
     width: 100%; }
-    .tooltip-anchor-wrapper .tooltip-anchor .tooltip-wrapper {
+    .wood.tooltip-anchor-wrapper .tooltip-anchor .tooltip-wrapper {
       position: absolute;
       width: 100%;
       bottom: 0;
@@ -341,7 +341,7 @@
       justify-content: center;
       -ms-justify-content: center;
       -webkit-justify-content: center; }
-      .tooltip-anchor-wrapper .tooltip-anchor .tooltip-wrapper .wood-tooltip {
+      .wood.tooltip-anchor-wrapper .tooltip-anchor .tooltip-wrapper .wood.tooltip {
         border-radius: 2px;
         padding: 0px 8px;
         height: 0px;
