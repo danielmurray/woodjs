@@ -1,85 +1,53 @@
-@keyframes pulse {
-  0% {
-    transform: scale(1.7); }
-  50% {
-    transform: scale(2); }
-  100% {
-    transform: scale(1.7); } }
+@font-face {
+  font-family: Roboto;
+  src: url(../fonts/Roboto.woff2); }
 
-@keyframes ripple {
-  0% {
-    opacity: 1;
-    transform: scale(0); }
-  100% {
-    opacity: 0;
-    transform: scale(4.5); } }
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/MaterialIcons-Regular.eot);
+  /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url(../fonts/MaterialIcons-Regular.woff2) format("woff2"), url(../fonts/MaterialIcons-Regular.woff) format("woff"), url(../fonts/MaterialIcons-Regular.ttf) format("truetype"); }
 
-.button {
-  border: 10px;
-  border-radius: 2px;
-  margin: 6px;
-  outline: none;
-  padding: 0;
-  position: relative;
-  min-width: 88px;
-  height: 36px;
-  font-family: Roboto, sans-serif;
-  overflow: hidden;
-  background-color: transparent;
-  box-sizing: border-box;
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
-  .button:hover .overlay, .button.pressed .overlay, .button.focused .overlay {
-    background-color: rgba(153, 153, 153, 0.4); }
-  .button.pressed .overlay .ripple-container .ripple {
-    position: absolute;
-    display: block;
-    top: 0px;
-    left: 0px;
-    animation: ripple 0.35s ease-in; }
-  .button.flat.focused .ripple {
-    animation: pulse 1.5s ease-in-out infinite;
-    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
-  .button.raised {
-    color: white;
-    background-color: #00bcd4; }
-    .button.raised:hover, .button.raised.focused {
-      box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px; }
-    .button.raised.focused .ripple {
-      animation: pulse 1.5s ease-in-out infinite; }
-  .button .overlay {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
-    .button .overlay .ripple-container {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      display: flex;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      justify-content: center;
-      -ms-justify-content: center;
-      -webkit-justify-content: center;
-      align-items: center;
-      -ms-align-items: center;
-      -webkit-align-items: center; }
-      .button .overlay .ripple-container .ripple {
-        background-color: rgba(255, 255, 255, 0.2);
-        height: 36px;
-        width: 36px;
-        opacity: 1;
-        transform: scale(0); }
-  .button .btnlabel {
-    margin: 0;
-    padding: 0 16px;
-    position: relative;
-    -webkit-user-select: none;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 36px;
-    text-transform: uppercase; }
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga'; }
+
+.circle {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%; }
+
+.hexagon {
+  width: 100%;
+  height: 86.5%;
+  /* 30-60-90 triangles yo */
+  -webkit-clip-path: polygon(100% 50%, 75% 100%, 25% 100%, 0% 50%, 25% 0%, 75% 0%);
+  clip-path: polygon(100% 50%, 75% 100%, 25% 100%, 0% 50%, 25% 0%, 75% 0%); }
+
+.hexagon-rotate {
+  width: 86.5%;
+  /* 30-60-90 triangles yo */
+  height: 100%;
+  -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
 
 .input-text {
   position: relative;
@@ -157,17 +125,100 @@
       border-color: #00bcd4;
       transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
 
-.avatar .shape {
-  background-color: white;
+.appbar {
+  height: 55px;
+  padding: 0 10px;
   display: flex;
   display: -ms-flexbox;
   display: -webkit-flex;
-  justify-content: center;
-  -ms-justify-content: center;
-  -webkit-justify-content: center;
-  align-items: center;
-  -ms-align-items: center;
-  -webkit-align-items: center; }
+  justify-content: space-between;
+  -ms-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  background-image: linear-gradient(to top, rgba(69, 69, 69, 0.75), rgba(51, 51, 51, 0.75));
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12); }
+  .appbar .appbar-brand {
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    align-items: center;
+    -ms-align-items: center;
+    -webkit-align-items: center;
+    padding: 0px;
+    margin-left: 0px; }
+    .appbar .appbar-brand .avatar-wrapper {
+      height: 32px;
+      width: 32px; }
+    .appbar .appbar-brand .logo {
+      margin: 0px 10px;
+      width: 100px;
+      height: 13px;
+      background: transparent url("https://www.teslamotors.com/tesla_theme/assets/img/logo.svg?1") no-repeat center;
+      background-size: 100px 13px; }
+  .appbar .login-menu {
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    align-items: center;
+    -ms-align-items: center;
+    -webkit-align-items: center; }
+    .appbar .login-menu .login-icon {
+      color: whitesmoke;
+      font-size: 20px; }
+
+.avatar {
+  height: 100%;
+  width: 100%; }
+  .avatar .shape {
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+    -ms-justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -ms-align-items: center;
+    -webkit-align-items: center;
+    margin: auto;
+    background-color: white; }
+
+.button {
+  border: 10px;
+  border-radius: 2px;
+  margin: 6px;
+  outline: none;
+  padding: 0;
+  position: relative;
+  min-width: 88px;
+  height: 36px;
+  font-family: Roboto, sans-serif;
+  overflow: hidden;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
+  .button:hover, .button.pressed, .button.focused {
+    background-color: rgba(153, 153, 153, 0.4); }
+  .button.raised {
+    color: white;
+    background-color: #00bcd4;
+    box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px; }
+    .button.raised:hover, .button.raised.focused {
+      box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px; }
+  .button .ripple-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%; }
+  .button .btnlabel {
+    margin: 0;
+    padding: 0 16px;
+    position: relative;
+    -webkit-user-select: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 36px;
+    text-transform: uppercase; }
 
 .card {
   width: 300px;
@@ -206,6 +257,98 @@
     -ms-justify-content: flex-end;
     -webkit-justify-content: flex-end; }
 
-@font-face {
-  font-family: Roboto;
-  src: url(fonts/Roboto.woff2); }
+/**
+ * Created by danmurray on 2/26/15.
+ */
+.icon-wrapper {
+  border: 0px;
+  outline: none;
+  padding: 12px;
+  position: relative;
+  font-size: 18px;
+  background-color: transparent;
+  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
+  .icon-wrapper .icon {
+    font-size: 24px; }
+
+@keyframes ripple {
+  0% {
+    transform: scale(0); }
+  100% {
+    transform: scale(1); } }
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.75); }
+  50% {
+    transform: scale(0.6); }
+  100% {
+    transform: scale(0.75); } }
+
+.ripple-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: center;
+  -ms-justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -ms-align-items: center;
+  -webkit-align-items: center; }
+  .ripple-wrapper .ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    opacity: 1; }
+    .ripple-wrapper .ripple.propagating {
+      animation: ripple 1s cubic-bezier(0.23, 1, 0.32, 1); }
+    .ripple-wrapper .ripple.pulsing {
+      animation: pulse 1.5s ease-in-out infinite;
+      transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
+
+.tooltip-anchor-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%; }
+  .tooltip-anchor-wrapper:hover .tooltip-anchor .tooltip-wrapper, .tooltip-anchor-wrapper.focused .tooltip-anchor .tooltip-wrapper {
+    bottom: -24px;
+    opacity: 0.9; }
+    .tooltip-anchor-wrapper:hover .tooltip-anchor .tooltip-wrapper .wood-tooltip, .tooltip-anchor-wrapper.focused .tooltip-anchor .tooltip-wrapper .wood-tooltip {
+      height: 22px; }
+  .tooltip-anchor-wrapper .tooltip-anchor {
+    position: relative;
+    height: 100%;
+    width: 100%; }
+    .tooltip-anchor-wrapper .tooltip-anchor .tooltip-wrapper {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      opacity: 0;
+      transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 3000;
+      display: flex;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      justify-content: center;
+      -ms-justify-content: center;
+      -webkit-justify-content: center; }
+      .tooltip-anchor-wrapper .tooltip-anchor .tooltip-wrapper .wood-tooltip {
+        border-radius: 2px;
+        padding: 0px 8px;
+        height: 0px;
+        white-space: nowrap;
+        background-color: #616161;
+        color: white;
+        font-family: Roboto, sans-serif;
+        font-size: 10px;
+        line-height: 22px;
+        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1); }

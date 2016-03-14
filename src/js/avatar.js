@@ -4,7 +4,7 @@
 (function (Wood) {
     Wood.Avatar = Marionette.ItemView.extend({
         attributes: {
-          class: 'avatar',
+          class: 'wood avatar',
         },
         template: _.template(
           '<div class="shape <%-shape%>">' +

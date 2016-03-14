@@ -19,11 +19,35 @@
           alertContainer: '#alert-container',
           submitBtnContainer: '#submit-btn'
         },
+        events: {
+          'keypress': 'listenForSubmit'
+        },
         childEvents: {
-          "action:saveButtonClick": "save"
+          'action:click:button': 'onSubmit'
+        },
+        listenForSubmit: function (e) {
+          if (e.keyCode == 13) {
+            this.onSubmit();
+            var submitButton = this.submitBtnContainer.currentView;
+            submitButton.rippleCenter();
+          }
+        },
+        onSubmit: function(){
+          //get form data
+          var formData = this.getFormData();
+          var formErrors = this.getFormErrors();
+
+          if( _.isEmpty(formErrors) ){
+            //trigger form submit
+            this.triggerMethod("action:submit:form", formData);
+          }else{
+            //render errors
+            this.triggerMethod("error:submit:form", formErrors);
+          }
         },
         initialize: function(options){
           this.options = options;
+          this.inputs = this.options.inputs;
         },
         createInputView: function(input){
           var self = this;
@@ -43,10 +67,6 @@
             }));
           }
         },
-        getInputValue: function(input){
-          if( input && input.view )
-            return input.view.getVal();
-        },
         getInput: function(key){
           for( var i in this.inputs ){
             var input = this.inputs[i];
@@ -54,28 +74,48 @@
               return input
           }
         },
-        onRender: function(){
-          // var somethingToSave = this.inputs.some(function(x,i,a){
-          //   return x.disabled != true;
-          // });
-          // if ( somethingToSave ){
-          //   // At leas one value can be edited and should be saved
-          //   var saveBtn = new toolbox.gui.widgets.SaveButton();
-          //   this.saveBtnContainer.show(saveBtn);
-          // }
+        getInputVal: function(input){
+          if( input && input.view )
+            return input.view.getVal();
         },
-        onShow: function(){
-          var inputs = this.options.inputs;
-          for( var i in inputs ){
-            var input = inputs[i];
-            var inputView = this.createInputView(input);
+        getInputError: function(input){
+          if( input && input.required ){
+            var inputVal = this.getInputVal(input);
+            //TODO implement this as a function of the input
+            // aka input.isEmpty() and isValid()
+            if( inputVal == '' || inputVal == null)
+              return 'empty'
+          }
+        },
+        getFormData: function(){
+          var formData = {};
+          for( var i in this.inputs ){
+            var input = this.inputs[i];
+            formData[input['id']] = this.getInputVal(input);
+          }
+          return formData;
+        },
+        getFormErrors: function(){
+          var formErrors = {};
+          for( var i in this.inputs ){
+            var input = this.inputs[i];
+            var error = this.getInputError(input);
+            if( error )
+              formErrors[input['id']] = error;
+          }
+          return formErrors;
+        },
+        onRender: function(){
+          for( var i in this.inputs ){
+            var input = this.inputs[i];
+            input.view = this.createInputView(input);
             this.addRegion( input.label + 'Container', '#' + input.label + '-container');
-            this.getRegion( input.label + 'Container').show(inputView);
+            this.getRegion( input.label + 'Container').show(input.view);
           }
 
           if( this.options.submitButton){
-            var submitButton = new Wood.inputs.buttons.Raised({
-              label: 'Sign In',
+            var submitButton = new Wood.RaisedButton({
+              label: this.options.submitButton.label || 'Submit',
             });
             this.submitBtnContainer.show(submitButton);
           }

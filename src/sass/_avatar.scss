@@ -1,9 +1,13 @@
-.avatar{
+.wood.avatar{
+  height: 100%;
+  width: 100%;
 
   .shape{
-    background-color: white;
     @include flexbox;
     @include justify-content(center);
     @include align-items(center);
+    margin: auto;
+
+    background-color: white;
   }
 }

@@ -1,0 +1,30 @@
+@mixin circle( $size:100% ){
+  	height: $size;
+  	width: $size;
+  	border-radius: 50%;
+}
+.circle {
+  @include circle(100%);
+}
+
+@mixin hexagon( $size:100% ){
+  	width: $size;
+  	height: $size / 2 * 1.73;  /* 30-60-90 triangles yo */
+
+  	-webkit-clip-path: polygon(100% 50%, 75% 100%, 25% 100%, 0% 50%, 25% 0%, 75% 0%);
+  	clip-path: polygon(100% 50%, 75% 100%, 25% 100%, 0% 50%, 25% 0%, 75% 0%);
+}
+.hexagon {
+  @include hexagon();
+}
+
+@mixin hexagon-rotate( $size:100% ){
+    width: $size / 2 * 1.73;  /* 30-60-90 triangles yo */
+  	height: $size;
+
+    -webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+.hexagon-rotate{
+  @include hexagon-rotate();
+}
