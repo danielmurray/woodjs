@@ -17,10 +17,6 @@
   height: 100%;
   width: 100%;
 
-  @include flexbox;
-  @include justify-content(center);
-  @include align-items(center);
-
   .ripple{
     position: absolute;
     top:0;

@@ -2,7 +2,6 @@ window.Wood = {};
 
 // include base common widgets
 require('./inputs/all');
-// require('./alert');
 // require('./banner');
 
 require('./appbar');
@@ -12,6 +11,7 @@ require('./button');
 // require('./button');
 require('./form');
 require('./icon');
+require('./item');
 // require('./label');
 // require('./loader');
 // require('./quicksearch');

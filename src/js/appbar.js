@@ -2,7 +2,7 @@
     Wood.AppBar = Marionette.LayoutView.extend({
       tagName: "appbar",
       attributes: {
-        class: 'appbar',
+        class: 'wood appbar',
       },
       template: _.template(''+
         '<div class="appbar-brand" href="#">' +

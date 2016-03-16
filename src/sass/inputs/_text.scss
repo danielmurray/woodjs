@@ -1,33 +1,54 @@
-.input-text{
+.wood.input{
   position: relative;
   min-width: 256px;
-  height: 48px;
   font-family: Roboto;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.298039);
-  line-height: 24px;
+  padding-top: 4px;
 
-  &.filled{
-    .label-text{
-      transform: perspective(1px) scale(0.75) translate3d(2px, -28px, 0px);
+  @include flexbox;
+  @include flex-direction(column);
+
+  .label-placeholder{
+    height: 0px;
+    width: 100%;
+    margin: 0px;
+  }
+  &.labeled{
+    .label-placeholder{
+      height: 16px;
+      margin-bottom: 4px;
     }
+  }
 
-    .hint-text{
-      opacity: 0;
+  &.erred{
+    .border-bottom{
+      .border-bottom-active{
+        width: 100%;
+        border-color: #dd2c00;
+      }
     }
   }
 
   &.focused{
     .label-text{
       color: rgb(0, 188, 212);
-      transform: perspective(1px) scale(0.75) translate3d(2px, -28px, 0px);
+      transform: perspective(1px) scale(0.75) translate3d(0px, -28px, 0px);
+    }
+
+    &.erred{
+      .label-text{
+        color: #dd2c00;
+      }
     }
 
     .border-bottom{
       .border-bottom-active{
         width: 100%;
+        border-color: rgb(0, 188, 212);
       }
     }
+
 
     &.filled{
       .label-text{
@@ -36,9 +57,9 @@
     }
   }
 
-  &.labeled{
-    height: 58px;
 
+
+  &.labeled{
     .label-text{
       display: block;
     }
@@ -57,10 +78,6 @@
           opacity: 0;
         }
       }
-    }
-
-    input{
-      margin-top: 5px;
     }
   }
 
@@ -81,15 +98,23 @@
 
   .hint-text{
     position: absolute;
-    bottom: 12px;
+    top: 24px;
     opacity: 1;
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   }
 
+  &.filled{
+    .label-text{
+      transform: perspective(1px) scale(0.75) translate3d(0px, -26px, 0px);
+    }
+
+    .hint-text{
+      opacity: 0;
+    }
+  }
+
   input{
     padding: 0;
-    position: absolute;
-    bottom: 12px;
     width: 100%;
     border: none;
     outline: none;
@@ -97,27 +122,35 @@
     color: rgba(0, 0, 0, 0.87);
     font: inherit;
     z-index: 2;
+    margin-bottom: 4px;
   }
 
   .border-bottom{
-    position: absolute;
-    bottom: 8px;
     height: 0px;
     width: 100%;
+    color: #e0e0e0;
+    margin-bottom: 4px;
 
     .border-bottom-inactive{
       border: none;
       border-bottom: solid 1px;
-      border-color: #e0e0e0;
     }
 
     .border-bottom-active{
       margin: 0 auto;
       width: 0%;
       border: none;
-      border-bottom: solid 2px;
       border-color: rgb(0, 188, 212);
+      border-bottom: solid 2px;
       transition: width 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     }
+  }
+
+  .error-text{
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #f44336;
+    transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0;
   }
 }
