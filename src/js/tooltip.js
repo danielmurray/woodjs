@@ -9,7 +9,7 @@
     template: _.template(
       '<div class="tooltip-anchor">' +
         '<div class="tooltip-wrapper">' +
-          '<div class="wood tooltip"><%- text %></div>' +
+          '<div class="wood-tooltip"><%- text %></div>' +
         '</div>' +
       '</div>' +
     ''),

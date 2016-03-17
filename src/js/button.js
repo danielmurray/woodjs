@@ -5,7 +5,7 @@
     var Button = Marionette.LayoutView.extend({
         tagName: 'button',
         attributes: {
-          class: 'button',
+          class: 'wood button',
         },
         template: _.template(
           '<div id="ripple-container" class="ripple-container"></div>' +
@@ -17,45 +17,43 @@
         events:{
           'focusin':  'focusIn',
           'focusout': 'focusOut',
-          'keypress': 'keyPress',
-          'mousedown':'propagate',
-          'mouseup':  'fade',
-          'click':    'click',
+          'mousedown':'mouseDown',
+          'mouseout': 'mouseOut',
+          'click':    'click'
         },
         focusIn : function(e){
-          this.ripple.pulse();
+          var ripple = this.rippleContainer.currentView;
+          ripple.focusIn();
         },
         focusOut : function(e){
-          this.ripple.fade(0)
+          var ripple = this.rippleContainer.currentView;
+          ripple.focusOut()
         },
-        keyPress: function(e){
-          if (e.keyCode == 13) {
-            this.ripple.ripple();
-          }
-        },
-        propagate: function(e){
-          e.preventDefault();
+        mouseDown: function(e){
           var x = e.pageX - this.$el.offset().left;
           var y = e.pageY - this.$el.offset().top;
-          this.ripple.propagate(x, y);
+          var ripple = this.rippleContainer.currentView;
+          ripple.mouseDown(x, y);
         },
-        fade: function(e){
+        mouseOut: function(){
+          var ripple = this.rippleContainer.currentView;
+          ripple.mouseOut();
+        },
+        click: function(e){
           e.preventDefault();
-          this.ripple.fade();
-        },
-        click: function(){
-          this.ripple.fade(0)
-          // this.triggerMethod("action:click:icon")
+          var ripple = this.rippleContainer.currentView;
+          ripple.click();
+          this.triggerMethod("action:click:button");
         },
         defaults:{
           label: 'Button',
         },
         initialize: function(options){
-          this.options = _.extend({}, this.defaults, this.options);
+          this.options = _.extend({}, this.defaults, options);
         },
         onRender: function(){
-          this.ripple = new Wood.Ripple();
-          this.rippleContainer.show(this.ripple);
+          var ripple = new Wood.Ripple();
+          this.rippleContainer.show(ripple);
         },
         templateHelpers: function(){
           return _.extend({}, this.options, {
@@ -76,13 +74,13 @@
 
     Wood.FlatButton = Button.extend({
         attributes: {
-          class: 'button flat',
+          class: 'wood button flat',
         }
     });
 
     Wood.RaisedButton = Button.extend({
         attributes: {
-          class: 'button raised',
+          class: 'wood button raised',
         }
     });
 })(window.Wood);

@@ -4,72 +4,70 @@ Wood.Ripple = Marionette.ItemView.extend({
   },
   template: _.template(
   ''),
-  events: {
-  },
   initialize: function(){
-    this.ripples = [];
+    this.$ripples = [];
   },
   pythagoras: function(a, b){
     return Math.pow(Math.pow(a,2)+Math.pow(b,2),0.5);
   },
-  ripple: function(){
+  createRipple(className, x, y){
+    var $ripple = $(document.createElement('div'));
+    $ripple.addClass('circle ripple ' + className);
+    var h = this.$el.height();
+    var w = this.$el.width();
+    if( x == undefined ){
+      x = w/2;
+      y = h/2;
+    }
+    var r = this.pythagoras(Math.max(x,w-x), Math.max(y,h-y));
+    $ripple.css({
+      'top': y - r,
+      'left': x - r,
+      'height': 2*r,
+      'width': 2*r
+    });
+    return $ripple;
+  },
+  focusIn: function(){
+    if( !this.$pulse  && this.$ripples.length == 0){
+      var $pulse = this.createRipple('pulsing');
+      this.$el.append($pulse);
+      this.$pulse = $pulse;
+    }
+  },
+  focusOut: function(){
+    if( this.$pulse ){
+      this.fade(this.$pulse, 0);
+      this.$pulse = undefined;
+    }
+  },
+  mouseDown: function(x, y){
+    var $ripple = this.createRipple('propagating', x, y);
+    this.$el.append($ripple);
+    this.$ripples.push($ripple);
+  },
+  mouseOut: function(){
+    var $ripple = this.$ripples.pop();
+    if( $ripple ){
+      this.fade($ripple);
+    }
+  },
+  click: function(){
     var self = this;
+    var $ripple = this.$ripples.pop();
+    if( $ripple ){
+      this.$ripples.push($ripple);
+    } else {
+      this.mouseDown();
+    }
     setTimeout(function(){
-      self.propagate();
-      self.fade();
+      self.mouseOut();
     }, 0);
   },
-  propagate: function(x, y){
-    var self = this;
-    var $ripple = $(document.createElement('div'));
-    $ripple.addClass('ripple propagating circle');
-    var h = this.$el.height();
-    var w = this.$el.width();
-    if( x == undefined ){
-      x = w/2;
-      y = h/2;
-    }
-    var r = this.pythagoras(Math.max(x,w-x), Math.max(y,h-y));
-    $ripple.css({
-      'top': y - r,
-      'left': x - r,
-      'height': 2*r,
-      'width': 2*r
-    });
-    this.$el.append($ripple);
-    this.ripples.push($ripple);
-  },
-  pulse: function(x,y){
-    var self = this;
-    var $ripple = $(document.createElement('div'));
-    $ripple.addClass('ripple pulsing circle');
-    var h = this.$el.height();
-    var w = this.$el.width();
-    if( x == undefined ){
-      x = w/2;
-      y = h/2;
-    }
-    var r = this.pythagoras(Math.max(x,w-x), Math.max(y,h-y));
-    $ripple.css({
-      'top': y - r,
-      'left': x - r,
-      'height': 2*r,
-      'width': 2*r
-    });
-    this.$el.append($ripple);
-    this.ripples.push($ripple);
-  },
-  fade: function(duration){
-    var self = this;
-    var ripple = this.ripples.pop();
-    this.kill(ripple, duration);
-  },
-  kill: function(ripple, duration){
+  fade: function(ripple, duration){
     var duration = typeof duration == 'number' ? duration : 500;
-    if( ripple ){
-      ripple.fadeOut(duration, function(){
-        ripple.remove();
-      });
-    }
+    ripple.fadeOut(duration, function(){
+      ripple.remove();
+    });
   }
 });

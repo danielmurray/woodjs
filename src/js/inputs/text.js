@@ -1,31 +1,37 @@
-/**
- * Created by danmurray on 12/9/15.
- */
 (function (Wood) {
-    Wood.inputs.Text = Marionette.LayoutView.extend({
+    Wood.Input = Marionette.LayoutView.extend({
         attributes: {
-          class: 'input-text',
+          class: 'wood input',
         },
         template: _.template(
+          '<div class="label-placeholder"></div>' +
           '<div class="label-text"><%-floatingLabelText%></div>' +
           '<div class="hint-text"><%-hintText%></div>' +
-          '<input type="<%-type%>" value="<%-defaultValue%>"></input>' +
+          '<input type="<%-type%>" value="<%-value%>"></input>' +
           '<div class="border-bottom">' +
             '<div class="border-bottom-inactive"></div>' +
             '<div class="border-bottom-active"></div>' +
           '</div>' +
+          '<div id="error-text" class="error-text"></div>' +
         ''),
         events:{
           'keyup input': 'keyPress',
-          'keydown input': 'keyPress',
+          'keydown input': 'setFilled',
           'focusin  input': 'focusIn',
           'focusout input': 'focusOut'
         },
-        keyPress: function(e){
-          if( this.getVal() == '' ){
+        setFilled: function(){
+          this.value = this.getValue();
+          if( this.value == '' ){
             this.$el.removeClass('filled');
           }else{
             this.$el.addClass('filled');
+          }
+        },
+        keyPress: function(e){
+          this.setFilled();
+          if( !this.error() ){
+            this.validate();
           }
         },
         focusIn : function(){
@@ -33,31 +39,54 @@
         },
         focusOut : function(){
           this.$el.removeClass('focused');
+          this.validate();
         },
-        getVal: function () {
-            return this.$('input').val();
+        getValue: function () {
+          return this.$('input').val();
+        },
+        setError: function(error){
+          if( error ){
+            this.$el.addClass('erred');
+            this.$('#error-text').text(error);
+          } else {
+            this.$el.removeClass('erred');
+            this.$('#error-text').text('');
+          }
+        },
+        error: function(){
+          var error = false;
+          if( this.options.isRequired && this.getValue() == '' ){
+            error = 'This field is required';
+          }
+          return error;
+        },
+        validate: function(){
+          var error = this.error();
+          this.setError(error);
+          return !error;
+        },
+        defaults: {
+          floatingLabelText: '',
+          hintText: '',
+          defaultValue: '',
+          type: 'text',
+          isRequired: false
         },
         initialize: function (options) {
-          var defaultValues = {
-            floatingLabelText: '',
-            hintText: '',
-            defaultValue: '',
-            type: 'text'
-          };
-
-          this.options = _.extend(defaultValues, options);
+          this.options = _.extend({}, this.defaults, this.options);
 
           if( this.options.floatingLabelText )
             this.$el.addClass('labeled');
         },
         onRender: function(){
-          this.keyPress();
+          this.setFilled();
         },
         setVal: function (val) {
             return this.$('input').val(val);
         },
         templateHelpers: function(){
           return _.extend({}, this.options, {
+            value: this.value
           });
         }
     });

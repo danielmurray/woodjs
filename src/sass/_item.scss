@@ -1,0 +1,49 @@
+.wood.item{
+  height: 60px;
+
+  @include flexbox;
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  &:hover{
+    background-color: #fafafa;
+  }
+  
+  .left-icon{
+    height: 40px;
+    width: 40px;
+    margin: 0px 16px 0px 16px;
+
+    .shape{
+      background-color: rgba(244,67,54,1);
+    }
+
+    .icon{
+      font-size: 24px;
+    }
+  }
+
+  .item-body{
+    @include flex-grow(2);
+
+    .primary-text{
+      font-size: 13px;
+      line-height: 19px;
+      max-height: 22px;
+
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+
+    .secondary-text{
+      font-size: 11px;
+      line-height: 17px;
+      max-height: 34px;
+
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+  }
+}

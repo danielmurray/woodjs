@@ -22,7 +22,7 @@
           tooltip: false
         },
         initialize: function(options){
-          this.options = _.extend({}, this.defaults, this.options);
+          this.options = _.extend({}, this.defaults, options);
         },
         templateHelpers: function(){
           return _.extend({}, this.options, {
@@ -34,7 +34,7 @@
     Wood.IconButton = Wood.Icon.extend({
       tagName: 'button',
       attributes: {
-        class: 'icon-wrapper',
+        class: 'wood icon-wrapper',
       },
       template: _.template(
         '<div id="ripple-container"></div>' +
@@ -47,41 +47,42 @@
       },
       events:{
         'focusin':  'focusIn',
-        'focusout':  'focusOut',
-        'keypress': 'keyPress',
-        'mousedown':  'propagate',
-        'mouseup':    'fade',
-        'mouseout': 'fade'
+        'focusout': 'focusOut',
+        'mousedown': 'mouseDown',
+        'mouseleave':'mouseOut',
+        'click':    'click'
       },
       focusIn : function(e){
-        this.ripple.pulse();
+        var ripple = this.rippleContainer.currentView;
+        ripple.focusIn();
         if( this.tooltip ){
           this.tooltip.focusIn()
         }
       },
       focusOut : function(e){
-        this.ripple.fade(0)
+        var ripple = this.rippleContainer.currentView;
+        ripple.focusOut();
         if( this.tooltip ){
           this.tooltip.focusOut()
         }
       },
-      keyPress: function(e){
-        if (e.keyCode == 13) {
-          this.ripple.ripple();
-        }
+      mouseDown: function(e){
+        e.preventDefault();
+        var ripple = this.rippleContainer.currentView;
+        ripple.mouseDown();
       },
-      propagate: function(){
-        event.preventDefault();
-        this.ripple.propagate();
-        // this.triggerMethod("action:click:icon")
+      mouseOut: function(e){
+        var ripple = this.rippleContainer.currentView;
+        ripple.mouseOut();
       },
-      fade: function(){
-         this.ripple.fade();
-        // this.triggerMethod("action:click:icon")
+      click: function(e){
+        var ripple = this.rippleContainer.currentView;
+        ripple.click();
+        this.triggerMethod("action:click:icon");
       },
       onRender: function(){
-        this.ripple = new Wood.Ripple();
-        this.rippleContainer.show(this.ripple);
+        var ripple = new Wood.Ripple();
+        this.rippleContainer.show(ripple);
 
         if( this.options.tooltip ){
           this.tooltip = new Wood.Tooltip({

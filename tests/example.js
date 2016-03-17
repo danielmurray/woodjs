@@ -17,14 +17,16 @@
           '<div id="flat-button"></div>' +
           '<div id="raised-button"></div>' +
         '</div>' +
+        '<div id="form-container"></div>' +
       ''),
       regions:{
-        iconContainer: '#icon',
-        iconButtonContainer: '#icon-button',
-        iconTooltipContainer: '#icon-tooltip',
-        iconMaterialContainer: '#icon-material',
-        flatButtonContainer: '#flat-button',
-        raisedButtonContainer: '#raised-button',
+        iconContainer:          '#icon',
+        iconButtonContainer:    '#icon-button',
+        iconTooltipContainer:   '#icon-tooltip',
+        iconMaterialContainer:  '#icon-material',
+        flatButtonContainer:    '#flat-button',
+        raisedButtonContainer:  '#raised-button',
+        formContainer:          '#form-container',
       },
       events:{
       },
@@ -58,6 +60,32 @@
         this.flatButtonContainer.show(flatButton)
         var raisedButton = new Wood.RaisedButton();
         this.raisedButtonContainer.show(raisedButton);
+
+        // Form
+        var form = new Wood.Form({
+          inputs: [{
+            id: 'username',
+            view: Wood.Input,
+            options: {
+              floatingLabelText: 'Username',
+              hintText: 'Are you the Keymaster?',
+              isRequired: true
+            }
+          },{
+            id: 'password',
+            view: Wood.Input,
+            options: {
+              floatingLabelText: 'Password',
+              hintText: 'I am the Gatekeeper.',
+              type: 'password',
+              isRequired: true
+            },
+          }],
+          submitButton: {
+            label: 'Sign In'
+          }
+        });
+        this.formContainer.show(form)
 
       },
       templateHelpers: function(){
