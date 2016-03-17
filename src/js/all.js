@@ -13,7 +13,7 @@ require('./form');
 require('./icon');
 require('./item');
 // require('./label');
-// require('./loader');
+require('./spinner');
 // require('./quicksearch');
 // require('./recordtable');
 require('./ripple');
