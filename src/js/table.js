@@ -156,19 +156,18 @@
                     rowHeight: this.rowHeight,
                     displayBuffer: 2
                 },
-                language: {
-                    loadingRecords: '<div class="text-center" width="100%"><img class="text-middle" src="/assets/images/loaders/gears.gif"/></div>'
-                },
                 ajax: function (data, callback, settings) {
-                    return self.collection.fetch({
-                        data: {
-                            expand: self.columns.map(function(c){return c.data}).join(','),
-                        },
-                        success: function (collection) {
-                            callback({data: self.collectData()});
-                            self.onLoad();
-                        }
-                    });
+                  var $overlay = new Wood.Spinner.overlay(self.$el);
+                  return self.collection.fetch({
+                      data: {
+                          expand: self.columns.map(function(c){return c.data}).join(','),
+                      },
+                      success: function (collection) {
+                        $overlay.remove();
+                        callback({data: self.collectData()});
+                        self.onLoad();
+                      }
+                  });
                 },
                 tableTools: {
                     sSwfPath: '/assets/swf/copy_csv_xls_pdf.swf',
@@ -204,8 +203,7 @@
             $(window).off("resize");
         },
         refresh: function () {
-            var $overlay = toolbox.gui.widgets.Loader.overlay(this.$el);
-
+            var $overlay = Wood.Spinner.overlay(this.$el);
             this.table.ajax.reload(function () {
                 $overlay.remove();
             });

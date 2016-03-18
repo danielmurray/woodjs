@@ -22,27 +22,13 @@
         }
     }, {
       overlay: function ($el) {
-        //
-        // var $overlay = $(
-        //     '<div class="text-center fill-height">' +
-        //         '<span class="text-middle"></span>' +
-        //         '<img src="/assets/images/loaders/gears.gif"/>' +
-        //     '</div>'
-        // );
-        //
-        // $overlay.css('padding', '20px');
-        // $overlay.css('position', 'absolute');
-        // $overlay.css('top', 0);
-        // $overlay.css('left', 0);
-        // $overlay.css('height', '100%');
-        // $overlay.css('width', '100%');
-        // $overlay.css('z-index', '1000');
-        // $overlay.css('background', '#F9F9F9');
-        // $overlay.css('opacity', '0.8');
-        // $overlay.css('cursor', 'wait');
-        //
-        // $el.append($overlay);
-        // return $overlay;
+        var widget = new Wood.Spinner();
+        widget.render();
+        $overlay = widget.$el;
+        $overlay.addClass('overlay');
+
+        $el.append($overlay);
+        return $overlay;
       }
     });
 

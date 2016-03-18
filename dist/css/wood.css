@@ -251,7 +251,6 @@ wood-label {
     width: 100%; }
   .wood.button .label-wrapper {
     height: 100%;
-    width: 100%;
     margin: 0;
     padding: 0 16px;
     position: relative;
@@ -404,21 +403,42 @@ wood-label {
     stroke-dasharray: 89,200;
     stroke-dashoffset: -124px; } }
 
-wood-spinner .circular {
-  animation: rotate 2s linear infinite;
-  height: 100%;
-  transform-origin: center center;
-  width: 100%;
-  margin: auto; }
+wood-spinner {
+  margin: 5px; }
+  wood-spinner.overlay {
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    justify-content: center;
+    -ms-justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -ms-align-items: center;
+    -webkit-align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    cursor: wait;
+    background-color: #F9F9F9;
+    opacity: 0.8; }
+  wood-spinner .circular {
+    animation: rotate 2s linear infinite;
+    transform-origin: center center;
+    margin: auto; }
+  wood-spinner .path {
+    stroke: #a8a8a8;
+    fill: none;
+    stroke-miterlimit: 10;
+    stroke-dasharray: 1,200;
+    stroke-dashoffset: 0;
+    animation: dash 1.5s ease-in-out infinite;
+    stroke-linecap: round; }
 
-wood-spinner .path {
-  stroke: #a8a8a8;
-  fill: none;
-  stroke-miterlimit: 10;
-  stroke-dasharray: 1,200;
-  stroke-dashoffset: 0;
-  animation: dash 1.5s ease-in-out infinite;
-  stroke-linecap: round; }
+div.DTTT_container {
+  margin-bottom: 0; }
 
 .wood.tooltip-anchor-wrapper {
   position: absolute;

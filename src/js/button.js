@@ -82,7 +82,9 @@
           disabled: false
         },
         disable: function( disabled ){
-          this.$el.attr('disabled', disabled );
+          if( !this._saving ){
+            this.$el.attr('disabled', disabled );
+          }
         },
         initialize: function(options){
           this.options = _.extend({}, this.defaults, options);
@@ -98,6 +100,8 @@
           this.labelContainer.show(label);
         },
         onPost: function(){
+          this.disable(true);
+          this._saving = true;
           var label = new Label({
             icon: {
               view: Wood.Spinner,
@@ -109,13 +113,22 @@
             text: this.options.label
           });
           this.labelContainer.show(label);
-          this.disable(true);
         },
         onSuccess: function(){
-          //TODO
+          this._saving = false;
+          this.disable(false);
+          var label = new Label({
+            text: this.options.label
+          });
+          this.labelContainer.show(label);
         },
         onError: function(){
-          //TODO
+          this._saving = false;
+          this.disable(false);
+          var label = new Label({
+            text: this.options.label
+          });
+          this.labelContainer.show(label);
         },
         templateHelpers: function(){
           return _.extend({}, this.options, {

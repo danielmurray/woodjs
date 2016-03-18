@@ -91,8 +91,7 @@
       submitForm: function(e){
         if( this.validate() ){
           var data = this.getData();
-          // this.triggerMethod('action:submit:form', data);
-          this.onPost();
+          this.triggerMethod('action:submit:form', data);
         }
       },
       defaults: {
@@ -123,24 +122,14 @@
       onPost: function(){
         var submitButton = this.submitBtnContainer.currentView;
         submitButton.onPost();
-        
       },
       onSuccess: function(){
-        // var self = this;
-        // this.saveBtnContainer.currentView.stateChange('success');
-        // var alert = new toolbox.gui.widgets.Alert({
-        //     title: 'Successfully Saved!',
-        //     message: 'Saved settings successfully',
-        //     type: 'alert-success'
-        // });
-        // this.alertContainer.show(alert);
-        // setTimeout(function(){
-        //   self.saveBtnContainer.currentView.stateChange('save');
-        //   self.alertContainer.currentView.$el.fadeOut(400);
-        // },2000)
+        var submitButton = this.submitBtnContainer.currentView;
+        submitButton.onSuccess();
       },
       onError: function(){
-        // this.saveBtnContainer.currentView.stateChange('error');
+        var submitButton = this.submitBtnContainer.currentView;
+        submitButton.onError();
       },
       templateHelpers: function(){
         return _.extend({}, this.options, {
