@@ -1,5 +1,11 @@
 (function (toolbox) {
   Wood.InputList = Marionette.CollectionView.extend({
+    childEvents: {
+      "action:input:change": "onInputChange",
+    },
+    onInputChange: function(inputView, valid){
+      this.triggerMethod('action:inputs:change', !this.error());
+    },
     childView: Wood.Input,
     buildChildView: function(child, ChildViewClass, childViewOptions){
       var id = child.get('id');
@@ -24,11 +30,20 @@
       }
       return data;
     },
+    error: function(){
+      var error = false;
+      for( var i in this.children._views ){
+        var childView = this.children._views[i];
+        error = error || childView.error();
+      }
+      return error;
+    },
     validate: function(){
       var valid = true;
       for( var i in this.children._views ){
         var childView = this.children._views[i];
-        valid = valid && childView.validate();
+        var childValid = childView.validate();
+        valid = valid && childValid;
       }
       return valid;
     }
@@ -53,7 +68,12 @@
         "submit": "onFormSubmit",
       },
       childEvents: {
-        "action:click:button": "submitForm"
+        "action:click:button": "submitForm",
+        "action:inputs:change": "onInputChange",
+      },
+      onInputChange: function(inputListView, valid){
+        var submitButton = this.submitBtnContainer.currentView;
+        submitButton.disable(!valid);
       },
       onFormSubmit: function(e){
         e.preventDefault();
@@ -61,6 +81,9 @@
       },
       getData: function(){
         return this.inputListContainer.currentView.getData();
+      },
+      error: function(){
+        return this.inputListContainer.currentView.error();
       },
       validate: function(){
         return this.inputListContainer.currentView.validate();
@@ -89,46 +112,24 @@
         if( this.options.submitButton){
           var submitButton = new Wood.RaisedButton({
             label: this.options.submitButton.label,
+            disabled: !!this.error()
           });
           this.submitBtnContainer.show(submitButton);
         }
       },
       onShow: function(){
       },
+      onPost: function(){
+        var submitButton = this.submitBtnContainer.currentView;
+        submitButton.onPost();
+      },
       onSuccess: function(){
-        // var self = this;
-        // this.saveBtnContainer.currentView.stateChange('success');
-        // var alert = new toolbox.gui.widgets.Alert({
-        //     title: 'Successfully Saved!',
-        //     message: 'Saved settings successfully',
-        //     type: 'alert-success'
-        // });
-        // this.alertContainer.show(alert);
-        // setTimeout(function(){
-        //   self.saveBtnContainer.currentView.stateChange('save');
-        //   self.alertContainer.currentView.$el.fadeOut(400);
-        // },2000)
+        var submitButton = this.submitBtnContainer.currentView;
+        submitButton.onSuccess();
       },
       onError: function(){
-        // this.saveBtnContainer.currentView.stateChange('error');
-      },
-      save: function(){
-        // var self = this;
-        // var setObj = {};
-        // for( var i in this.inputs ){
-        //   var input = this.inputs[i];
-        //   var inputValue = this.getInputValue(input);
-        //   setObj[input.id] = inputValue;
-        // }
-        // this.model.save(setObj, {
-        //     patch: true,
-        //     success: function(){
-        //       self.onSuccess();
-        //     },
-        //     error: function(){
-        //       self.onError();
-        //     }
-        // });
+        var submitButton = this.submitBtnContainer.currentView;
+        submitButton.onError();
       },
       templateHelpers: function(){
         return _.extend({}, this.options, {

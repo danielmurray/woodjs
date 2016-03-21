@@ -2,6 +2,37 @@
  * Created by danmurray on 2/17/16.
  */
 (function (Wood) {
+    var Label = Marionette.LayoutView.extend({
+      tagName: 'wood-label',
+      attributes: {
+      },
+      template: _.template(
+        '<div id="icon-container" class="icon-wrapper"></div>' +
+        '<span class="text-wrapper"><%-text%></span>' +
+      ''),
+      regions: {
+        iconContainer: '#icon-container'
+      },
+      defaults:{
+        text: 'Button',
+      },
+      initialize: function(options){
+        this.options = _.extend({}, this.defaults, options);
+      },
+      onRender: function(){
+        if ( this.options.icon ){
+          var view = this.options.icon.view;
+          var options = this.options.icon.options;
+          var iconView = new view(options);
+          this.iconContainer.show(iconView);
+        }
+      },
+      templateHelpers: function(){
+        return _.extend({}, this.options, {
+        });
+      },
+    });
+
     var Button = Marionette.LayoutView.extend({
         tagName: 'button',
         attributes: {
@@ -9,10 +40,11 @@
         },
         template: _.template(
           '<div id="ripple-container" class="ripple-container"></div>' +
-          '<div class="btnlabel"><%-label%></div>' +
+          '<div id="label-container" class="label-wrapper"><%-label%></div>' +
         ''),
         regions:{
-          rippleContainer: '#ripple-container'
+          rippleContainer: '#ripple-container',
+          labelContainer: '#label-container'
         },
         events:{
           'focusin':  'focusIn',
@@ -47,13 +79,56 @@
         },
         defaults:{
           label: 'Button',
+          disabled: false
+        },
+        disable: function( disabled ){
+          if( !this._saving ){
+            this.$el.attr('disabled', disabled );
+          }
         },
         initialize: function(options){
           this.options = _.extend({}, this.defaults, options);
+          this.disable(this.options.disabled);
         },
         onRender: function(){
           var ripple = new Wood.Ripple();
           this.rippleContainer.show(ripple);
+
+          var label = new Label({
+            text: this.options.label
+          });
+          this.labelContainer.show(label);
+        },
+        onPost: function(){
+          this.disable(true);
+          this._saving = true;
+          var label = new Label({
+            icon: {
+              view: Wood.Spinner,
+              options: {
+                radius: 12,
+                strokeWidth: 6,
+              }
+            },
+            text: this.options.label
+          });
+          this.labelContainer.show(label);
+        },
+        onSuccess: function(){
+          this._saving = false;
+          this.disable(false);
+          var label = new Label({
+            text: this.options.label
+          });
+          this.labelContainer.show(label);
+        },
+        onError: function(){
+          this._saving = false;
+          this.disable(false);
+          var label = new Label({
+            text: this.options.label
+          });
+          this.labelContainer.show(label);
         },
         templateHelpers: function(){
           return _.extend({}, this.options, {

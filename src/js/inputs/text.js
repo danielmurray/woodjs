@@ -30,9 +30,11 @@
         },
         keyPress: function(e){
           this.setFilled();
-          if( !this.error() ){
+          var error = this.error();
+          if( !error ){
             this.validate();
           }
+          this.triggerMethod('action:input:change', !error);
         },
         focusIn : function(){
           this.$el.addClass('focused');
