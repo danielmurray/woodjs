@@ -4,7 +4,6 @@ window.Wood = {};
 require('./inputs/all');
 // require('./banner');
 
-require('./appbar');
 require('./avatar');
 require('./button');
 // require('./card');
@@ -19,3 +18,4 @@ require('./spinner');
 require('./ripple');
 require('./table');
 require('./tooltip');
+require('./toolbar');
