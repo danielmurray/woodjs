@@ -2,8 +2,8 @@
     Wood.Spinner = Marionette.ItemView.extend({
         tagName: 'wood-spinner',
         template: _.template(
-          '<svg class="circular" viewBox="25 25 50 50" height="<%-height%>" width="<%-width%>">' +
-            '<circle class="path" cx="50" cy="50" r="<%-radius%>" stroke-width="<%-strokeWidth%>"/>' +
+          '<svg class="circular" viewBox="<%-r+5%> <%-r+5%> <%-d+10%> <%-d+10%>" height="<%-d%>" width="<%-d%>">' +
+            '<circle class="path" cx="<%-d+10%>" cy="<%-d+10%>" r="<%-radius%>" stroke-width="<%-strokeWidth%>"/>' +
           '</svg>' +
         ''),
         defaults: {
@@ -16,8 +16,8 @@
         templateHelpers: function () {
           var radius = this.options.radius;
           return _.extend({}, this.options, {
-            height: radius * 2,
-            width: radius * 2
+            r: radius,
+            d: radius * 2
           });
         }
     }, {

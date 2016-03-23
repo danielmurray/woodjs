@@ -4,38 +4,39 @@
  (function (toolbox) {
     Wood.Icon = Marionette.LayoutView.extend({
       tagName: 'wood-icon',
-        attributes: {
-          class: 'wood icon-wrapper',
-        },
-        iconTemplates: {
-          'fa': '<i class="fa fa-icon fa-<%-icon%>"></i>',
-          'material': '<i class="material-icons"><%-icon%></i>'
-        },
-        iconTemplate: function(icon) {
-          return _.template(this.iconTemplates[this.options.iconClass])({icon: icon})
-        },
-        template: _.template(
-          '<%= iconTemplate %>' +
-        ''),
-        defaults:{
-          iconClass: 'fa',
-          icon: 'circle-thin',
-          tooltip: false
-        },
-        initialize: function(options){
-          this.options = _.extend({}, this.defaults, options);
-        },
-        templateHelpers: function(){
-          return _.extend({}, this.options, {
-            iconTemplate: this.iconTemplate(this.options.icon)
-          });
-        },
+      attributes: {
+        class: 'wood-icon',
+      },
+      iconTemplates: {
+        'fa': '<i class="fa fa-icon fa-<%-icon%>"></i>',
+        'material': '<i class="material-icons"><%-icon%></i>'
+      },
+      iconTemplate: function(icon) {
+        return _.template(this.iconTemplates[this.options.iconClass])({icon: icon})
+      },
+      template: _.template(
+        '<%= iconTemplate %>' +
+      ''),
+      defaults:{
+        iconClass: 'fa',
+        icon: 'circle-thin',
+        tooltip: false,
+        clickEvent: 'action:click:icon'
+      },
+      initialize: function(options){
+        this.options = _.extend({}, this.defaults, options);
+      },
+      templateHelpers: function(){
+        return _.extend({}, this.options, {
+          iconTemplate: this.iconTemplate(this.options.icon)
+        });
+      },
     });
 
     Wood.IconButton = Wood.Icon.extend({
       tagName: 'button',
       attributes: {
-        class: 'wood icon-wrapper',
+        class: 'wood-icon',
       },
       template: _.template(
         '<div id="ripple-container"></div>' +
@@ -79,7 +80,7 @@
       click: function(e){
         var ripple = this.rippleContainer.currentView;
         ripple.click();
-        this.triggerMethod("action:click:icon");
+        this.triggerMethod(this.options.clickEvent);
       },
       onRender: function(){
         var ripple = new Wood.Ripple();

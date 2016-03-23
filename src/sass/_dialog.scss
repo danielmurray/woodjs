@@ -1,0 +1,15 @@
+.model-modal{
+  .model-form{
+    .input-wrapper{
+      .bootstrap-select{
+          width:100% !important;
+      }
+
+      .checkbox{
+        input[type="checkbox"]{
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}

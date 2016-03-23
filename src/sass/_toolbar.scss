@@ -1,6 +1,7 @@
 wood-toolbar{
-  height: 55px;
+  height: 64px;
   padding: 0 10px;
+  overflow: hidden;
 
   @include flexbox;
   @include justify-content(space-between);
