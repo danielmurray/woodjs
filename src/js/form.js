@@ -13,7 +13,8 @@
       var options = child.get('options');
       // build the final list of options for the childView class
       var options = _.extend({}, childViewOptions, options, {
-        id: id
+        id: id,
+        defaultValue: this.model.get(id)
       });
 
       // create the child view instance
@@ -95,6 +96,7 @@
         }
       },
       defaults: {
+        model: null,
         inputs: [],
         submitButton: {
           label: 'Submit'
@@ -105,6 +107,7 @@
       },
       onRender: function(){
         var inputList = new Wood.InputList({
+          model: this.options.model,
           collection: new Backbone.Collection(this.options.inputs)
         });
         this.inputListContainer.show(inputList);

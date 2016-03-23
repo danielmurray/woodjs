@@ -8,6 +8,7 @@ require('./avatar');
 require('./button');
 // require('./card');
 // require('./button');
+require('./dialog');
 require('./form');
 require('./icon');
 require('./item');

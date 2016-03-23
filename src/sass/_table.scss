@@ -1,3 +1,10 @@
-div.DTTT_container{
-  margin-bottom: 0;
+.dataTables_wrapper{
+  .title{
+    font-size: 24px;
+    float:left;
+  }
+
+  div.DTTT_container{
+    margin-bottom: 0;
+  }
 }
