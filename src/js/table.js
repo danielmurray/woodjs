@@ -198,6 +198,7 @@
                 self.$dataTable.find('div.title').append(self.title);
             }
 
+            this.resizeHeight();
         },
         onDestroy: function (){
             $(window).off("resize");
@@ -213,10 +214,10 @@
             return info.recordsTotal;
         },
         setHeight: function (height) {
-            this.$dataTable.find('.dataTables_scrollBody').css('height', height + "px");
+            this.$dataTable.find('.dataTables_scrollBody').css('max-height', height + "px");
         },
         resizeHeight : function(){
-            this.setHeight($(window).height() - 385)
+            this.setHeight($(window).height() - 540)
         },
         unfilteredRowCount: function () {
             var info = this.table.page.info();

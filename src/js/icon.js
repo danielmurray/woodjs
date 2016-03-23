@@ -3,6 +3,7 @@
  */
  (function (toolbox) {
     Wood.Icon = Marionette.LayoutView.extend({
+      tagName: 'wood-icon',
         attributes: {
           class: 'wood icon-wrapper',
         },
@@ -93,5 +94,25 @@
       },
       onShow:function(){
       }
+    });
+
+    Wood.IconList = Marionette.CollectionView.extend({
+      tagName: 'wood-icon-list',
+      childView: Wood.Icon,
+      buildChildView: function(child, ChildViewClass, childViewOptions){
+        var id = child.get('id');
+        var view = child.get('view');
+        var options = child.get('options');
+        // build the final list of options for the childView class
+        var options = _.extend({}, childViewOptions, options, {
+          id: id
+        });
+
+        // create the child view instance
+        var view = new view(options);
+
+        // return it
+        return view;
+      },
     });
 })(window.toolbox);

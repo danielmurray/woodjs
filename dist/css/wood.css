@@ -143,46 +143,6 @@
     color: #f44336;
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0; }
 
-.wood.appbar {
-  height: 55px;
-  padding: 0 10px;
-  display: flex;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  justify-content: space-between;
-  -ms-justify-content: space-between;
-  -webkit-justify-content: space-between;
-  background-image: linear-gradient(to top, rgba(69, 69, 69, 0.75), rgba(51, 51, 51, 0.75));
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12); }
-  .wood.appbar .appbar-brand {
-    display: flex;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    align-items: center;
-    -ms-align-items: center;
-    -webkit-align-items: center;
-    padding: 0px;
-    margin-left: 0px; }
-    .wood.appbar .appbar-brand .avatar-wrapper {
-      height: 32px;
-      width: 32px; }
-    .wood.appbar .appbar-brand .logo {
-      margin: 0px 10px;
-      width: 100px;
-      height: 13px;
-      background: transparent url("https://www.teslamotors.com/tesla_theme/assets/img/logo.svg?1") no-repeat center;
-      background-size: 100px 13px; }
-  .wood.appbar .login-menu {
-    display: flex;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    align-items: center;
-    -ms-align-items: center;
-    -webkit-align-items: center; }
-    .wood.appbar .login-menu .login-icon {
-      color: whitesmoke;
-      font-size: 20px; }
-
 .wood.avatar {
   height: 100%;
   width: 100%; }
@@ -211,7 +171,10 @@ wood-label {
   -ms-align-items: center;
   -webkit-align-items: center; }
   wood-label .icon-wrapper {
-    height: 100%; }
+    height: 100%;
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex; }
   wood-label .icon-wrapper,
   wood-label .text-wrapper {
     margin: 0 5px; }
@@ -314,6 +277,15 @@ wood-label {
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
   .wood.icon-wrapper .icon {
     font-size: 24px; }
+
+wood-icon-list {
+  height: 100%;
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  align-items: center;
+  -ms-align-items: center;
+  -webkit-align-items: center; }
 
 .wood.item {
   height: 60px;
@@ -439,6 +411,40 @@ wood-spinner {
 
 div.DTTT_container {
   margin-bottom: 0; }
+
+wood-toolbar {
+  height: 55px;
+  padding: 0 10px;
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -ms-justify-content: space-between;
+  -webkit-justify-content: space-between;
+  background-image: linear-gradient(to top, rgba(69, 69, 69, 0.75), rgba(51, 51, 51, 0.75));
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+  color: white; }
+  wood-toolbar .title {
+    display: flex;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    align-items: center;
+    -ms-align-items: center;
+    -webkit-align-items: center;
+    flex-grow: 2;
+    -ms-flex-grow: 2;
+    -webkit-flex-grow: 2;
+    height: 100%;
+    font-family: Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
+    cursor: pointer;
+    margin: 0px 5px; }
 
 .wood.tooltip-anchor-wrapper {
   position: absolute;

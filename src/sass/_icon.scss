@@ -19,3 +19,9 @@
    font-size: 24px;
  }
 }
+
+wood-icon-list{
+  height: 100%;
+  @include flexbox;
+  @include align-items(center);
+}
