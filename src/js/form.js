@@ -11,10 +11,12 @@
       var id = child.get('id');
       var view = child.get('view');
       var options = child.get('options');
+      var defaultValue = this.model ? this.model.get(id) : '';
+
       // build the final list of options for the childView class
       var options = _.extend({}, childViewOptions, options, {
         id: id,
-        defaultValue: this.model.get(id)
+        defaultValue: defaultValue
       });
 
       // create the child view instance
