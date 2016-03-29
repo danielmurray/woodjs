@@ -1,11 +1,10 @@
 /**
  * Created by danmurray on 2/26/15.
  */
-.wood.icon-wrapper{
+.wood-icon{
  border: 0px;
  outline: none;
 
- padding: 12px;
  position: relative;
 
  font-size: 18px;
@@ -24,4 +23,8 @@ wood-icon-list{
   height: 100%;
   @include flexbox;
   @include align-items(center);
+
+  .wood-icon{
+    padding: 12px;
+  }
 }

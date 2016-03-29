@@ -217,7 +217,7 @@
             this.$dataTable.find('.dataTables_scrollBody').css('max-height', height + "px");
         },
         resizeHeight : function(){
-            this.setHeight($(window).height() - 540)
+            this.setHeight($(window).height() - 570)
         },
         unfilteredRowCount: function () {
             var info = this.table.page.info();

@@ -57,8 +57,11 @@
         },
         error: function(){
           var error = false;
-          if( this.options.isRequired && this.getValue() == '' ){
+          var value = this.getValue();
+          if( this.options.isRequired && value == '' ){
             error = 'This field is required';
+          } else if( this.options.error ){
+            error = this.options.error(value);
           }
           return error;
         },
@@ -88,7 +91,7 @@
         },
         templateHelpers: function(){
           return _.extend({}, this.options, {
-            value: this.value
+            value: this.value || this.options.defaultValue
           });
         }
     });

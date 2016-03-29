@@ -1,41 +1,41 @@
 {
-  "name": "woodjs",
-  "description": "M@terial for M@arionette... Wood",
-  "version": "0.0.14",
-  "license": "ISC",
-  "author": {
-    "name": "Dan Murray",
-    "email": "daniel.phillip.murray@gmail.com",
-    "url": "http://danielmurray.github.io/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/danielmurray/woodjs.git"
-  },
-  "github": "https://github.com/danielmurray/woodjs",
-  "scripts": {
-    "watch-sass": "npm run build-sass & node-sass -wr src/sass/all.scss dist/css/wood.css",
-    "watch-js": "watchify src/js/all.js -o dist/js/wood.js -dv",
-    "watch": "npm run watch-sass & npm run watch-js",
-    "build-sass": "node-sass src/sass/all.scss dist/css/wood.css",
-    "build-js": "browserify src/js/all.js > dist/js/wood.js",
-    "build": "npm run build-sass & npm run build-js",
-    "bdist-sass": "node-sass --output-style compressed src/sass/all.scss dist/css/wood.min.css",
-    "bdist-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
-    "bdist": "npm run bdist-sass & npm run bdist-js",
-    "deploy": "npm run bdist && npm run build && npm run version:patch && npm run push:git && npm publish",
-    "version:patch": "mversion patch -m \"Release v%s\"",
-    "push:git": "git push --tags origin HEAD:master"
-  },
-  "devDependencies": {
-    "browserify": "",
-    "express": "^4.13.0",
-    "grunt": "",
-    "grunt-cli": "",
-    "grunt-bowercopy": "",
-    "mversion": "1.10.1",
-    "node-sass": "",
-    "uglify-js": "",
-    "watchify": ""
-  }
+    "name": "woodjs",
+    "description": "M@terial for M@arionette... Wood",
+    "version": "0.0.14",
+    "license": "ISC",
+    "author": {
+        "name": "Dan Murray",
+        "email": "daniel.phillip.murray@gmail.com",
+        "url": "http://danielmurray.github.io/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/danielmurray/woodjs.git"
+    },
+    "github": "https://github.com/danielmurray/woodjs",
+    "scripts": {
+        "watch-sass": "npm run build-sass & node-sass -wr src/sass/all.scss dist/css/wood.css",
+        "watch-js": "watchify src/js/all.js -o dist/js/wood.js -dv",
+        "watch": "npm run watch-sass & npm run watch-js",
+        "build-sass": "node-sass src/sass/all.scss dist/css/wood.css",
+        "build-js": "browserify src/js/all.js > dist/js/wood.js",
+        "build": "npm run build-sass & npm run build-js",
+        "bdist-sass": "node-sass --output-style compressed src/sass/all.scss dist/css/wood.min.css",
+        "bdist-js": "browserify src/js/all.js | uglifyjs -mc > dist/js/wood.min.js",
+        "bdist": "npm run bdist-sass & npm run bdist-js",
+        "deploy": "npm run bdist && npm run build && npm run version:patch && npm run push:git && npm publish",
+        "version:patch": "mversion patch -m \"Release v%s\"",
+        "push:git": "git push --tags origin HEAD:master"
+    },
+    "devDependencies": {
+        "browserify": "",
+        "express": "^4.13.0",
+        "grunt": "",
+        "grunt-cli": "",
+        "grunt-bowercopy": "",
+        "mversion": "1.10.1",
+        "node-sass": "",
+        "uglify-js": "",
+        "watchify": ""
+    }
 }
