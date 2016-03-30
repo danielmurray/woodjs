@@ -10,7 +10,7 @@ Wood.Ripple = Marionette.ItemView.extend({
   pythagoras: function(a, b){
     return Math.pow(Math.pow(a,2)+Math.pow(b,2),0.5);
   },
-  createRipple(className, x, y){
+  createRipple: function(className, x, y){
     var $ripple = $(document.createElement('div'));
     $ripple.addClass('circle ripple ' + className);
     var h = this.$el.height();
