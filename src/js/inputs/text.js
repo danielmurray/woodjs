@@ -15,6 +15,7 @@
           '<div id="error-text" class="error-text"></div>' +
         ''),
         events:{
+          'change input': 'keyPress',
           'keyup input': 'keyPress',
           'keydown input': 'setFilled',
           'focusin  input': 'focusIn',
