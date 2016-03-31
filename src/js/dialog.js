@@ -40,7 +40,7 @@
         },
     }, {
       show: function (options) {
-        var widget = new Wood.Dialog(options);
+        var widget = new this(options);
         widget.render();
         widget.open();
       }
@@ -66,11 +66,5 @@
         var form = new Wood.Form(this.options.formOptions);
         this.dialogContentContainer.show(form);
       },
-    }, {
-      show: function (options) {
-        var widget = new Wood.FormDialog(options);
-        widget.render();
-        widget.open();
-      }
     });
 })(window.keys);
