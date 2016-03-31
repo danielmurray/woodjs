@@ -425,7 +425,6 @@ wood-spinner {
 wood-toolbar {
   height: 64px;
   padding: 0 10px;
-  overflow: hidden;
   display: flex;
   display: -ms-flexbox;
   display: -webkit-flex;
