@@ -6,7 +6,7 @@ require('./inputs/all');
 
 require('./avatar');
 require('./button');
-// require('./card');
+require('./card');
 // require('./button');
 require('./dialog');
 require('./form');
@@ -20,3 +20,4 @@ require('./ripple');
 require('./table');
 require('./tooltip');
 require('./toolbar');
+require('./tree');

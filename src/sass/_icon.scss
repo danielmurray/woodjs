@@ -7,16 +7,44 @@
 
  position: relative;
 
- font-size: 18px;
  background-color: rgba(0, 0, 0, 0);
  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 
- &button{
+ i{
+   font-size: 18px;
+   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
  }
+}
 
- .icon{
-   font-size: 24px;
- }
+wood-checkbox{
+  display: block;
+  position: relative;
+
+  .check-wrapper,
+  .box-wrapper{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+  }
+
+  .box-wrapper i{
+    font-size: 18px;
+  }
+
+  .check-wrapper i{
+    font-size: 0px;
+    margin-bottom: 2px;
+  }
+
+  &[checked]{
+    .check-wrapper i{
+      font-size: 16px;
+    }
+  }
 }
 
 wood-icon-list{
