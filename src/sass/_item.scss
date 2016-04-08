@@ -2,17 +2,21 @@ wood-item{
   display: block;
   height: 60px;
 
-  &:hover{
-    background-color: #fafafa;
-  }
+  &.button{
+    cursor: pointer;
 
+    &:hover{
+      background-color: #fafafa;
+    }
+  }
+  
   .item-wrapper{
     @include flexbox;
     @include justify-content(space-between);
     @include align-items(center);
     height: 100%;
     width: 100%;
-    padding-left: 16px;
+    padding: 0 16px;
 
     .right-icon,
     .left-icon{
@@ -29,7 +33,7 @@ wood-item{
 
     .item-body{
       @include flex-grow(2);
-      min-width: 200px;
+      padding-right: 16px;
 
       .primary-text{
         font-size: 13px;

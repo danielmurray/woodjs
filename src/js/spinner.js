@@ -33,7 +33,7 @@
     });
 
     // TODO
-    // toolbox.gui.widgets.InlineLoader = Marionette.ItemView.extend({
+    // Wood.InlineLoader = Marionette.ItemView.extend({
     //     tagName: 'img',
     //     attributes: {
     //         src: '/assets/images/loaders/bar.gif',
