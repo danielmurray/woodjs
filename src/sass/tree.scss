@@ -1,0 +1,40 @@
+wood-tree{
+  display: block;
+
+  .children-container{
+    wood-branches{
+      display: block;
+      padding: 0px 0px 0px 36px;
+
+      wood-branch{
+        display: block;
+        border-left: solid 1px;
+
+        .tree-wrapper{
+          position: relative;
+
+          .twig{
+            height: 50%;
+            width: 8px;
+            position: absolute;
+            border-bottom: solid 1px;
+          }
+        }
+
+        &:last-child{
+          border-left-width:0px;
+
+          .tree-wrapper{
+            .twig{
+              height: 50%;
+              width: 8px;
+              position: absolute;
+              border-left: solid 1px;
+              border-bottom: solid 1px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

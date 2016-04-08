@@ -8,11 +8,11 @@
             class: 'wood-icon',
         },
         iconTemplates: {
-            'fa': '<i class="fa fa-icon fa-<%-icon%>"></i>',
-            'material': '<i class="material-icons"><%-icon%></i>'
+            'fa': '<i class="fa fa-icon fa-<%-icon%> color-<%-color%>"></i>',
+            'material': '<i class="material-icons color-<%-color%>"><%-icon%></i>'
         },
-        iconTemplate: function(icon) {
-            return _.template(this.iconTemplates[this.options.iconClass])({icon: icon})
+        iconTemplate: function(options) {
+            return _.template(this.iconTemplates[this.options.iconClass])(options)
         },
         template: _.template(
             '<%= iconTemplate %>' +
@@ -20,6 +20,7 @@
         defaults:{
             iconClass: 'fa',
             icon: 'circle-thin',
+            color: 'inherit',
             tooltip: false,
             clickEvent: 'action:click:icon'
         },
@@ -28,7 +29,7 @@
         },
         templateHelpers: function(){
             return _.extend({}, this.options, {
-                iconTemplate: this.iconTemplate(this.options.icon)
+                iconTemplate: this.iconTemplate(this.options)
             });
         },
     });
@@ -93,8 +94,66 @@
           this.tooltipContainer.show(this.tooltip);
         }
       },
-      onShow:function(){
-      }
+    });
+
+    Wood.Checkbox = Marionette.LayoutView.extend({
+      tagName: 'wood-checkbox',
+      attributes: {
+        class: 'wood-checkbox',
+      },
+      template: _.template(
+        '<div class="check-wrapper">' +
+          '<div id="check-container"></div>' +
+        '</div>' +
+        '<div class="box-wrapper">' +
+          '<div id="box-container"></div>' +
+        '</div>' +
+      ''),
+      regions:{
+        checkContainer: '#check-container',
+        boxContainer: '#box-container'
+      },
+      events:{
+        "submit": "onFormSubmit",
+      },
+      childEvents: {
+        "action:click:checkbox": "clickCheckbox",
+      },
+      clickCheckbox: function(){
+        if( this.$el.attr('checked') ){
+          this.$el.attr('checked', null);
+        }else{
+          this.$el.attr('checked', true);
+        }
+      },
+      defaults:{
+        checkIconView: Wood.Icon,
+        checkIconOptions:{
+          icon: 'check-square',
+          color: 'blue'
+        },
+        boxIconView: Wood.IconButton,
+        boxIconOptions:{
+          icon: 'square-o',
+          color: 'inherit',
+          clickEvent: 'action:click:checkbox'
+        }
+      },
+      initialize: function(options){
+        this.options = _.extend({}, this.defaults, options, {
+        });
+      },
+      onRender: function(){
+        var check = new this.options.checkIconView(
+          this.options.checkIconOptions
+        );
+        this.checkContainer.show(check);
+
+        var box = new this.options.boxIconView(
+          this.options.boxIconOptions
+        );
+        this.boxContainer.show(box);
+      },
     });
 
     Wood.IconList = Marionette.CollectionView.extend({
@@ -116,4 +175,5 @@
         return view;
       },
     });
+
 })(window.toolbox);

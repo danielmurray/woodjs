@@ -38,12 +38,12 @@ wood-label{
   &:hover,
   &.pressed,
   &.focused{
-    background-color: $color-grey;
+    background-color: map-get($colors, 'grey');
   }
 
   &.raised{
     color: white;
-    background-color: $color-secondary;
+    background-color: map-get($colors, 'secondary');
     box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
 
     &:hover,

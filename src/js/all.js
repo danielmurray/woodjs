@@ -15,3 +15,4 @@ require('./ripple');
 require('./table');
 require('./tooltip');
 require('./toolbar');
+require('./tree');

@@ -3,11 +3,9 @@
  */
 (function (Wood) {
     Wood.Avatar = Marionette.ItemView.extend({
-        attributes: {
-          class: 'wood avatar',
-        },
+      tagName: "wood-avatar",
         template: _.template(
-          '<div class="shape <%-shape%>">' +
+          '<div class="shape <%-shape%> color-<%-color%> backgroundColor-<%-backgroundColor%>">' +
             '<% if (image) { %>' +
               '<img class="img" src="<%-image%>"></img>' +
             '<%} else if(icon) {%>' +
@@ -21,19 +19,21 @@
         },
         events:{
         },
+        defaults: {
+          image: null,
+          icon: null,
+          letter: null,
+          shape: null,
+          color: 'inherit',
+          backgroundColor: 'inherit'
+        },
         initialize: function (options) {
-          this.options = options;
+          this.options = _.extend({}, this.defaults, this.options);
         },
         onRender: function(){
         },
         templateHelpers: function(){
-          return _.extend({
-            image: '',
-            icon: '',
-            letter: '',
-            shape: ''
-          }, this.options, {
-
+          return _.extend({}, this.options, {
           });
         }
     });

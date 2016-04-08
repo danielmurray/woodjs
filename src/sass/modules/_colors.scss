@@ -1,11 +1,27 @@
 //== Colors
-$color-grey-light:      rgba( 153,    153,    153,    0.2);
-$color-grey:            rgba( 153,    153,    153,    0.4);
-$color-grey-dark:       rgba( 153,    153,    153,    0.6);
-$color-black:           rgba( 0,    0,    0,    0.870588);
-$color-primary:         rgba( 255,  64,   129,  1);
-$color-secondary:       rgba( 0,    188,  212,  1);
-$color-success:         #5cb85c !default;
-$color-info:            #5bc0de !default;
-$color-warning:         #f0ad4e !default;
-$color-danger:          #d9534f !default;
+$colors: (
+  inherit:         'inherit',
+  white:           'white',
+  blue:            #00bcd4,
+  grey-light:      rgba( 153,    153,    153,    0.2),
+  grey:            rgba( 153,    153,    153,    0.4),
+  grey-dark:       rgba( 153,    153,    153,    0.6),
+  black:           rgba( 0,    0,    0,    0.870588),
+  primary:         rgba( 255,  64,   129,  1),
+  secondary:       rgba( 0,    188,  212,  1),
+  success:         #5cb85c,
+  info:            #5bc0de,
+  warning:         #f0ad4e,
+  danger:          #d9534f
+);
+
+@each $key, $value in $colors {
+
+  .color-#{$key}{
+    color: #{$value};
+  }
+
+  .backgroundColor-#{$key}{
+    background-color: #{$value};
+  }
+}
