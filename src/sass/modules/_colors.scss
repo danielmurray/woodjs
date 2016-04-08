@@ -1,24 +1,31 @@
 //== Colors
 $colors: (
-  inherit:         'inherit',
-  white:           'white',
-  blue:            #00bcd4,
-  grey-light:      rgba( 153,    153,    153,    0.2),
-  grey:            rgba( 153,    153,    153,    0.4),
-  grey-dark:       rgba( 153,    153,    153,    0.6),
-  black:           rgba( 0,    0,    0,    0.870588),
-  primary:         rgba( 255,  64,   129,  1),
-  secondary:       rgba( 0,    188,  212,  1),
-  success:         #5cb85c,
-  info:            #5bc0de,
-  warning:         #f0ad4e,
-  danger:          #d9534f
+  inherit:       'inherit',
+  white:         'white',
+  blue:           rgba( 0,    188,  212,  1),
+  grey-light:     rgba( 232,    232,    232,    1),
+  grey:           rgba( 139,    139,    139,    1),
+  grey-dark:      rgba(  90,     90,     90,    1),
+  overlay-light:  rgba( 153,    153,    153,    0.2),
+  overlay:        rgba( 153,    153,    153,    0.4),
+  overlay-dark:   rgba( 153,    153,    153,    0.6),
+  black:          rgba( 0,    0,    0,    0.870588),
+  primary:        rgba( 255,  64,   129,  1),
+  secondary:      rgba( 0,    188,  212,  1),
+  success:        #5cb85c,
+  info:           #5bc0de,
+  warning:        #f0ad4e,
+  danger:         #d9534f
 );
 
 @each $key, $value in $colors {
-
   .color-#{$key}{
     color: #{$value};
+  }
+
+  .overlay-#{$key}{
+    background-color: #{$value};
+    opacity: 0.8;
   }
 
   .backgroundColor-#{$key}{

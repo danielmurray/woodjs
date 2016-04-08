@@ -31,7 +31,6 @@
     },
     initialize: function(options) {
       this.options = _.extend({}, this.defaults, this.options);
-
     },
     onRender: function() {
       if (this.options.leftIcon) {
@@ -53,5 +52,21 @@
         value: this.value
       });
     }
+  });
+
+  Wood.ItemButton = Wood.Item.extend({
+    attributes:{
+      class: 'button'
+    },
+    events:{
+      'click': 'click'
+    },
+    defaults: _.extend({}, Wood.Item.prototype.defaults, {
+      clickEvent: 'action:click:item',
+      clickEventArg: null
+    }),
+    click: function(e){
+      this.triggerMethod(this.options.clickEvent, this.options.clickEventArg);
+    },
   });
 })(window.Wood);

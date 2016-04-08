@@ -1,7 +1,7 @@
 /**
  * Created by danmurray on 3/11/15.
  */
-(function (toolbox) {
+(function (Wood) {
   Wood.Tooltip = Marionette.LayoutView.extend({
     attributes: {
       class: 'wood tooltip-anchor-wrapper',
@@ -30,4 +30,4 @@
       });
     },
   });
-})(window.toolbox);
+})(window.Wood);

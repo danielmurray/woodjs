@@ -1,4 +1,4 @@
-(function (toolbox) {
+(function (Wood) {
   Wood.InputList = Marionette.CollectionView.extend({
     childEvents: {
       "action:input:change": "onInputChange",
@@ -141,5 +141,4 @@
         });
       },
   });
-
-})(window.toolbox);
+})(window.Wood);

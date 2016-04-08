@@ -14,16 +14,20 @@
         iconContainer: '#icon-container'
       },
       defaults:{
+        iconClass: 'fa',
         text: 'Button',
+        color: 'inherit'
       },
       initialize: function(options){
         this.options = _.extend({}, this.defaults, options);
       },
       onRender: function(){
         if ( this.options.icon ){
-          var view = this.options.icon.view;
-          var options = this.options.icon.options;
-          var iconView = new view(options);
+          var iconView = new Wood.Icon({
+            icon: this.options.icon,
+            iconClass: this.options.iconClass,
+            color: this.options.color
+          });
           this.iconContainer.show(iconView);
         }
       },
@@ -39,8 +43,8 @@
           class: 'wood button',
         },
         template: _.template(
-          '<div id="ripple-container" class="ripple-container"></div>' +
-          '<div id="label-container" class="label-wrapper"><%-label%></div>' +
+          '<div id="ripple-container" class="ripple-container backgroundColor-<%-backgroundColor%>"></div>' +
+          '<div id="label-container" class="label-wrapper color-<%-color%>"><%-label%></div>' +
         ''),
         regions:{
           rippleContainer: '#ripple-container',
@@ -67,9 +71,12 @@
           var ripple = this.rippleContainer.currentView;
           ripple.mouseDown(x, y);
         },
-        mouseOut: function(){
-          var ripple = this.rippleContainer.currentView;
-          ripple.mouseOut();
+        mouseOut: function(e){
+          var target = $(e.toElement);
+          if( target.closest(this.$el).length ==0 ){
+            var ripple = this.rippleContainer.currentView;
+            ripple.mouseOut();
+          }
         },
         click: function(e){
           e.preventDefault();
@@ -78,7 +85,10 @@
           this.triggerMethod("action:click:button");
         },
         defaults:{
+          iconClass: 'fa',
           label: 'Button',
+          color: 'white',
+          backgroundColor: 'secondary',
           disabled: false
         },
         disable: function( disabled ){
@@ -95,6 +105,9 @@
           this.rippleContainer.show(ripple);
 
           var label = new Label({
+            icon: this.options.icon,
+            iconClass: this.options.iconClass,
+            color: this.options.color,
             text: this.options.label
           });
           this.labelContainer.show(label);
@@ -148,14 +161,61 @@
     });
 
     Wood.FlatButton = Button.extend({
-        attributes: {
-          class: 'wood button flat',
-        }
+      attributes: {
+        class: 'wood button flat',
+      }
     });
 
     Wood.RaisedButton = Button.extend({
-        attributes: {
-          class: 'wood button raised',
+      attributes: {
+        class: 'wood button raised',
+      }
+    });
+
+    Wood.DropdownButton = Button.extend({
+      attributes: {
+        class: 'wood button dropdown',
+      },
+      template: _.template(
+        '<div id="ripple-container" class="ripple-container backgroundColor-<%-backgroundColor%>"></div>' +
+        '<div id="label-container" class="label-wrapper color-<%-color%>"><%-label%></div>' +
+        '<div id="caret-container" class="caret-wrapper color-<%-color%>"></div>' +
+      ''),
+      toggle: function(){
+        this.expanded = !this.expanded;
+        this.renderCaret(this.expanded);
+      },
+      focusIn : function(e){},
+      focusOut : function(e){},
+      mouseDown: function(e){
+        if( this.expanded ){
+          var ripple = this.rippleContainer.currentView;
+          ripple.mouseOut();
+          this.triggerMethod('action:dropdown:collapse');
+        }else{
+          Button.prototype.mouseDown.call(this, e);
+          this.triggerMethod('action:dropdown:expand');
         }
+        this.toggle();
+      },
+      mouseOut: function(e){},
+      click: function(e){},
+      initialize: function(options){
+        Button.prototype.initialize.call(this, options);
+        this.expanded = false;
+      },
+      onRender: function(){
+        Button.prototype.onRender.call(this);
+        this.addRegion("caretContainer", "#caret-container");
+        this.renderCaret(this.expanded);
+      },
+      renderCaret: function(expanded){
+        var icon = expanded ? 'angle-up' : 'angle-down';
+        var caret = new Wood.Icon({
+          icon: icon,
+          color: this.options.color
+        });
+        this.caretContainer.show(caret);
+      }
     });
 })(window.Wood);

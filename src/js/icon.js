@@ -1,7 +1,7 @@
 /**
  * Created by danmurray on 2/26/15.
  */
- (function (toolbox) {
+ (function (Wood) {
     Wood.Icon = Marionette.LayoutView.extend({
         tagName: 'wood-icon',
         attributes: {
@@ -81,7 +81,7 @@
       click: function(e){
         var ripple = this.rippleContainer.currentView;
         ripple.click();
-        this.triggerMethod(this.options.clickEvent);
+        this.triggerMethod(this.options.clickEvent, e);
       },
       onRender: function(){
         var ripple = new Wood.Ripple();
@@ -119,7 +119,8 @@
       childEvents: {
         "action:click:checkbox": "clickCheckbox",
       },
-      clickCheckbox: function(){
+      clickCheckbox: function(child, event){
+        event.stopPropagation();
         if( this.$el.attr('checked') ){
           this.$el.attr('checked', null);
         }else{
@@ -176,4 +177,4 @@
       },
     });
 
-})(window.toolbox);
+})(window.Wood);

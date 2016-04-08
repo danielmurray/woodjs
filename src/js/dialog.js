@@ -15,7 +15,6 @@
           title: 'Dialog'
         },
         initialize: function(options){
-          var self = this;
           this.options = _.extend({}, this.defaults, options);
 
           this.dialog = new BootstrapDialog({
