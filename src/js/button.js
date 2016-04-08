@@ -209,7 +209,7 @@
         this.addRegion("caretContainer", "#caret-container");
         this.renderCaret(this.expanded);
       },
-      renderCaret(expanded){
+      renderCaret: function(expanded){
         var icon = expanded ? 'angle-up' : 'angle-down';
         var caret = new Wood.Icon({
           icon: icon,

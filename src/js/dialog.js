@@ -1,5 +1,6 @@
 /**
  * Created by danmurray on 14/12/15.
+ * TODO remove bootstrap dependency
  */
 (function (keys) {
     Wood.Dialog = Marionette.LayoutView.extend({
@@ -14,7 +15,6 @@
           title: 'Dialog'
         },
         initialize: function(options){
-          var self = this;
           this.options = _.extend({}, this.defaults, options);
 
           this.dialog = new BootstrapDialog({
