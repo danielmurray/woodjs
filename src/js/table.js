@@ -1,4 +1,8 @@
-(function (Wood) {
+/**
+ * Created by danmurray on 14/12/15.
+ * TODO remove datatables dependency
+ */
+ (function (Wood) {
     Wood.Table = Marionette.ItemView.extend({
         tagName: 'table',
         attributes: {

@@ -10,11 +10,6 @@ module.exports = function (grunt) {
                     destPrefix: 'dist/fonts'
                 },
                 files: {
-                  // material icons
-                  'MaterialIcons-Regular.eot': 'material-design-icons/iconfont/MaterialIcons-Regular.eot',
-                  'MaterialIcons-Regular.woff': 'material-design-icons/iconfont/MaterialIcons-Regular.woff',
-                  'MaterialIcons-Regular.woff2': 'material-design-icons/iconfont/MaterialIcons-Regular.woff2',
-                  'MaterialIcons-Regular.truetype': 'material-design-icons/iconfont/MaterialIcons-Regular.ttf'
                 }
             },
         }

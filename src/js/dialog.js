@@ -1,5 +1,6 @@
 /**
  * Created by danmurray on 14/12/15.
+ * TODO remove bootstrap dependency
  */
 (function (keys) {
     Wood.Dialog = Marionette.LayoutView.extend({
