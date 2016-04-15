@@ -57,7 +57,7 @@
       },
       submit: function(formView, data){
         if( this.options.onSubmit ){
-          this.options.onSubmit(this, formView, data);
+          this.options.onSubmit(data);
         }else {
           this.triggerMethod('action:submit:form', data);
         }

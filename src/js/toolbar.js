@@ -25,7 +25,9 @@
       defaults: {
         leftIcons: [],
         rightIcons: [],
-        title: 'Toolbar'
+        title: 'Toolbar',
+        color: 'black',
+        backgroundColor: 'grey-light',
       },
       initialize: function () {
         this.options = _.extend({}, this.defaults, this.options);
@@ -35,6 +37,9 @@
         });
       },
       onRender: function () {
+        this.$el.addClass('color-'+this.options.color);
+        this.$el.addClass('backgroundColor-'+this.options.backgroundColor);
+        
         var leftIconList = new Wood.IconList({
           collection: new Backbone.Collection(this.options.leftIcons)
         });

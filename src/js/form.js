@@ -77,6 +77,7 @@
       onInputChange: function(inputListView, valid){
         var submitButton = this.submitBtnContainer.currentView;
         submitButton.disable(!valid);
+        console.log(valid)
       },
       onFormSubmit: function(e){
         e.preventDefault();
@@ -92,6 +93,7 @@
         return this.inputListContainer.currentView.validate();
       },
       submitForm: function(e){
+        console.log('hello world')
         if( this.validate() ){
           var data = this.getData();
           this.triggerMethod('action:submit:form', data);
@@ -105,6 +107,7 @@
         },
       },
       initialize: function (options) {
+        console.log('hello world')
         this.options = _.extend({}, this.defaults, this.options);
       },
       onRender: function(){

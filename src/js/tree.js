@@ -7,10 +7,11 @@
     template: _.template(
       '<div id="tree-container"></div>' +
     ''),
+    childEvents:{
+    },
     regions: {
       treeContainer: "#tree-container",
     },
-    events: {},
     defaults: {
     },
     initialize: function(options) {
@@ -20,9 +21,18 @@
     getTree: function(){
       return this.tree.getTree(this.options);
     },
+    bubbleChildEvent: function(childEventName){
+      this.childEvents[childEventName] = function(child, args){
+        this.triggerMethod(childEventName, args)
+      }
+    },
     onRender: function() {
       var tree = this.getTree();
       this.treeContainer.show(tree);
+
+      for( childEventName in tree.childEvents ){
+        this.bubbleChildEvent(childEventName)
+      }
     },
     templateHelpers: function() {
       return _.extend({}, this.options, {

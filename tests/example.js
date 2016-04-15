@@ -91,6 +91,14 @@
               type: 'password',
               isRequired: true
             },
+          }, {
+            id: 'date',
+            view: Wood.Input,
+            options: {
+              floatingLabelText: '',
+              type: 'datetime-local',
+              isRequired: true
+            },
           }],
           submitButton: {
             label: 'Sign In'
@@ -98,6 +106,35 @@
         }
       });
       // this.cardFormContainer.show(card)
+
+      var dialog = Wood.FormDialog.show({
+        title: 'Specify a Date',
+        onSubmit:function(data){
+          console.log(data)
+        },
+        formOptions:{
+          inputs: [{
+            id: 'startdate',
+            view: Wood.Input,
+            options: {
+              floatingLabelText: '',
+              type: 'datetime-local',
+              isRequired: true
+            },
+          },{
+            id: 'enddate',
+            view: Wood.Input,
+            options: {
+              floatingLabelText: '',
+              type: 'datetime-local',
+              isRequired: true
+            },
+          }],
+          submitButton: {
+            label: 'Submit'
+          }
+        }
+      });
 
       // Dropdown & Tree
       var dropdown = new Wood.Dropdown({
@@ -198,7 +235,7 @@
           ]
         }
       })
-      this.dropdownTreeContainer.show(dropdown)
+      // this.dropdownTreeContainer.show(dropdown)
 
       var dropdown = new Wood.Dropdown({
         buttonOptions:{
@@ -253,7 +290,7 @@
           ]
         }
       })
-      this.dropdownArborContainer.show(dropdown)
+      // this.dropdownArborContainer.show(dropdown)
 
     },
     templateHelpers: function() {}

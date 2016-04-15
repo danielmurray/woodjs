@@ -122,12 +122,16 @@
       clickCheckbox: function(child, event){
         event.stopPropagation();
         if( this.$el.attr('checked') ){
-          this.$el.attr('checked', null);
+          this.options.checked = false;
         }else{
-          this.$el.attr('checked', true);
+          this.options.checked = true;
         }
+
+        this.$el.attr('checked', this.options.checked);
+        this.triggerMethod("action:click:checkbox", this.options.checked)
       },
       defaults:{
+        checked: false,
         checkIconView: Wood.Icon,
         checkIconOptions:{
           icon: 'check-square',
@@ -154,7 +158,14 @@
           this.options.boxIconOptions
         );
         this.boxContainer.show(box);
+
+        this.$el.attr('checked', this.options.checked);
       },
+    });
+
+    Wood.Separator = Marionette.ItemView.extend({
+      tagName: 'wood-separator',
+      template: _.template('')
     });
 
     Wood.IconList = Marionette.CollectionView.extend({
