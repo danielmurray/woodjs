@@ -6,7 +6,9 @@
     tagName: 'wood-dropdown',
     template: _.template(
       '<div id="button-container" class="button-container"></div>' +
-      '<div id="dropdown-container" class="dropdown-container"></div>' +
+      '<div class="dropdown-anchor">' +
+        '<div id="dropdown-container" class="dropdown-container <%-floatRightClass%>"></div>' +
+      '</div>' +
     ''),
     regions: {
       buttonContainer   : '#button-container',
@@ -41,7 +43,7 @@
       });
     },
     defaults: {
-
+      floatRight: false,
     },
     initialize: function (options) {
       this.options = _.extend({}, this.defaults, this.options);
@@ -64,6 +66,7 @@
     },
     templateHelpers: function(){
       return _.extend({}, this.options, {
+        floatRightClass: this.options.floatRight ? 'floatRight' : ''
       });
     }
   });

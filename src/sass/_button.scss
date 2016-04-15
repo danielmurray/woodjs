@@ -71,8 +71,10 @@ wood-label{
   }
 
   &:disabled{
-    background: #eaeaea;
-    color: #a8a8a8;
+    .ripple-container{
+      background: #d1d1d1;
+      color: #a8a8a8;
+    }
   }
 
   .ripple-container{
@@ -94,7 +96,6 @@ wood-label{
     font-size: 14px;
     font-weight: 500;
     letter-spacing: 0;
-    line-height: 36px;
     text-transform: uppercase;
   }
 }
