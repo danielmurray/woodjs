@@ -24,13 +24,17 @@ wood-tree{
         &:last-child{
           border-left-width:0px;
 
-          .tree-wrapper{
-            .twig{
-              height: 50%;
-              width: 8px;
-              position: absolute;
-              border-left: solid 1px;
-              border-bottom: solid 1px;
+          & > #tree-container{
+            & > wood-tree{
+              & > .tree-wrapper{
+                & > .twig{
+                  height: 50%;
+                  width: 8px;
+                  position: absolute;
+                  border-left: solid 1px;
+                  border-bottom: solid 1px;
+                }
+              }
             }
           }
         }
