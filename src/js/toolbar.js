@@ -36,10 +36,15 @@
         return _.extend({}, this.options, {
         });
       },
+      getIcon: function(iconId){
+        var a = this.leftIconsContainer.currentView.getView(iconId);
+        var b = this.rightIconsContainer.currentView.getView(iconId);
+        return a || b;
+      },
       onRender: function () {
         this.$el.addClass('color-'+this.options.color);
         this.$el.addClass('backgroundColor-'+this.options.backgroundColor);
-        
+
         var leftIconList = new Wood.IconList({
           collection: new Backbone.Collection(this.options.leftIcons)
         });

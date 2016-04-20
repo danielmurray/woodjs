@@ -773,7 +773,7 @@ wood-tree {
           border-bottom: solid 1px; }
       wood-tree .children-container wood-branches wood-branch:last-child {
         border-left-width: 0px; }
-        wood-tree .children-container wood-branches wood-branch:last-child .tree-wrapper .twig {
+        wood-tree .children-container wood-branches wood-branch:last-child > #tree-container > wood-tree > .tree-wrapper > .twig {
           height: 50%;
           width: 8px;
           position: absolute;

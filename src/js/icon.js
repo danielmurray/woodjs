@@ -24,6 +24,9 @@
             tooltip: false,
             clickEvent: 'action:click:icon'
         },
+        setAttr: function(setObj){
+          _.extend(this.options, setObj);
+        },
         initialize: function(options){
             this.options = _.extend({}, this.defaults, options);
         },
@@ -167,7 +170,7 @@
       tagName: 'wood-separator',
       template: _.template('')
     });
-
+    //
     Wood.IconList = Marionette.CollectionView.extend({
       tagName: 'wood-icon-list',
       childView: Wood.Icon,
@@ -186,6 +189,13 @@
         // return it
         return view;
       },
+      getView: function(id){
+        for( var i in this.children._views ){
+          var childView = this.children._views[i];
+          if( id == childView.id)
+            return childView;
+        }
+      }
     });
 
 })(window.Wood);
