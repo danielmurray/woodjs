@@ -80,7 +80,8 @@
             options: {
               floatingLabelText: 'Username',
               hintText: 'Are you the Keymaster?',
-              isRequired: true
+              isRequired: true,
+              defaultValue: 'Default User'
             }
           }, {
             id: 'password',
