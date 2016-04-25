@@ -11,7 +11,7 @@
       var id = child.get('id');
       var view = child.get('view');
       var options = child.get('options');
-      var defaultValue = options.defaultValue;
+      var defaultValue = this.model ? this.model.get(id) : options.defaultValue;
 
       // build the final list of options for the childView class
       var options = _.extend({}, childViewOptions, options, {
