@@ -19,8 +19,6 @@
 }
 
 wood-spinner{
-  margin: 5px;
-
   &.overlay{
     @include flexbox;
     @include justify-content(center);
@@ -28,8 +26,8 @@ wood-spinner{
     position: absolute;
     top:0;
     left:0;
-    height: 95%;
-    width: 95%;
+    height: 100%;
+    width: 100%;
     z-index: 1000;
     cursor: wait;
     background-color: #F9F9F9;
@@ -52,5 +50,21 @@ wood-spinner{
      dash 1.5s ease-in-out infinite
     ;
     stroke-linecap: round;
+  }
+}
+
+wood-spinner-overlay{
+  .overlay{
+    @include flexbox;
+    @include justify-content(center);
+    @include align-items(center);
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    cursor: wait;
+    opacity: 0.8;
   }
 }

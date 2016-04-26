@@ -21,14 +21,54 @@
           });
         }
     }, {
-      overlay: function ($el) {
-        var widget = new Wood.Spinner();
+      overlay: function ($el, options) {
+        var widget = new Wood.Spinner(options);
         widget.render();
         $overlay = widget.$el;
         $overlay.addClass('overlay');
 
         $el.append($overlay);
         return $overlay;
+      }
+    });
+
+    Wood.SpinnerOverlay = Marionette.LayoutView.extend({
+        tagName: 'wood-spinner-overlay',
+        template: _.template(
+          '<div class="overlay backgroundColor-<%-backgroundColor%>">' +
+            '<div id="spinner-container"></div>' +
+          '</div>' +
+        ''),
+        defaults: {
+          backgroundColor: 'transparent'
+        },
+        events: {
+          'click': 'preventDefault'
+        },
+        regions: {
+          spinnerContainer: '#spinner-container'
+        },
+        initialize: function (options) {
+          this.options = _.extend({}, this.defaults, this.options);
+        },
+        onRender: function(){
+          var spinner = new Wood.Spinner();
+          this.spinnerContainer.show(spinner)
+        },
+        preventDefault: function(e){
+          e.preventDefault();
+        },
+        templateHelpers: function () {
+          return _.extend({}, this.options, {
+          });
+        }
+    }, {
+      show: function ($el, options) {
+        var overlay = new Wood.SpinnerOverlay(options);
+        overlay.render();
+
+        $el.append(overlay.$el);
+        return overlay.$el;
       }
     });
 
