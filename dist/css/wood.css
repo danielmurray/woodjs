@@ -642,39 +642,58 @@ wood-divider {
     stroke-dasharray: 89,200;
     stroke-dashoffset: -124px; } }
 
-wood-spinner {
-  margin: 5px; }
-  wood-spinner.overlay {
-    display: flex;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    justify-content: center;
-    -ms-justify-content: center;
-    -webkit-justify-content: center;
-    align-items: center;
-    -ms-align-items: center;
-    -webkit-align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 95%;
-    width: 95%;
-    z-index: 1000;
-    cursor: wait;
-    background-color: #F9F9F9;
-    opacity: 0.8; }
-  wood-spinner .circular {
-    animation: rotate 2s linear infinite;
-    transform-origin: center center;
-    margin: auto; }
-  wood-spinner .path {
-    stroke: #a8a8a8;
-    fill: none;
-    stroke-miterlimit: 10;
-    stroke-dasharray: 1,200;
-    stroke-dashoffset: 0;
-    animation: dash 1.5s ease-in-out infinite;
-    stroke-linecap: round; }
+wood-spinner.overlay {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: center;
+  -ms-justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  cursor: wait;
+  background-color: #F9F9F9;
+  opacity: 0.8; }
+
+wood-spinner .circular {
+  animation: rotate 2s linear infinite;
+  transform-origin: center center;
+  margin: auto; }
+
+wood-spinner .path {
+  stroke: #a8a8a8;
+  fill: none;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 1,200;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+  stroke-linecap: round; }
+
+wood-spinner-overlay .overlay {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  justify-content: center;
+  -ms-justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  cursor: wait;
+  opacity: 0.8; }
 
 .dataTables_wrapper .title {
   font-size: 24px;
