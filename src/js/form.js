@@ -11,7 +11,7 @@
       var id = child.get('id');
       var view = child.get('view');
       var options = child.get('options');
-      var defaultValue = this.model ? this.model.get(id) : '';
+      var defaultValue = this.model ? this.model.get(id) : options.defaultValue;
 
       // build the final list of options for the childView class
       var options = _.extend({}, childViewOptions, options, {
@@ -93,7 +93,6 @@
         return this.inputListContainer.currentView.validate();
       },
       submitForm: function(e){
-        console.log('hello world')
         if( this.validate() ){
           var data = this.getData();
           this.triggerMethod('action:submit:form', data);
@@ -107,7 +106,6 @@
         },
       },
       initialize: function (options) {
-        console.log('hello world')
         this.options = _.extend({}, this.defaults, this.options);
       },
       onRender: function(){

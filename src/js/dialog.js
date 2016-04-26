@@ -61,6 +61,7 @@
         }else {
           this.triggerMethod('action:submit:form', data);
         }
+        this.close();
       },
       onRender: function () {
         var form = new Wood.Form(this.options.formOptions);
