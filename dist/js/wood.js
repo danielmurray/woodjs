@@ -788,7 +788,8 @@ require('./tree');
         }
       },
       initialize: function(options){
-        this.options = _.extend({}, this.defaults, options, {
+        //jquery recursive copy
+        this.options = $.extend(true, {}, this.defaults, options, {
         });
       },
       onRender: function(){
@@ -810,7 +811,7 @@ require('./tree');
       tagName: 'wood-separator',
       template: _.template('')
     });
-    //
+
     Wood.IconList = Marionette.CollectionView.extend({
       tagName: 'wood-icon-list',
       childView: Wood.Icon,
@@ -956,7 +957,7 @@ require('./text.js');
           '<div id="left-icon-container" class="left-icon"></div>' +
         '<%}%>' +
           '<div class="item-body">' +
-            '<div class="primary-text"><%-primaryText%></div>' +
+            '<div class="primary-text"><%=primaryText%></div>' +
             '<div class="secondary-text"><%-secondaryText%></div>' +
           '</div>' +
           '<% if (rightIcon) { %>' +

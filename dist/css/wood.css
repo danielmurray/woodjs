@@ -501,15 +501,15 @@ wood-checkbox {
     -ms-align-items: center;
     -webkit-align-items: center; }
   wood-checkbox .box-wrapper i {
+    height: 18px;
+    width: 18px;
     font-size: 18px; }
   wood-checkbox .check-wrapper i {
-    font-size: 0px;
-    margin-bottom: 5px; }
+    font-size: 0px; }
   wood-checkbox[checked] .check-wrapper i {
-    font-size: 16px; }
+    font-size: 18px; }
   wood-checkbox[checked] .box-wrapper i {
-    font-size: 18px;
-    color: #00bcd4; }
+    color: rgba(0, 188, 212, 0); }
 
 wood-icon-list {
   height: 100%;
@@ -564,6 +564,8 @@ wood-item {
       wood-item .item-wrapper .right-icon .icon,
       wood-item .item-wrapper .left-icon .icon {
         font-size: 18px; }
+    wood-item .item-wrapper .left-icon {
+      margin-right: 10px; }
     wood-item .item-wrapper .item-body {
       flex-grow: 2;
       -ms-flex-grow: 2;

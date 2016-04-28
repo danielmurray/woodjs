@@ -148,7 +148,8 @@
         }
       },
       initialize: function(options){
-        this.options = _.extend({}, this.defaults, options, {
+        //jquery recursive copy
+        this.options = $.extend(true, {}, this.defaults, options, {
         });
       },
       onRender: function(){
@@ -170,7 +171,7 @@
       tagName: 'wood-separator',
       template: _.template('')
     });
-    //
+
     Wood.IconList = Marionette.CollectionView.extend({
       tagName: 'wood-icon-list',
       childView: Wood.Icon,

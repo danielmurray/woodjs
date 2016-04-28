@@ -31,11 +31,15 @@ wood-item{
       }
     }
 
+    .left-icon{
+      margin-right: 10px;
+    }
+
     .item-body{
       @include flex-grow(2);
       padding-right: 16px;
       min-width: 150px;
-      
+
       .primary-text{
         font-size: 13px;
         line-height: 19px;

@@ -7,7 +7,7 @@
           '<div id="left-icon-container" class="left-icon"></div>' +
         '<%}%>' +
           '<div class="item-body">' +
-            '<div class="primary-text"><%-primaryText%></div>' +
+            '<div class="primary-text"><%=primaryText%></div>' +
             '<div class="secondary-text"><%-secondaryText%></div>' +
           '</div>' +
           '<% if (rightIcon) { %>' +
