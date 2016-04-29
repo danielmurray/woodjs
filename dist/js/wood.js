@@ -643,7 +643,6 @@ require('./tree');
  */
  (function (Wood) {
     Wood.Icon = Marionette.LayoutView.extend({
-        tagName: 'wood-icon',
         attributes: {
             class: 'wood-icon',
         },
@@ -651,24 +650,26 @@ require('./tree');
             'fa': '<i class="fa fa-icon fa-<%-icon%> color-<%-color%>"></i>',
             'material': '<i class="material-icons color-<%-color%>"><%-icon%></i>'
         },
-        iconTemplate: function(options) {
-            return _.template(this.iconTemplates[this.options.iconClass])(options)
+        defaults:{
+          clickEvent: 'action:click:icon',
+          color: 'inherit',
+          disabled: false,
+          icon: 'circle-thin',
+          iconClass: 'fa',
+          tooltip: false,
         },
+        tagName: 'wood-icon',
         template: _.template(
             '<%= iconTemplate %>' +
         ''),
-        defaults:{
-            iconClass: 'fa',
-            icon: 'circle-thin',
-            color: 'inherit',
-            tooltip: false,
-            clickEvent: 'action:click:icon'
-        },
-        setAttr: function(setObj){
-          _.extend(this.options, setObj);
+        iconTemplate: function(options) {
+            return _.template(this.iconTemplates[this.options.iconClass])(options)
         },
         initialize: function(options){
             this.options = _.extend({}, this.defaults, options);
+        },
+        setAttr: function(setObj){
+          _.extend(this.options, setObj);
         },
         templateHelpers: function(){
             return _.extend({}, this.options, {
@@ -678,18 +679,8 @@ require('./tree');
     });
 
     Wood.IconButton = Wood.Icon.extend({
-      tagName: 'button',
       attributes: {
         class: 'wood-icon',
-      },
-      template: _.template(
-        '<div id="ripple-container"></div>' +
-        '<%= iconTemplate %>' +
-        '<div id="tooltip-container"></div>' +
-      ''),
-      regions:{
-        rippleContainer: '#ripple-container',
-        tooltipContainer: '#tooltip-container'
       },
       events:{
         'focusin':  'focusIn',
@@ -697,6 +688,24 @@ require('./tree');
         'mousedown': 'mouseDown',
         'mouseleave':'mouseOut',
         'click':    'click'
+      },
+      regions:{
+        rippleContainer: '#ripple-container',
+        tooltipContainer: '#tooltip-container'
+      },
+      tagName: 'button',
+      template: _.template(
+        '<div id="ripple-container"></div>' +
+        '<%= iconTemplate %>' +
+        '<div id="tooltip-container"></div>' +
+      ''),
+      click: function(e){
+        var ripple = this.rippleContainer.currentView;
+        ripple.click();
+        this.triggerMethod(this.options.clickEvent, e);
+      },
+      disable: function( disabled ){
+        this.$el.attr('disabled', disabled );
       },
       focusIn : function(e){
         var ripple = this.rippleContainer.currentView;
@@ -712,6 +721,10 @@ require('./tree');
           this.tooltip.focusOut()
         }
       },
+      initialize: function(options){
+        this.options = _.extend({}, this.defaults, options);
+        this.disable(this.options.disabled);
+      },
       mouseDown: function(e){
         e.preventDefault();
         var ripple = this.rippleContainer.currentView;
@@ -721,18 +734,14 @@ require('./tree');
         var ripple = this.rippleContainer.currentView;
         ripple.mouseOut();
       },
-      click: function(e){
-        var ripple = this.rippleContainer.currentView;
-        ripple.click();
-        this.triggerMethod(this.options.clickEvent, e);
-      },
       onRender: function(){
         var ripple = new Wood.Ripple();
         this.rippleContainer.show(ripple);
 
         if( this.options.tooltip ){
+          var text = this.options.disabled ? 'Disabled' : this.options.tooltip;
           this.tooltip = new Wood.Tooltip({
-            text: this.options.tooltip
+            text: text
           });
           this.tooltipContainer.show(this.tooltip);
         }
@@ -740,10 +749,34 @@ require('./tree');
     });
 
     Wood.Checkbox = Marionette.LayoutView.extend({
-      tagName: 'wood-checkbox',
       attributes: {
         class: 'wood-checkbox',
       },
+      childEvents: {
+        "action:click:checkbox": "clickCheckbox",
+      },
+      defaults:{
+        boxIconView: Wood.IconButton,
+        boxIconOptions:{
+          icon: 'square-o',
+          color: 'inherit',
+          clickEvent: 'action:click:checkbox'
+        },
+        checked: false,
+        checkIconView: Wood.Icon,
+        checkIconOptions:{
+          icon: 'check-square',
+          color: 'blue'
+        }
+      },
+      events:{
+        "submit": "onFormSubmit",
+      },
+      regions:{
+        checkContainer: '#check-container',
+        boxContainer: '#box-container'
+      },
+      tagName: 'wood-checkbox',
       template: _.template(
         '<div class="check-wrapper">' +
           '<div id="check-container"></div>' +
@@ -752,16 +785,6 @@ require('./tree');
           '<div id="box-container"></div>' +
         '</div>' +
       ''),
-      regions:{
-        checkContainer: '#check-container',
-        boxContainer: '#box-container'
-      },
-      events:{
-        "submit": "onFormSubmit",
-      },
-      childEvents: {
-        "action:click:checkbox": "clickCheckbox",
-      },
       clickCheckbox: function(child, event){
         event.stopPropagation();
         if( this.$el.attr('checked') ){
@@ -772,20 +795,6 @@ require('./tree');
 
         this.$el.attr('checked', this.options.checked);
         this.triggerMethod("action:click:checkbox", this.options.checked)
-      },
-      defaults:{
-        checked: false,
-        checkIconView: Wood.Icon,
-        checkIconOptions:{
-          icon: 'check-square',
-          color: 'blue'
-        },
-        boxIconView: Wood.IconButton,
-        boxIconOptions:{
-          icon: 'square-o',
-          color: 'inherit',
-          clickEvent: 'action:click:checkbox'
-        }
       },
       initialize: function(options){
         //jquery recursive copy
@@ -813,8 +822,8 @@ require('./tree');
     });
 
     Wood.IconList = Marionette.CollectionView.extend({
-      tagName: 'wood-icon-list',
       childView: Wood.Icon,
+      tagName: 'wood-icon-list',
       buildChildView: function(child, ChildViewClass, childViewOptions){
         var id = child.get('id');
         var view = child.get('view');
