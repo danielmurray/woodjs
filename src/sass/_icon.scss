@@ -23,6 +23,8 @@
 wood-checkbox{
   display: block;
   position: relative;
+  height: 100%;
+  width: 100%;
 
   .check-wrapper,
   .box-wrapper{
@@ -51,7 +53,7 @@ wood-checkbox{
     }
 
     .box-wrapper i{
-      color: rgba( 0,    188,  212,  0);
+      color: rgba( 0,    0,  0,  0);
     }
   }
 }

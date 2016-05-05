@@ -7,7 +7,7 @@
           '<div class="label-placeholder"></div>' +
           '<div class="label-text"><%-floatingLabelText%></div>' +
           '<div class="hint-text"><%-hintText%></div>' +
-          '<input type="<%-type%>" value="<%-value%>"></input>' +
+          '<input type="<%-type%>" value="<%-value%>" <%-attributeString%>></input>' +
           '<div class="border-bottom">' +
             '<div class="border-bottom-inactive"></div>' +
             '<div class="border-bottom-active"></div>' +
@@ -72,11 +72,12 @@
           return !error;
         },
         defaults: {
+          attributes : [],
+          defaultValue: '',
           floatingLabelText: '',
           hintText: '',
-          defaultValue: '',
-          type: 'text',
-          isRequired: false
+          isRequired: false,
+          type: 'text'
         },
         initialize: function (options) {
           this.options = _.extend({}, this.defaults, this.options);
@@ -91,8 +92,13 @@
             return this.$('input').val(val);
         },
         templateHelpers: function(){
+          var attributeString = $.map(this.options.inputAttributes,
+            function( value, key) {
+              return key + '=' + value
+            }).join(' ')
           return _.extend({}, this.options, {
-            value: this.value || this.options.defaultValue
+            value: this.value || this.options.defaultValue,
+            attributeString: attributeString
           });
         }
     });

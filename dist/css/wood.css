@@ -487,7 +487,9 @@ wood-dropdown {
 
 wood-checkbox {
   display: block;
-  position: relative; }
+  position: relative;
+  height: 100%;
+  width: 100%; }
   wood-checkbox .check-wrapper,
   wood-checkbox .box-wrapper {
     position: absolute;
@@ -511,7 +513,7 @@ wood-checkbox {
   wood-checkbox[checked] .check-wrapper i {
     font-size: 18px; }
   wood-checkbox[checked] .box-wrapper i {
-    color: rgba(0, 188, 212, 0); }
+    color: transparent; }
 
 wood-icon-list {
   height: 100%;
