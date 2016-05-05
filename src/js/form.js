@@ -77,7 +77,6 @@
       onInputChange: function(inputListView, valid){
         var submitButton = this.submitBtnContainer.currentView;
         submitButton.disable(!valid);
-        console.log(valid)
       },
       onFormSubmit: function(e){
         e.preventDefault();
