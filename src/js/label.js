@@ -1,5 +1,5 @@
-(function (toolbox) {
-    toolbox.gui.widgets.Label = Marionette.ItemView.extend({
+(function (Wood) {
+    Wood.Label = Marionette.ItemView.extend({
         template: _.template('<span class="<%- cssClass %>"><%- text %></span>'),
         initialize: function (options) {
             options = options || {};
@@ -13,4 +13,4 @@
             }
         }
     });
-})(window.toolbox);
+})(window.Wood);

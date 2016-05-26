@@ -1,12 +1,13 @@
 wood-item{
   display: block;
-  height: 60px;
+  height: 56px;
 
   &.button{
     cursor: pointer;
 
     &:hover{
-      background-color: #fafafa;
+      background-color: rgba(0,0,0,0.098);
+      transition: background-color 0.25s ease;
     }
   }
 

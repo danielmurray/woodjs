@@ -1037,6 +1037,24 @@ require('./text.js');
 
 },{}],12:[function(require,module,exports){
 (function (Wood) {
+  Wood.Subheader = Marionette.ItemView.extend({
+    tagName: 'wood-subheader',
+    template: _.template(
+      '<%-text%>' +
+    ''),
+    defaults:{
+      text: ''
+    },
+    initialize: function (options) {
+      this.options = _.extend({}, this.defaults, options);
+    },
+    templateHelpers: function () {
+      return {
+        text: this.options.text
+      }
+    }
+  });
+
   Wood.Divider = Marionette.ItemView.extend({
     tagName: 'wood-divider',
     template: _.template(''),
