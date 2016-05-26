@@ -8,16 +8,17 @@
     },
     template: _.template(
       '<div class="icons display-row">' +
-        '<div id="icon"></div>' +
-        '<div id="icon-button"></div>' +
-        '<div id="icon-tooltip"></div>' +
-        '<div id="icon-material"></div>' +
+      '<div id="icon"></div>' +
+      '<div id="icon-button"></div>' +
+      '<div id="icon-tooltip"></div>' +
+      '<div id="icon-material"></div>' +
       '</div>' +
       '<div class="buttons display-row">' +
-        '<div id="flat-button"></div>' +
-        '<div id="raised-button"></div>' +
+      '<div id="flat-button"></div>' +
+      '<div id="raised-button"></div>' +
       '</div>' +
       '<div id="card-form-container"></div>' +
+      '<div id="list-container"></div>' +
       '<div id="dropdown-tree-container"></div>' +
       '<div id="dropdown-arbor-container"></div>' +
       ''),
@@ -29,6 +30,7 @@
       flatButtonContainer: '#flat-button',
       raisedButtonContainer: '#raised-button',
       cardFormContainer: '#card-form-container',
+      listContainer: '#list-container',
       dropdownTreeContainer: '#dropdown-tree-container',
       dropdownArborContainer: '#dropdown-arbor-container',
     },
@@ -137,19 +139,54 @@
       //   }
       // });
 
+      // List
+      var list = new Wood.List({
+        items: [{
+          itemView: Wood.Subheader,
+          itemOptions:{
+            text: 'Math'
+          }
+        },{
+          itemView: Wood.ItemButton,
+          itemOptions: {
+            leftIcon: true,
+            leftIconOptions: {
+              icon: 'code-fork',
+            },
+            primaryText: 'Fork Repos',
+            color: 'black',
+          }
+        },{
+          itemView: Wood.Divider,
+        },{
+          itemView: Wood.Item,
+          itemOptions: {
+            rightIcon: true,
+            rightIconView: Wood.Checkbox,
+            rightIconOptions:{
+              checked: true,
+            },
+            primaryText: 'Concern #578324',
+            secondaryText: 'Pre-Delivery Inspection (PDI)',
+            color: 'black'
+          }
+        }]
+      });
+      this.listContainer.show(list)
+
       // Dropdown & Tree
       var dropdown = new Wood.Dropdown({
-        buttonOptions:{
-          icon: 'skyatlas',
-          label: 'Skywalkers',
-          color: 'black',
-          backgroundColor: 'white'
-        },
-        contentView: Wood.List,
-        contentOptions:{
-          items:[{
+          buttonOptions: {
+            icon: 'skyatlas',
+            label: 'Skywalkers',
+            color: 'black',
+            backgroundColor: 'white'
+          },
+          contentView: Wood.List,
+          contentOptions: {
+            items: [{
               itemView: Wood.Tree,
-              itemOptions:{
+              itemOptions: {
                 itemOptions: {
                   leftIcon: true,
                   leftIconOptions: {
@@ -232,49 +269,48 @@
                 primaryText: 'Fork Session',
                 color: 'black',
               }
-            }
-          ]
-        }
-      })
-      this.dropdownTreeContainer.show(dropdown)
+            }]
+          }
+        })
+        // this.dropdownTreeContainer.show(dropdown)
 
       var dropdown = new Wood.Dropdown({
-        buttonOptions:{
-          icon: 'code-fork',
-          label: 'Fork Session',
-          color: 'black',
-          backgroundColor: 'white'
-        },
-        contentView: Wood.List,
-        contentOptions:{
-          items:[{
+          buttonOptions: {
+            icon: 'code-fork',
+            label: 'Fork Session',
+            color: 'black',
+            backgroundColor: 'white'
+          },
+          contentView: Wood.List,
+          contentOptions: {
+            items: [{
               itemView: Wood.Arbor,
-              itemOptions:{
+              itemOptions: {
                 root: 17,
                 collection: new Backbone.Collection([{
-                    "description": "Grandpa",
-                    "id": 17,
-                    "parent": null
-                  },{
-                    "description": "Father",
-                    "id": 71919,
-                    "parent": 17
-                  },{
-                    "description": "Grandson",
-                    "id": 71921,
-                    "parent": 71919
-                  },{
-                    "description": "Granddaughter",
-                    "id": 71922,
-                    "parent": 71919
-                  },{
-                    "description": "Cousin",
-                    "id": 71923,
-                    "parent": 71920
-                  },{
-                    "description": "Uncle",
-                    "id": 71920,
-                    "parent": 17
+                  "description": "Grandpa",
+                  "id": 17,
+                  "parent": null
+                }, {
+                  "description": "Father",
+                  "id": 71919,
+                  "parent": 17
+                }, {
+                  "description": "Grandson",
+                  "id": 71921,
+                  "parent": 71919
+                }, {
+                  "description": "Granddaughter",
+                  "id": 71922,
+                  "parent": 71919
+                }, {
+                  "description": "Cousin",
+                  "id": 71923,
+                  "parent": 71920
+                }, {
+                  "description": "Uncle",
+                  "id": 71920,
+                  "parent": 17
                 }])
               }
             }, {
@@ -287,11 +323,10 @@
                 primaryText: 'Fork Session',
                 color: 'black',
               }
-            }
-          ]
-        }
-      })
-      // this.dropdownArborContainer.show(dropdown)
+            }]
+          }
+        })
+        // this.dropdownArborContainer.show(dropdown)
 
     },
     templateHelpers: function() {}

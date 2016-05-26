@@ -534,11 +534,12 @@ wood-separator {
 
 wood-item {
   display: block;
-  height: 60px; }
+  height: 56px; }
   wood-item.button {
     cursor: pointer; }
     wood-item.button:hover {
-      background-color: #fafafa; }
+      background-color: rgba(0, 0, 0, 0.098);
+      transition: background-color 0.25s ease; }
   wood-item .item-wrapper {
     display: flex;
     display: -ms-flexbox;
@@ -599,6 +600,15 @@ wood-list {
 wood-divider {
   display: block;
   border-bottom: solid 1px grey; }
+
+wood-subheader {
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.541176);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 48px;
+  padding-left: 16px;
+  width: 100%; }
 
 @keyframes ripple {
   0% {
