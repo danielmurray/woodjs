@@ -43,28 +43,28 @@
       var icon = new Wood.Icon({
         icon: 'check'
       });
-      // this.iconContainer.show(icon);
+      this.iconContainer.show(icon);
       var iconButton = new Wood.IconButton({
         icon: 'check'
       });
-      // this.iconButtonContainer.show(iconButton);
+      this.iconButtonContainer.show(iconButton);
       var iconTooltip = new Wood.IconButton({
         icon: 'check',
         tooltip: 'Tooltip'
       });
-      // this.iconTooltipContainer.show(iconTooltip);
+      this.iconTooltipContainer.show(iconTooltip);
       var iconMaterial = new Wood.IconButton({
         iconClass: 'material',
         icon: 'android',
         tooltip: 'Material Icon'
       });
-      // this.iconMaterialContainer.show(iconMaterial);
+      this.iconMaterialContainer.show(iconMaterial);
 
       // Buttons
       var flatButton = new Wood.FlatButton();
-      // this.flatButtonContainer.show(flatButton)
+      this.flatButtonContainer.show(flatButton)
       var raisedButton = new Wood.RaisedButton();
-      // this.raisedButtonContainer.show(raisedButton);
+      this.raisedButtonContainer.show(raisedButton);
 
       // Card & Form
       var card = new Wood.Card({
@@ -108,7 +108,7 @@
           }
         }
       });
-      // this.cardFormContainer.show(card)
+      this.cardFormContainer.show(card)
 
       // var dialog = Wood.FormDialog.show({
       //   title: 'Specify a Date',
@@ -156,7 +156,6 @@
                   },
                   primaryText: "Eggs",
                   secondaryText: "Caged free for me",
-                  color: "black"
               }
           }, {
               itemOptions: {
@@ -168,7 +167,6 @@
                   },
                   primaryText: "Milk",
                   secondaryText: "Lowfat or skim",
-                  color: "black"
               }
           }, {
               itemOptions: {
@@ -180,7 +178,6 @@
                   },
                   primaryText: "Butter",
                   secondaryText: "I can't beleive it's butter",
-                  color: "black"
               }
           }, {
               itemOptions: {
@@ -192,7 +189,6 @@
                   },
                   primaryText: "Bread",
                   secondaryText: "Wheat not white",
-                  color: "black"
               }
           }]
       });
@@ -296,7 +292,7 @@
             }]
           }
         })
-        // this.dropdownTreeContainer.show(dropdown)
+        this.dropdownTreeContainer.show(dropdown)
 
       var dropdown = new Wood.Dropdown({
           buttonOptions: {
@@ -350,7 +346,7 @@
             }]
           }
         })
-        // this.dropdownArborContainer.show(dropdown)
+        this.dropdownArborContainer.show(dropdown)
 
     },
     templateHelpers: function() {}

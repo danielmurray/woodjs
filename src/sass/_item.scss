@@ -43,10 +43,10 @@ wood-item{
       .primary-text{
         font-size: 13px;
         line-height: 14px;
-        max-height: 22px;
+        max-height: 14px;
 
         text-overflow: ellipsis;
-        word-wrap: break-word;
+        white-space: nowrap;
         overflow: hidden;
       }
 
