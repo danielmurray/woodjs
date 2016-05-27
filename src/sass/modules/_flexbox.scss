@@ -34,6 +34,12 @@
 	-webkit-flex-grow: $fg;
 }
 
+@mixin flex-shrink($fs) {
+	flex-shrink: $fs;
+	-ms-flex-shrink: $fs;
+	-webkit-flex-shrink: $fs;
+}
+
 @mixin align-content($ac) {
 	align-content: $ac;
 	-ms-align-content: $ac;
