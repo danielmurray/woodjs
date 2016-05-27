@@ -18,7 +18,7 @@
       '<div id="raised-button"></div>' +
       '</div>' +
       '<div id="card-form-container"></div>' +
-      '<div id="list-container"></div>' +
+      '<div id="list-container" style="width:300px;"></div>' +
       '<div id="dropdown-tree-container"></div>' +
       '<div id="dropdown-arbor-container"></div>' +
       ''),
@@ -139,39 +139,70 @@
       //   }
       // });
 
+      var text = {
+          "items": [{
+              "itemView": Wood.Subheader,
+              "itemOptions": {
+                  "text": "Jobs"
+              }
+          }, {
+              "itemOptions": {
+                  "rightIcon": true,
+                  "rightIconView": Wood.Checkbox,
+                  "rightIconOptions": {
+                      "checked": false,
+                      "disabled": true
+                  },
+                  "primaryText": "RONC9962004517",
+                  "secondaryText": "Bulletin: Model S | SID-13-0012 | Standard Courtesy Inspection Checklist",
+                  "color": "black"
+              }
+          }, {
+              "itemOptions": {
+                  "rightIcon": true,
+                  "rightIconView": Wood.Checkbox,
+                  "rightIconOptions": {
+                      "checked": false,
+                      "disabled": true
+                  },
+                  "primaryText": "RONC9962012877",
+                  "secondaryText": "Bulletin: Model S | SB-16-44-001 | Replace Charge Port Pin Carrier, 3 Phase",
+                  "color": "black"
+              }
+          }, {
+              "itemView": Wood.Divider,
+              "itemOptions": {
+                  "color": "blue"
+              }
+          }, {
+              "itemOptions": {
+                  "rightIcon": true,
+                  "rightIconView": Wood.Checkbox,
+                  "rightIconOptions": {
+                      "checked": false,
+                      "disabled": true
+                  },
+                  "primaryText": "RONC9962012877",
+                  "secondaryText": "Bulletin: Model S | SID-13-0012 | Standard Courtesy Inspection Checklist sdfasdfasdfasdfasdfas",
+                  "color": "black"
+              }
+          }, {
+              "itemOptions": {
+                  "rightIcon": true,
+                  "rightIconView": Wood.Checkbox,
+                  "rightIconOptions": {
+                      "checked": false,
+                      "disabled": true
+                  },
+                  "primaryText": "RONC9962012877",
+                  "secondaryText": "Panoramic roof will not open properly",
+                  "color": "black"
+              }
+          }]
+      }
+
       // List
-      var list = new Wood.List({
-        items: [{
-          itemView: Wood.Subheader,
-          itemOptions:{
-            text: 'Math'
-          }
-        },{
-          itemView: Wood.ItemButton,
-          itemOptions: {
-            leftIcon: true,
-            leftIconOptions: {
-              icon: 'code-fork',
-            },
-            primaryText: 'Fork Repos',
-            color: 'black',
-          }
-        },{
-          itemView: Wood.Divider,
-        },{
-          itemView: Wood.Item,
-          itemOptions: {
-            rightIcon: true,
-            rightIconView: Wood.Checkbox,
-            rightIconOptions:{
-              checked: true,
-            },
-            primaryText: 'Concern #578324',
-            secondaryText: 'Pre-Delivery Inspection (PDI)',
-            color: 'black'
-          }
-        }]
-      });
+      var list = new Wood.List(text);
       this.listContainer.show(list)
 
       // Dropdown & Tree
