@@ -164,7 +164,8 @@
                   rightIconView: Wood.Checkbox,
                   rightIconOptions: {
                       checked: true,
-                      disabled: true,
+                      disabled: false,
+                      tooltip: 'Hello World'
                   },
                   primaryText: "Milk",
                   secondaryText: "Lowfat or skim",
