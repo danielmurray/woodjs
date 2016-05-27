@@ -139,70 +139,63 @@
       //   }
       // });
 
-      var text = {
-          "items": [{
-              "itemView": Wood.Subheader,
-              "itemOptions": {
-                  "text": "Jobs"
+      // List
+      var list = new Wood.List({
+          items: [{
+              itemView: Wood.Subheader,
+              itemOptions: {
+                  text: "Ingredients"
               }
           }, {
-              "itemOptions": {
-                  "rightIcon": true,
-                  "rightIconView": Wood.Checkbox,
-                  "rightIconOptions": {
-                      "checked": false,
-                      "disabled": true
+              itemOptions: {
+                  rightIcon: true,
+                  rightIconView: Wood.Checkbox,
+                  rightIconOptions: {
+                      checked: false,
+                      disabled: true
                   },
-                  "primaryText": "RONC9962004517",
-                  "secondaryText": "Bulletin: Model S | SID-13-0012 | Standard Courtesy Inspection Checklist",
-                  "color": "black"
+                  primaryText: "Eggs",
+                  secondaryText: "Caged free for me",
+                  color: "black"
               }
           }, {
-              "itemOptions": {
-                  "rightIcon": true,
-                  "rightIconView": Wood.Checkbox,
-                  "rightIconOptions": {
-                      "checked": false,
-                      "disabled": true
+              itemOptions: {
+                  rightIcon: true,
+                  rightIconView: Wood.Checkbox,
+                  rightIconOptions: {
+                      checked: false,
+                      disabled: true
                   },
-                  "primaryText": "RONC9962012877",
-                  "secondaryText": "Bulletin: Model S | SB-16-44-001 | Replace Charge Port Pin Carrier, 3 Phase",
-                  "color": "black"
+                  primaryText: "Milk",
+                  secondaryText: "Lowfat or skim",
+                  color: "black"
               }
           }, {
-              "itemView": Wood.Divider,
-              "itemOptions": {
-                  "color": "blue"
-              }
-          }, {
-              "itemOptions": {
-                  "rightIcon": true,
-                  "rightIconView": Wood.Checkbox,
-                  "rightIconOptions": {
-                      "checked": false,
-                      "disabled": true
+              itemOptions: {
+                  rightIcon: true,
+                  rightIconView: Wood.Checkbox,
+                  rightIconOptions: {
+                      checked: false,
+                      disabled: true
                   },
-                  "primaryText": "RONC9962012877",
-                  "secondaryText": "Bulletin: Model S | SID-13-0012 | Standard Courtesy Inspection Checklist sdfasdfasdfasdfasdfas",
-                  "color": "black"
+                  primaryText: "Butter",
+                  secondaryText: "I can't beleive it's butter",
+                  color: "black"
               }
           }, {
-              "itemOptions": {
-                  "rightIcon": true,
-                  "rightIconView": Wood.Checkbox,
-                  "rightIconOptions": {
-                      "checked": false,
-                      "disabled": true
+              itemOptions: {
+                  rightIcon: true,
+                  rightIconView: Wood.Checkbox,
+                  rightIconOptions: {
+                      checked: false,
+                      disabled: true
                   },
-                  "primaryText": "RONC9962012877",
-                  "secondaryText": "Panoramic roof will not open properly",
-                  "color": "black"
+                  primaryText: "Bread",
+                  secondaryText: "Wheat not white",
+                  color: "black"
               }
           }]
-      }
-
-      // List
-      var list = new Wood.List(text);
+      });
       this.listContainer.show(list)
 
       // Dropdown & Tree
