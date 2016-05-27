@@ -737,8 +737,8 @@ require('./tree');
         var ripple = new Wood.Ripple();
         this.rippleContainer.show(ripple);
 
-        if( this.options.tooltip ){
-          var text = this.options.disabled ? 'Disabled' : this.options.tooltip;
+        if( this.options.tooltip || this.options.disabled){
+          var text = this.options.tooltip || 'Disabled'
           this.tooltip = new Wood.Tooltip({
             text: text
           });
@@ -766,10 +766,11 @@ require('./tree');
         checkIconOptions:{
           icon: 'check-square',
           color: 'blue'
-        }
+        },
+        disabled: false,
+        tooltip: false
       },
       events:{
-        "submit": "onFormSubmit",
       },
       regions:{
         checkContainer: '#check-container',
@@ -795,10 +796,24 @@ require('./tree');
         this.$el.attr('checked', this.options.checked);
         this.triggerMethod("action:click:checkbox", this.options.checked)
       },
+      disable: function( disabled ){
+        this.$el.attr('disabled', disabled );
+      },
+      focusIn : function(e){
+        if( this.tooltip ){
+          this.tooltip.focusIn()
+        }
+      },
+      focusOut : function(e){
+        if( this.tooltip ){
+          this.tooltip.focusOut()
+        }
+      },
       initialize: function(options){
         //jquery recursive copy
         this.options = $.extend(true, {}, this.defaults, options, {
         });
+        this.disable(this.options.disabled);
       },
       onRender: function(){
         var check = new this.options.checkIconView(
@@ -807,7 +822,10 @@ require('./tree');
         this.checkContainer.show(check);
 
         var box = new this.options.boxIconView(
-          this.options.boxIconOptions
+          _.extend({},this.options.boxIconOptions,{
+            disabled: this.options.disabled,
+            tooltip: this.options.tooltip
+          })
         );
         this.boxContainer.show(box);
 

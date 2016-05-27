@@ -514,6 +514,8 @@ wood-checkbox {
     font-size: 18px; }
   wood-checkbox[checked] .box-wrapper i {
     color: transparent; }
+  wood-checkbox[disabled] .check-wrapper i {
+    opacity: 0.3; }
 
 wood-icon-list {
   height: 100%;
@@ -681,6 +683,7 @@ wood-spinner.overlay {
   opacity: 0.8; }
 
 wood-spinner .circular {
+  display: block;
   animation: rotate 2s linear infinite;
   transform-origin: center center;
   margin: auto; }
