@@ -56,6 +56,12 @@ wood-checkbox{
       color: rgba( 0,    0,  0,  0);
     }
   }
+
+  &[disabled]{
+    .check-wrapper i{
+      opacity: 0.3;
+    }
+  }
 }
 
 wood-icon-list{
