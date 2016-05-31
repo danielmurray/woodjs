@@ -1,49 +1,70 @@
-(function (Wood) {
-  Wood.Subheader = Marionette.ItemView.extend({
-    tagName: 'wood-subheader',
-    template: _.template(
-      '<%-text%>' +
-    ''),
-    defaults:{
-      text: ''
-    },
-    initialize: function (options) {
-      this.options = _.extend({}, this.defaults, options);
-    },
-    templateHelpers: function () {
-      return {
-        text: this.options.text
-      }
+class Subheader extends Marionette.ItemView{
+  constructor(options) {
+    super(options);
+    this.text = options.text || '';
+  }
+
+  get tagName () {
+    return 'wood-subheader';
+  }
+
+  get template () {
+    return _.template('<%-text%>');
+  }
+
+  templateHelpers() {
+    return {
+      text: this.options.text
     }
-  });
+  }
 
-  Wood.Divider = Marionette.ItemView.extend({
-    tagName: 'wood-divider',
-    template: _.template(''),
-  });
+}
 
-  Wood.List = Marionette.CollectionView.extend({
-    tagName: 'wood-list',
-    childEvents: {
-    },
-    childView: Wood.Item,
-    buildChildView: function(child, ChildViewClass, childViewOptions){
-      var view = child.get('itemView') || ChildViewClass;
-      var options = child.get('itemOptions');
+class Divider extends Marionette.ItemView{
+  constructor(options) {
+    super(options);
+  }
 
-      // build the final list of options for the childView class
-      var options = _.extend({}, childViewOptions, options, {
-      });
+  get tagName () {
+    return 'wood-divider';
+  }
 
-      // create the child view instance
-      var view = new view(options);
+  get template () {
+    return _.template('');
+  }
+}
 
-      // return it
-      return view;
-    },
-    initialize: function(options){
-      this.options = _.extend({}, this.defaults, options);
-      this.collection = new Backbone.Collection(this.options.items);
-    }
-  });
-})(window.Wood);
+class List extends Marionette.CollectionView{
+  constructor(options) {
+    super(options);
+  }
+
+  get childView () {
+    return Wood.Item;
+  }
+
+  get tagName () {
+    return 'wood-list';
+  }
+
+  onRender () {
+
+  }
+}
+
+class Assistant extends List{
+  getChildView (model, index) {
+    return model.get('itemView') || this.getOption('childView');
+  }
+
+  childViewOptions (model, index) {
+    return model.get('itemOptions');
+  }
+
+  initialize(options){
+    this.options = _.extend({}, this.defaults, options);
+    this.collection = new Backbone.Collection(this.options.items);
+  }
+}
+
+export {Assistant, Divider, List, Subheader}

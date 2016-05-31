@@ -1,4 +1,4 @@
-Ja/**
+/**
  * Created by danmurray on 2/26/15.
  */
  (function (Wood) {
@@ -157,8 +157,8 @@ Ja/**
         this.$el.attr('checked', this.options.checked);
         this.triggerMethod("action:click:checkbox", this.options.checked)
       },
-      disable: function( disabled ){
-        this.$el.attr('disabled', disabled );
+      disable: function (disabled) {
+        this.boxContainer.currentView.disable(disabled);
       },
       focusIn : function(e){
         if( this.tooltip ){
@@ -174,7 +174,6 @@ Ja/**
         //jquery recursive copy
         this.options = $.extend(true, {}, this.defaults, options, {
         });
-        this.disable(this.options.disabled);
       },
       onRender: function(){
         var check = new this.options.checkIconView(

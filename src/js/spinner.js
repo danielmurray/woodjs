@@ -24,7 +24,7 @@
       overlay: function ($el, options) {
         var widget = new Wood.Spinner(options);
         widget.render();
-        $overlay = widget.$el;
+        var $overlay = widget.$el;
         $overlay.addClass('overlay');
 
         $el.append($overlay);
