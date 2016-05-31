@@ -1,3 +1,3 @@
 # Wood.js
 
-M@terial for M@rionette ... Wood
+Material for Marionette ... Wood

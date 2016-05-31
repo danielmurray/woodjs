@@ -23,16 +23,16 @@
       '<div id="dropdown-arbor-container"></div>' +
       ''),
     regions: {
-      iconContainer: '#icon',
-      iconButtonContainer: '#icon-button',
-      iconTooltipContainer: '#icon-tooltip',
-      iconMaterialContainer: '#icon-material',
-      flatButtonContainer: '#flat-button',
-      raisedButtonContainer: '#raised-button',
-      cardFormContainer: '#card-form-container',
+      // iconContainer: '#icon',
+      // iconButtonContainer: '#icon-button',
+      // iconTooltipContainer: '#icon-tooltip',
+      // iconMaterialContainer: '#icon-material',
+      // flatButtonContainer: '#flat-button',
+      // raisedButtonContainer: '#raised-button',
+      // cardFormContainer: '#card-form-container',
       listContainer: '#list-container',
-      dropdownTreeContainer: '#dropdown-tree-container',
-      dropdownArborContainer: '#dropdown-arbor-container',
+      // dropdownTreeContainer: '#dropdown-tree-container',
+      // dropdownArborContainer: '#dropdown-arbor-container',
     },
     events: {},
     initialize: function(options) {
@@ -140,7 +140,7 @@
       // });
 
       // List
-      var list = new Wood.List({
+      var list = new Wood.Assistant({
           items: [{
               itemView: Wood.Subheader,
               itemOptions: {
