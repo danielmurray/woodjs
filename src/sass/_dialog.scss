@@ -1,15 +1,20 @@
-.model-modal{
-  .model-form{
-    .input-wrapper{
-      .bootstrap-select{
-          width:100% !important;
-      }
+.modal-body{
+    max-height: 700px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 
-      .checkbox{
-        input[type="checkbox"]{
-          margin-left: 0px;
+.model-modal {
+    .model-form {
+        .input-wrapper {
+            .bootstrap-select {
+                width: 100% !important;
+            }
+            .checkbox {
+                input[type="checkbox"] {
+                    margin-left: 0;
+                }
+            }
         }
-      }
     }
-  }
 }

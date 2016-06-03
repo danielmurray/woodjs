@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var minimize = process.argv.indexOf('--minimize') !== -1;
 
 var jsOutput = 'wood.js';
@@ -28,16 +28,16 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       query: {
-        presets: 'es2015',
-      },
+        presets: 'es2015'
+      }
+    }, {
+      test: /\.(woff|woff2|eot|ttf|truetype|svg)$/,
+      loader: 'url-loader?limit=1024&name=../fonts/[name].[ext]'
     }, {
       test: /\.scss$/,
       loader: ExtractTextPlugin.extract(
-        "style",
-        "css!sass")
-    }, {
-      test: /\.(woff|woff2|eot|ttf|truetype|svg)$/,
-      loader: 'url-loader?limit=1024&name=fonts/[name].[ext]'
+        'style',
+        'css!sass')
     }]
   },
   plugins: plugins,
@@ -46,5 +46,5 @@ module.exports = {
     colors: true
   },
   // Create Sourcemaps for the bundle
-  devtool: 'source-map',
+  devtool: 'source-map'
 };

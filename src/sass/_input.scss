@@ -146,6 +146,16 @@
     }
   }
 
+  &.disabled{
+    .border-bottom-inactive{
+      border-bottom: dotted 1px;
+    }
+
+    .input{
+      opacity: 0.38;
+    }
+  }
+
   .error-text{
     height: 20px;
     line-height: 20px;

@@ -1,5 +1,5 @@
-class Subheader extends Marionette.ItemView{
-  constructor(options) {
+class Subheader extends Marionette.ItemView {
+  constructor (options) {
     super(options);
     this.text = options.text || '';
   }
@@ -12,19 +12,15 @@ class Subheader extends Marionette.ItemView{
     return _.template('<%-text%>');
   }
 
-  templateHelpers() {
+  templateHelpers () {
     return {
       text: this.options.text
-    }
+    };
   }
 
 }
 
-class Divider extends Marionette.ItemView{
-  constructor(options) {
-    super(options);
-  }
-
+class Divider extends Marionette.ItemView {
   get tagName () {
     return 'wood-divider';
   }
@@ -35,24 +31,17 @@ class Divider extends Marionette.ItemView{
 }
 
 class List extends Marionette.CollectionView{
-  constructor(options) {
-    super(options);
-  }
-
-  get childView () {
-    return Wood.Item;
-  }
 
   get tagName () {
     return 'wood-list';
   }
 
-  onRender () {
-
+  getChildView (model, index) {
+    return Wood.Item;
   }
 }
 
-class Assistant extends List{
+class Assistant extends List {
   getChildView (model, index) {
     return model.get('itemView') || this.getOption('childView');
   }
@@ -61,10 +50,10 @@ class Assistant extends List{
     return model.get('itemOptions');
   }
 
-  initialize(options){
+  initialize (options) {
     this.options = _.extend({}, this.defaults, options);
     this.collection = new Backbone.Collection(this.options.items);
   }
 }
 
-export {Assistant, Divider, List, Subheader}
+export {Assistant, Divider, List, Subheader};
