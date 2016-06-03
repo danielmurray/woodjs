@@ -1,5 +1,5 @@
 export class Header extends Marionette.ItemView{
-  constructor(options) {
+  constructor (options) {
     super(options);
     this.text = options || '';
   }
@@ -12,11 +12,11 @@ export class Header extends Marionette.ItemView{
     return _.template('<%-text%>');
   }
 
-  templateHelpers() {
+  templateHelpers () {
     return {
       text: this.options.text
-    }
+    };
   }
 }
 
-export {Header}
+export {Header};

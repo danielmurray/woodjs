@@ -1,144 +1,169 @@
-(function (Wood) {
-  Wood.InputList = Marionette.CollectionView.extend({
-    childEvents: {
-      "action:input:change": "onInputChange",
-    },
-    onInputChange: function(inputView, valid){
-      this.triggerMethod('action:inputs:change', !this.error());
-    },
-    childView: Wood.Input,
-    buildChildView: function(child, ChildViewClass, childViewOptions){
-      var id = child.get('id');
-      var view = child.get('view');
-      var options = child.get('options');
-      var defaultValue = this.model ? this.model.get(id) : options.defaultValue;
+import {List} from './list.js';
 
-      // build the final list of options for the childView class
-      var options = _.extend({}, childViewOptions, options, {
-        id: id,
-        defaultValue: defaultValue
-      });
+class InputList extends List {
+  get childEvents () {
+    return {
+      'input:change': 'onInputChange'
+    };
+  }
 
-      // create the child view instance
-      var view = new view(options);
-
-      // return it
-      return view;
-    },
-    getData: function(){
-      var data = {};
-      for( var i in this.children._views ){
-        var childView = this.children._views[i];
-        data[childView.id] = childView.getValue();
-      }
-      return data;
-    },
-    error: function(){
-      var error = false;
-      for( var i in this.children._views ){
-        var childView = this.children._views[i];
-        error = error || childView.error();
-      }
-      return error;
-    },
-    validate: function(){
-      var valid = true;
-      for( var i in this.children._views ){
-        var childView = this.children._views[i];
-        var childValid = childView.validate();
-        valid = valid && childValid;
-      }
-      return valid;
+  get error () {
+    var error = false;
+    for (var i in this.children._views) {
+      var childView = this.children._views[i];
+      error = error || childView.error;
     }
-  });
+    return error;
+  }
 
-  Wood.Form = Marionette.LayoutView.extend({
-      tagName: 'form',
-      attributes: {
-          class: 'wood form',
-      },
-      template: _.template(
-        '<div id="input-list-container" class="input-list"></div>' +
-        '<div class="btns">' +
-          '<div id="submit-btn" class="submit-btn"></div>' +
-        '</div>' +
-      ''),
-      regions: {
-        inputListContainer: '#input-list-container',
-        submitBtnContainer: '#submit-btn'
-      },
-      events:{
-        "submit": "onFormSubmit",
-      },
-      childEvents: {
-        "action:click:button": "submitForm",
-        "action:inputs:change": "onInputChange",
-      },
-      onInputChange: function(inputListView, valid){
-        var submitButton = this.submitBtnContainer.currentView;
-        submitButton.disable(!valid);
-      },
-      onFormSubmit: function(e){
-        e.preventDefault();
-        this.submitForm();
-      },
-      getData: function(){
-        return this.inputListContainer.currentView.getData();
-      },
-      error: function(){
-        return this.inputListContainer.currentView.error();
-      },
-      validate: function(){
-        return this.inputListContainer.currentView.validate();
-      },
-      submitForm: function(e){
-        if( this.validate() ){
-          var data = this.getData();
-          this.triggerMethod('action:submit:form', data);
-        }
-      },
-      defaults: {
-        model: null,
-        inputs: [],
-        submitButton: {
-          label: 'Submit'
-        },
-      },
-      initialize: function (options) {
-        this.options = _.extend({}, this.defaults, this.options);
-      },
-      onRender: function(){
-        var inputList = new Wood.InputList({
-          model: this.options.model,
-          collection: new Backbone.Collection(this.options.inputs)
-        });
-        this.inputListContainer.show(inputList);
+  get values () {
+    var values = {};
+    for (var i in this.children._views) {
+      var childView = this.children._views[i];
+      values[childView.id] = childView.value;
+    }
+    return values;
+  }
 
-        if( this.options.submitButton){
-          var submitButton = new Wood.RaisedButton({
-            label: this.options.submitButton.label,
-            disabled: !!this.error()
-          });
-          this.submitBtnContainer.show(submitButton);
-        }
-      },
-      onShow: function(){
-      },
-      onPost: function(){
-        var submitButton = this.submitBtnContainer.currentView;
-        submitButton.onPost();
-      },
-      onSuccess: function(){
-        var submitButton = this.submitBtnContainer.currentView;
-        submitButton.onSuccess();
-      },
-      onError: function(){
-        var submitButton = this.submitBtnContainer.currentView;
-        submitButton.onError();
-      },
-      templateHelpers: function(){
-        return _.extend({}, this.options, {
-        });
-      },
-  });
-})(window.Wood);
+  childViewOptions (model, index) {
+    return model.attributes;
+  }
+
+  getChildView (model, index) {
+    return Wood.Input;
+  }
+
+  onInputChange (inputView) {
+    console.log(this.error);
+    this.triggerMethod('inputs:change', !this.error);
+  }
+
+  validate () {
+    var valid = true;
+    for (var i in this.children._views) {
+      var childView = this.children._views[i];
+      var childValid = childView.validate();
+      valid = valid && childValid;
+    }
+    return valid;
+  }
+}
+
+class Form extends Marionette.LayoutView {
+  get attributes () {
+    return {
+      class: 'wood form'
+    };
+  }
+
+  get childEvents () {
+    return {
+      'click:button': 'onFormSubmit',
+      'inputs:change': 'onInputsChange'
+    };
+  }
+
+  get error () {
+    return this.inputListContainer.currentView.error;
+  }
+
+  get inputs () {
+    return new Backbone.Collection(this._inputs);
+  }
+
+  get submitButtonView () {
+    return Wood.RaisedButton;
+  }
+
+  get submitButtonViewOptions () {
+    return this._submitButtonViewOptions;
+  }
+
+  get tagName () {
+    return 'form';
+  }
+
+  get template () {
+    return _.template(`
+      <div id="input-list-container" class="input-list"></div>
+      <div class="btns">
+        <div id="submit-btn" class="submit-btn"></div>
+      </div>
+    `);
+  }
+
+  get values () {
+    return this.inputListContainer.currentView.values;
+  }
+
+  events () {
+    return {
+      submit: 'onFormSubmit'
+    };
+  }
+
+  initialize (options) {
+    this._inputs = options.inputs || [];
+    this._submitButtonViewOptions = options.submitButton || {label: 'Submit'};
+  }
+
+  onError () {
+    var submitButton = this.submitBtnContainer.currentView;
+    submitButton.onError();
+  }
+
+  onFormSubmit (event) {
+    event.preventDefault();
+    this.submitForm();
+  }
+
+  onInputsChange (inputListView, valid) {
+    var submitButton = this.submitBtnContainer.currentView;
+    submitButton.disable(!valid);
+  }
+
+  onPost () {
+    var submitButton = this.submitBtnContainer.currentView;
+    submitButton.onPost();
+  }
+
+  onRender () {
+    var inputList = new InputList({
+      model: this.model,
+      collection: this.inputs
+    });
+    this.inputListContainer.show(inputList);
+
+    var submitButtonView = new this.submitButtonView( _.extend({},
+      this.submitButtonViewOptions, {
+        disabled: !!this.error
+      })
+    );
+    this.submitBtnContainer.show(submitButtonView);
+  }
+
+  onSuccess () {
+    var submitButton = this.submitBtnContainer.currentView;
+    submitButton.onSuccess();
+  }
+
+  regions () {
+    return {
+      inputListContainer: '#input-list-container',
+      submitBtnContainer: '#submit-btn'
+    };
+  }
+
+  submitForm () {
+    if (this.validate()) {
+      var data = this.getData();
+      this.triggerMethod('action:submit:form', data);
+    }
+  }
+
+  validate () {
+    return this.inputListContainer.currentView.validate();
+  }
+}
+
+export {InputList, Form};

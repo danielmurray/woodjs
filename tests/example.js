@@ -29,7 +29,7 @@
       // iconMaterialContainer: '#icon-material',
       // flatButtonContainer: '#flat-button',
       // raisedButtonContainer: '#raised-button',
-      // cardFormContainer: '#card-form-container',
+      cardFormContainer: '#card-form-container',
       listContainer: '#list-container',
       // dropdownTreeContainer: '#dropdown-tree-container',
       // dropdownArborContainer: '#dropdown-arbor-container',
@@ -78,37 +78,28 @@
         contentOptions: {
           inputs: [{
             id: 'username',
-            view: Wood.Input,
-            options: {
-              floatingLabelText: 'Username',
-              hintText: 'Are you the Keymaster?',
-              isRequired: true,
-              defaultValue: 'Default User'
-            }
+            floatingLabelText: 'Username',
+            hintText: 'Are you the Keymaster?',
+            required: true,
+            disabled: true
           }, {
             id: 'password',
-            view: Wood.Input,
-            options: {
-              floatingLabelText: 'Password',
-              hintText: 'I am the Gatekeeper.',
-              type: 'password',
-              isRequired: true
-            },
-          }, {
-            id: 'date',
-            view: Wood.Input,
-            options: {
-              floatingLabelText: '',
-              type: 'datetime-local',
-              isRequired: true
-            },
+            floatingLabelText: 'Password',
+            hintText: 'I am the Gatekeeper.',
+            type: 'password',
+            required: true
+          // }, {
+          //   id: 'date',
+          //   floatingLabelText: '',
+          //   type: 'datetime-local',
+          //   required: true
           }],
           submitButton: {
             label: 'Sign In'
           }
         }
       });
-      // this.cardFormContainer.show(card)
+      this.cardFormContainer.show(card);
 
       // var dialog = Wood.FormDialog.show({
       //   title: 'Specify a Date',
@@ -196,7 +187,7 @@
               }
           }]
       });
-      this.listContainer.show(list)
+      // this.listContainer.show(list)
 
       // Dropdown & Tree
       var dropdown = new Wood.Dropdown({

@@ -59,21 +59,24 @@
 	  value: true
 	});
 	
-	var _list = __webpack_require__(2);
+	var _form = __webpack_require__(2);
 	
-	var _text = __webpack_require__(3);
+	var _input = __webpack_require__(4);
+	
+	var _list = __webpack_require__(3);
+	
+	var _text = __webpack_require__(5);
 	
 	window.Wood = {};
 	
 	// include base common widgets
-	__webpack_require__(4);
-	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
 	__webpack_require__(8);
 	__webpack_require__(9);
 	__webpack_require__(10);
 	__webpack_require__(11);
+	__webpack_require__(4);
 	__webpack_require__(12);
 	__webpack_require__(13);
 	__webpack_require__(14);
@@ -87,6 +90,9 @@
 	
 	Wood.Assistant = _list.Assistant;
 	Wood.Divider = _list.Divider;
+	Wood.Form = _form.Form;
+	Wood.Input = _input.Input;
+	Wood.InputList = _form.InputList;
 	Wood.List = _list.List;
 	Wood.Subheader = _list.Subheader;
 	Wood.Header = _text.Header;
@@ -95,6 +101,240 @@
 
 /***/ },
 /* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Form = exports.InputList = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _list = __webpack_require__(3);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var InputList = function (_List) {
+	  _inherits(InputList, _List);
+	
+	  function InputList() {
+	    _classCallCheck(this, InputList);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(InputList).apply(this, arguments));
+	  }
+	
+	  _createClass(InputList, [{
+	    key: 'childViewOptions',
+	    value: function childViewOptions(model, index) {
+	      return model.attributes;
+	    }
+	  }, {
+	    key: 'getChildView',
+	    value: function getChildView(model, index) {
+	      return Wood.Input;
+	    }
+	  }, {
+	    key: 'onInputChange',
+	    value: function onInputChange(inputView) {
+	      console.log(this.error);
+	      this.triggerMethod('inputs:change', !this.error);
+	    }
+	  }, {
+	    key: 'validate',
+	    value: function validate() {
+	      var valid = true;
+	      for (var i in this.children._views) {
+	        var childView = this.children._views[i];
+	        var childValid = childView.validate();
+	        valid = valid && childValid;
+	      }
+	      return valid;
+	    }
+	  }, {
+	    key: 'childEvents',
+	    get: function get() {
+	      return {
+	        'input:change': 'onInputChange'
+	      };
+	    }
+	  }, {
+	    key: 'error',
+	    get: function get() {
+	      var error = false;
+	      for (var i in this.children._views) {
+	        var childView = this.children._views[i];
+	        error = error || childView.error;
+	      }
+	      return error;
+	    }
+	  }, {
+	    key: 'values',
+	    get: function get() {
+	      var values = {};
+	      for (var i in this.children._views) {
+	        var childView = this.children._views[i];
+	        values[childView.id] = childView.value;
+	      }
+	      return values;
+	    }
+	  }]);
+	
+	  return InputList;
+	}(_list.List);
+	
+	var Form = function (_Marionette$LayoutVie) {
+	  _inherits(Form, _Marionette$LayoutVie);
+	
+	  function Form() {
+	    _classCallCheck(this, Form);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Form).apply(this, arguments));
+	  }
+	
+	  _createClass(Form, [{
+	    key: 'events',
+	    value: function events() {
+	      return {
+	        submit: 'onFormSubmit'
+	      };
+	    }
+	  }, {
+	    key: 'initialize',
+	    value: function initialize(options) {
+	      this._inputs = options.inputs || [];
+	      this._submitButtonViewOptions = options.submitButton || { label: 'Submit' };
+	    }
+	  }, {
+	    key: 'onError',
+	    value: function onError() {
+	      var submitButton = this.submitBtnContainer.currentView;
+	      submitButton.onError();
+	    }
+	  }, {
+	    key: 'onFormSubmit',
+	    value: function onFormSubmit(event) {
+	      event.preventDefault();
+	      this.submitForm();
+	    }
+	  }, {
+	    key: 'onInputsChange',
+	    value: function onInputsChange(inputListView, valid) {
+	      var submitButton = this.submitBtnContainer.currentView;
+	      submitButton.disable(!valid);
+	    }
+	  }, {
+	    key: 'onPost',
+	    value: function onPost() {
+	      var submitButton = this.submitBtnContainer.currentView;
+	      submitButton.onPost();
+	    }
+	  }, {
+	    key: 'onRender',
+	    value: function onRender() {
+	      var inputList = new InputList({
+	        model: this.model,
+	        collection: this.inputs
+	      });
+	      this.inputListContainer.show(inputList);
+	
+	      var submitButtonView = new this.submitButtonView(_.extend({}, this.submitButtonViewOptions, {
+	        disabled: !!this.error
+	      }));
+	      this.submitBtnContainer.show(submitButtonView);
+	    }
+	  }, {
+	    key: 'onSuccess',
+	    value: function onSuccess() {
+	      var submitButton = this.submitBtnContainer.currentView;
+	      submitButton.onSuccess();
+	    }
+	  }, {
+	    key: 'regions',
+	    value: function regions() {
+	      return {
+	        inputListContainer: '#input-list-container',
+	        submitBtnContainer: '#submit-btn'
+	      };
+	    }
+	  }, {
+	    key: 'submitForm',
+	    value: function submitForm() {
+	      if (this.validate()) {
+	        var data = this.getData();
+	        this.triggerMethod('action:submit:form', data);
+	      }
+	    }
+	  }, {
+	    key: 'validate',
+	    value: function validate() {
+	      return this.inputListContainer.currentView.validate();
+	    }
+	  }, {
+	    key: 'attributes',
+	    get: function get() {
+	      return {
+	        class: 'wood form'
+	      };
+	    }
+	  }, {
+	    key: 'childEvents',
+	    get: function get() {
+	      return {
+	        'click:button': 'onFormSubmit',
+	        'inputs:change': 'onInputsChange'
+	      };
+	    }
+	  }, {
+	    key: 'error',
+	    get: function get() {
+	      return this.inputListContainer.currentView.error;
+	    }
+	  }, {
+	    key: 'inputs',
+	    get: function get() {
+	      return new Backbone.Collection(this._inputs);
+	    }
+	  }, {
+	    key: 'submitButtonView',
+	    get: function get() {
+	      return Wood.RaisedButton;
+	    }
+	  }, {
+	    key: 'submitButtonViewOptions',
+	    get: function get() {
+	      return this._submitButtonViewOptions;
+	    }
+	  }, {
+	    key: 'tagName',
+	    get: function get() {
+	      return 'form';
+	    }
+	  }, {
+	    key: 'template',
+	    get: function get() {
+	      return _.template('\n      <div id="input-list-container" class="input-list"></div>\n      <div class="btns">\n        <div id="submit-btn" class="submit-btn"></div>\n      </div>\n    ');
+	    }
+	  }, {
+	    key: 'values',
+	    get: function get() {
+	      return this.inputListContainer.currentView.values;
+	    }
+	  }]);
+	
+	  return Form;
+	}(Marionette.LayoutView);
+	
+	exports.InputList = InputList;
+	exports.Form = Form;
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -148,10 +388,10 @@
 	var Divider = function (_Marionette$ItemView2) {
 	  _inherits(Divider, _Marionette$ItemView2);
 	
-	  function Divider(options) {
+	  function Divider() {
 	    _classCallCheck(this, Divider);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Divider).call(this, options));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Divider).apply(this, arguments));
 	  }
 	
 	  _createClass(Divider, [{
@@ -172,18 +412,15 @@
 	var List = function (_Marionette$Collectio) {
 	  _inherits(List, _Marionette$Collectio);
 	
-	  function List(options) {
+	  function List() {
 	    _classCallCheck(this, List);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(List).call(this, options));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(List).apply(this, arguments));
 	  }
 	
 	  _createClass(List, [{
-	    key: 'onRender',
-	    value: function onRender() {}
-	  }, {
-	    key: 'childView',
-	    get: function get() {
+	    key: 'getChildView',
+	    value: function getChildView(model, index) {
 	      return Wood.Item;
 	    }
 	  }, {
@@ -232,7 +469,196 @@
 	exports.Subheader = Subheader;
 
 /***/ },
-/* 3 */
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Input = function (_Marionette$LayoutVie) {
+	  _inherits(Input, _Marionette$LayoutVie);
+	
+	  function Input() {
+	    _classCallCheck(this, Input);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Input).apply(this, arguments));
+	  }
+	
+	  _createClass(Input, [{
+	    key: 'errorMessage',
+	    value: function errorMessage() {
+	      return false;
+	    }
+	  }, {
+	    key: 'events',
+	    value: function events() {
+	      return {
+	        'change input': 'keyPress',
+	        'keyup input': 'keyPress',
+	        'keydown input': 'keyPress',
+	        'focusin  input': 'onFocusIn',
+	        'focusout input': 'onFocusOut'
+	      };
+	    }
+	  }, {
+	    key: 'initialize',
+	    value: function initialize(options) {
+	      this.id = options.id || null;
+	      this.disabled = options.disabled || false;
+	      this.floatingLabelText = options.floatingLabelText || '';
+	      this.hintText = options.hintText || '';
+	      this.required = options.required || false;
+	      this.type = options.type || 'text';
+	      this.value = options.defaultValue || '';
+	    }
+	  }, {
+	    key: 'keyPress',
+	    value: function keyPress(event) {
+	      this.filled = this.value !== '';
+	      this.onChange();
+	      this.triggerMethod('input:change');
+	    }
+	  }, {
+	    key: 'onChange',
+	    value: function onChange() {}
+	  }, {
+	    key: 'onFocusIn',
+	    value: function onFocusIn() {
+	      this.$el.addClass('focused');
+	    }
+	  }, {
+	    key: 'onFocusOut',
+	    value: function onFocusOut() {
+	      this.$el.removeClass('focused');
+	      this.validate();
+	      this.triggerMethod('input:change');
+	    }
+	  }, {
+	    key: 'templateHelpers',
+	    value: function templateHelpers() {
+	      return {
+	        disabled: this.disabled ? 'disabled=true' : '',
+	        floatingLabelText: this.floatingLabelText,
+	        hintText: this.hintText,
+	        value: this.value,
+	        type: this.type
+	      };
+	    }
+	  }, {
+	    key: 'validate',
+	    value: function validate() {
+	      var error = false;
+	      if (this.required && this.value === '') {
+	        error = 'This field is required';
+	      }
+	      this.error = error || this.errorMessage(this.value);
+	    }
+	  }, {
+	    key: 'attributes',
+	    get: function get() {
+	      return {
+	        class: 'wood input'
+	      };
+	    }
+	  }, {
+	    key: 'childEvents',
+	    get: function get() {
+	      return {
+	        'click:button': 'onFormSubmit',
+	        'inputs:change': 'onInputsChange'
+	      };
+	    }
+	  }, {
+	    key: 'disabled',
+	    get: function get() {
+	      return this._disabled;
+	    },
+	    set: function set(disabled) {
+	      if (disabled) {
+	        this.$el.addClass('disabled');
+	      } else {
+	        this.$el.removeClass('disabled');
+	      }
+	      this._disabled = disabled;
+	    }
+	  }, {
+	    key: 'error',
+	    get: function get() {
+	      return this._error;
+	    },
+	    set: function set(error) {
+	      if (error) {
+	        this.$el.addClass('erred');
+	        this.$('#error-text').text(error);
+	      } else {
+	        this.$el.removeClass('erred');
+	        this.$('#error-text').text('');
+	      }
+	      this._error = error;
+	    }
+	  }, {
+	    key: 'filled',
+	    get: function get() {
+	      return this._filled;
+	    },
+	    set: function set(filled) {
+	      if (filled) {
+	        this.$el.addClass('filled');
+	      } else {
+	        this.$el.removeClass('filled');
+	      }
+	      this._filled = filled;
+	    }
+	  }, {
+	    key: 'floatingLabelText',
+	    get: function get() {
+	      return this._floatingLabelText;
+	    },
+	    set: function set(floatingLabelText) {
+	      if (floatingLabelText) {
+	        this.$el.addClass('labeled');
+	      }
+	      this._floatingLabelText = floatingLabelText;
+	    }
+	  }, {
+	    key: 'template',
+	    get: function get() {
+	      return _.template('\n      <div class="label-placeholder"></div>\n      <div class="label-text"><%-floatingLabelText%></div>\n      <div class="hint-text"><%-hintText%></div>\n      <input type="<%-type%>" value="<%-value%>" <%-disabled%>"></input>\n      <div class="border-bottom">\n        <div class="border-bottom-inactive"></div>\n        <div class="border-bottom-active"></div>\n      </div>\n      <div id="error-text" class="error-text"></div>\n    ');
+	    }
+	  }, {
+	    key: 'value',
+	    get: function get() {
+	      return this.$('input').val();
+	    },
+	    set: function set(value) {
+	      this._value = value;
+	      if (this._value === '') {
+	        this.$el.removeClass('filled');
+	      } else {
+	        this.$el.addClass('filled');
+	      }
+	      return this.$('input').val(value);
+	    }
+	  }]);
+	
+	  return Input;
+	}(Marionette.LayoutView);
+	
+	exports.Input = Input;
+
+/***/ },
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -286,7 +712,7 @@
 	exports.Header = Header;
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -319,7 +745,7 @@
 	})(window.Wood);
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -533,7 +959,7 @@
 	})(window.Wood);
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -583,7 +1009,7 @@
 	})(window.Wood);
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -658,7 +1084,7 @@
 	})(window.keys);
 
 /***/ },
-/* 8 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -729,151 +1155,7 @@
 	})(window.Wood);
 
 /***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	(function (Wood) {
-	  Wood.InputList = Marionette.CollectionView.extend({
-	    childEvents: {
-	      "action:input:change": "onInputChange"
-	    },
-	    onInputChange: function onInputChange(inputView, valid) {
-	      this.triggerMethod('action:inputs:change', !this.error());
-	    },
-	    childView: Wood.Input,
-	    buildChildView: function buildChildView(child, ChildViewClass, childViewOptions) {
-	      var id = child.get('id');
-	      var view = child.get('view');
-	      var options = child.get('options');
-	      var defaultValue = this.model ? this.model.get(id) : options.defaultValue;
-	
-	      // build the final list of options for the childView class
-	      var options = _.extend({}, childViewOptions, options, {
-	        id: id,
-	        defaultValue: defaultValue
-	      });
-	
-	      // create the child view instance
-	      var view = new view(options);
-	
-	      // return it
-	      return view;
-	    },
-	    getData: function getData() {
-	      var data = {};
-	      for (var i in this.children._views) {
-	        var childView = this.children._views[i];
-	        data[childView.id] = childView.getValue();
-	      }
-	      return data;
-	    },
-	    error: function error() {
-	      var error = false;
-	      for (var i in this.children._views) {
-	        var childView = this.children._views[i];
-	        error = error || childView.error();
-	      }
-	      return error;
-	    },
-	    validate: function validate() {
-	      var valid = true;
-	      for (var i in this.children._views) {
-	        var childView = this.children._views[i];
-	        var childValid = childView.validate();
-	        valid = valid && childValid;
-	      }
-	      return valid;
-	    }
-	  });
-	
-	  Wood.Form = Marionette.LayoutView.extend({
-	    tagName: 'form',
-	    attributes: {
-	      class: 'wood form'
-	    },
-	    template: _.template('<div id="input-list-container" class="input-list"></div>' + '<div class="btns">' + '<div id="submit-btn" class="submit-btn"></div>' + '</div>' + ''),
-	    regions: {
-	      inputListContainer: '#input-list-container',
-	      submitBtnContainer: '#submit-btn'
-	    },
-	    events: {
-	      "submit": "onFormSubmit"
-	    },
-	    childEvents: {
-	      "action:click:button": "submitForm",
-	      "action:inputs:change": "onInputChange"
-	    },
-	    onInputChange: function onInputChange(inputListView, valid) {
-	      var submitButton = this.submitBtnContainer.currentView;
-	      submitButton.disable(!valid);
-	    },
-	    onFormSubmit: function onFormSubmit(e) {
-	      e.preventDefault();
-	      this.submitForm();
-	    },
-	    getData: function getData() {
-	      return this.inputListContainer.currentView.getData();
-	    },
-	    error: function error() {
-	      return this.inputListContainer.currentView.error();
-	    },
-	    validate: function validate() {
-	      return this.inputListContainer.currentView.validate();
-	    },
-	    submitForm: function submitForm(e) {
-	      if (this.validate()) {
-	        var data = this.getData();
-	        this.triggerMethod('action:submit:form', data);
-	      }
-	    },
-	    defaults: {
-	      model: null,
-	      inputs: [],
-	      submitButton: {
-	        label: 'Submit'
-	      }
-	    },
-	    initialize: function initialize(options) {
-	      this.options = _.extend({}, this.defaults, this.options);
-	    },
-	    onRender: function onRender() {
-	      var inputList = new Wood.InputList({
-	        model: this.options.model,
-	        collection: new Backbone.Collection(this.options.inputs)
-	      });
-	      this.inputListContainer.show(inputList);
-	
-	      if (this.options.submitButton) {
-	        var submitButton = new Wood.RaisedButton({
-	          label: this.options.submitButton.label,
-	          disabled: !!this.error()
-	        });
-	        this.submitBtnContainer.show(submitButton);
-	      }
-	    },
-	    onShow: function onShow() {},
-	    onPost: function onPost() {
-	      var submitButton = this.submitBtnContainer.currentView;
-	      submitButton.onPost();
-	    },
-	    onSuccess: function onSuccess() {
-	      var submitButton = this.submitBtnContainer.currentView;
-	      submitButton.onSuccess();
-	    },
-	    onError: function onError() {
-	      var submitButton = this.submitBtnContainer.currentView;
-	      submitButton.onError();
-	    },
-	    templateHelpers: function templateHelpers() {
-	      return _.extend({}, this.options, {});
-	    }
-	  });
-	})(window.Wood);
-
-/***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1082,106 +1364,6 @@
 	        var childView = this.children._views[i];
 	        if (id == childView.id) return childView;
 	      }
-	    }
-	  });
-	})(window.Wood);
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	(function (Wood) {
-	  Wood.Input = Marionette.LayoutView.extend({
-	    attributes: {
-	      class: 'wood input'
-	    },
-	    template: _.template('<div class="label-placeholder"></div>' + '<div class="label-text"><%-floatingLabelText%></div>' + '<div class="hint-text"><%-hintText%></div>' + '<input type="<%-type%>" value="<%-value%>" <%-attributeString%>></input>' + '<div class="border-bottom">' + '<div class="border-bottom-inactive"></div>' + '<div class="border-bottom-active"></div>' + '</div>' + '<div id="error-text" class="error-text"></div>' + ''),
-	    events: {
-	      'change input': 'keyPress',
-	      'keyup input': 'keyPress',
-	      'keydown input': 'setFilled',
-	      'focusin  input': 'focusIn',
-	      'focusout input': 'focusOut'
-	    },
-	    setFilled: function setFilled() {
-	      this.value = this.getValue();
-	      if (this.value == '') {
-	        this.$el.removeClass('filled');
-	      } else {
-	        this.$el.addClass('filled');
-	      }
-	    },
-	    keyPress: function keyPress(e) {
-	      this.setFilled();
-	      var error = this.error();
-	      if (!error) {
-	        this.validate();
-	      }
-	      this.triggerMethod('action:input:change', !error);
-	    },
-	    focusIn: function focusIn() {
-	      this.$el.addClass('focused');
-	    },
-	    focusOut: function focusOut() {
-	      this.$el.removeClass('focused');
-	      this.validate();
-	    },
-	    getValue: function getValue() {
-	      return this.$('input').val();
-	    },
-	    setError: function setError(error) {
-	      if (error) {
-	        this.$el.addClass('erred');
-	        this.$('#error-text').text(error);
-	      } else {
-	        this.$el.removeClass('erred');
-	        this.$('#error-text').text('');
-	      }
-	    },
-	    error: function error() {
-	      var error = false;
-	      var value = this.getValue();
-	      if (this.options.isRequired && value == '') {
-	        error = 'This field is required';
-	      } else if (this.options.error) {
-	        error = this.options.error(value);
-	      }
-	      return error;
-	    },
-	    validate: function validate() {
-	      var error = this.error();
-	      this.setError(error);
-	      return !error;
-	    },
-	    defaults: {
-	      attributes: [],
-	      defaultValue: '',
-	      floatingLabelText: '',
-	      hintText: '',
-	      isRequired: false,
-	      type: 'text'
-	    },
-	    initialize: function initialize(options) {
-	      this.options = _.extend({}, this.defaults, this.options);
-	
-	      if (this.options.floatingLabelText) this.$el.addClass('labeled');
-	    },
-	    onRender: function onRender() {
-	      this.setFilled();
-	    },
-	    setVal: function setVal(val) {
-	      return this.$('input').val(val);
-	    },
-	    templateHelpers: function templateHelpers() {
-	      var attributeString = $.map(this.options.inputAttributes, function (value, key) {
-	        return key + '=' + value;
-	      }).join(' ');
-	      return _.extend({}, this.options, {
-	        value: this.value || this.options.defaultValue,
-	        attributeString: attributeString
-	      });
 	    }
 	  });
 	})(window.Wood);
