@@ -347,7 +347,8 @@ wood-card {
 
 .modal-body {
   max-height: 700px;
-  overflow-y: auto; }
+  overflow-y: auto;
+  overflow-x: hidden; }
 
 .model-modal .model-form .input-wrapper .bootstrap-select {
   width: 100% !important; }
