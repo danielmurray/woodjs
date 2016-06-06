@@ -80,12 +80,14 @@
             id: 'username',
             floatingLabelText: 'Username',
             hintText: 'Are you the Keymaster?',
+            defaultValue: 'username',
             required: true,
             disabled: true
           }, {
             id: 'password',
             floatingLabelText: 'Password',
             hintText: 'I am the Gatekeeper.',
+            defaultValue: 'password',
             type: 'password',
             required: true
           // }, {

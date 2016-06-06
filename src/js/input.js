@@ -80,7 +80,7 @@ class Input extends Marionette.LayoutView {
   }
 
   get value () {
-    return this.$('input').val();
+    return this._value;
   }
 
   set value (value) {
@@ -90,7 +90,6 @@ class Input extends Marionette.LayoutView {
     } else {
       this.$el.addClass('filled');
     }
-    return this.$('input').val(value);
   }
 
   errorMessage () {

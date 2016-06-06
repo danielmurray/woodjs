@@ -639,7 +639,7 @@
 	  }, {
 	    key: 'value',
 	    get: function get() {
-	      return this.$('input').val();
+	      return this._value;
 	    },
 	    set: function set(value) {
 	      this._value = value;
@@ -648,7 +648,6 @@
 	      } else {
 	        this.$el.addClass('filled');
 	      }
-	      return this.$('input').val(value);
 	    }
 	  }]);
 	
@@ -1104,9 +1103,6 @@
 	      'action:dropdown:expand': 'onDropdownExpand',
 	      'action:dropdown:collapse': 'onDropdownCollapse'
 	    },
-	    // 'action:button:click'     : 'forkSession',
-	    // 'action:menubutton:click' : 'onMenuButtonClick',
-	    // 'action:menuitem:click'   : 'onMenuItemClick',
 	    onDropdownCollapse: function onDropdownCollapse() {
 	      this.$('.dropdown-container').removeClass('expanded');
 	    },

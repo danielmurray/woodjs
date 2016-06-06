@@ -17,9 +17,6 @@
     childEvents: {
       'action:dropdown:expand' : 'onDropdownExpand',
       'action:dropdown:collapse' : 'onDropdownCollapse',
-      // 'action:button:click'     : 'forkSession',
-      // 'action:menubutton:click' : 'onMenuButtonClick',
-      // 'action:menuitem:click'   : 'onMenuItemClick',
     },
     onDropdownCollapse: function(){
       this.$('.dropdown-container').removeClass('expanded');
