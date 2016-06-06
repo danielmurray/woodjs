@@ -46,6 +46,7 @@ class Input extends Marionette.LayoutView {
   }
 
   set filled (filled) {
+    console.log(filled)
     if (filled) {
       this.$el.addClass('filled');
     } else {
@@ -86,9 +87,9 @@ class Input extends Marionette.LayoutView {
   set value (value) {
     this._value = value;
     if (this._value === '') {
-      this.$el.removeClass('filled');
+      this.filled = false;
     } else {
-      this.$el.addClass('filled');
+      this.filled = true;
     }
   }
 
@@ -117,12 +118,12 @@ class Input extends Marionette.LayoutView {
   }
 
   keyPress (event) {
-    this.filled = this.value !== '';
-    this.onChange();
+    this.value = event.target.value
+    this.onChange(this.value);
     this.triggerMethod('input:change');
   }
 
-  onChange () {
+  onChange (value) {
 
   }
 

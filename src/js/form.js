@@ -34,7 +34,6 @@ class InputList extends List {
   }
 
   onInputChange (inputView) {
-    console.log(this.error);
     this.triggerMethod('inputs:change', !this.error);
   }
 

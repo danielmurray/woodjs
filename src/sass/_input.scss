@@ -147,12 +147,12 @@
   }
 
   &.disabled{
-    .border-bottom-inactive{
-      border-bottom: dotted 2px;
+    input{
+      opacity: 0.38;
     }
 
-    .input{
-      opacity: 0.38;
+    .border-bottom-inactive{
+      border-bottom: dotted 2px;
     }
   }
 

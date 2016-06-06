@@ -142,7 +142,6 @@
 	  }, {
 	    key: 'onInputChange',
 	    value: function onInputChange(inputView) {
-	      console.log(this.error);
 	      this.triggerMethod('inputs:change', !this.error);
 	    }
 	  }, {
@@ -525,13 +524,13 @@
 	  }, {
 	    key: 'keyPress',
 	    value: function keyPress(event) {
-	      this.filled = this.value !== '';
-	      this.onChange();
+	      this.value = event.target.value;
+	      this.onChange(this.value);
 	      this.triggerMethod('input:change');
 	    }
 	  }, {
 	    key: 'onChange',
-	    value: function onChange() {}
+	    value: function onChange(value) {}
 	  }, {
 	    key: 'onFocusIn',
 	    value: function onFocusIn() {
@@ -613,6 +612,7 @@
 	      return this._filled;
 	    },
 	    set: function set(filled) {
+	      console.log(filled);
 	      if (filled) {
 	        this.$el.addClass('filled');
 	      } else {
@@ -644,9 +644,9 @@
 	    set: function set(value) {
 	      this._value = value;
 	      if (this._value === '') {
-	        this.$el.removeClass('filled');
+	        this.filled = false;
 	      } else {
-	        this.$el.addClass('filled');
+	        this.filled = true;
 	      }
 	    }
 	  }]);

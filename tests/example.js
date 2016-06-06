@@ -87,7 +87,7 @@
             id: 'password',
             floatingLabelText: 'Password',
             hintText: 'I am the Gatekeeper.',
-            defaultValue: 'password',
+            // defaultValue: 'password',
             type: 'password',
             required: true
           // }, {
