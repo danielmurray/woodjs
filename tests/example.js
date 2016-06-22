@@ -8,16 +8,17 @@
     },
     template: _.template(
       '<div class="icons display-row">' +
-      '<div id="icon"></div>' +
-      '<div id="icon-button"></div>' +
-      '<div id="icon-tooltip"></div>' +
-      '<div id="icon-material"></div>' +
+        '<div id="icon"></div>' +
+        '<div id="icon-button"></div>' +
+        '<div id="icon-tooltip"></div>' +
+        '<div id="icon-material"></div>' +
       '</div>' +
       '<div class="buttons display-row">' +
-      '<div id="flat-button"></div>' +
-      '<div id="raised-button"></div>' +
+        '<div id="flat-button"></div>' +
+        '<div id="raised-button"></div>' +
       '</div>' +
       '<div id="card-form-container"></div>' +
+      '<div id="card-list-container" style="width:300px;"></div>' +
       '<div id="list-container" style="width:300px;"></div>' +
       '<div id="dropdown-tree-container"></div>' +
       '<div id="dropdown-arbor-container"></div>' +
@@ -30,15 +31,16 @@
       // flatButtonContainer: '#flat-button',
       // raisedButtonContainer: '#raised-button',
       cardFormContainer: '#card-form-container',
-      listContainer: '#list-container',
+      cardListContainer: '#card-list-container'
+      // listContainer: '#list-container',
       // dropdownTreeContainer: '#dropdown-tree-container',
       // dropdownArborContainer: '#dropdown-arbor-container',
     },
     events: {},
-    initialize: function(options) {
+    initialize: function (options) {
 
     },
-    onRender: function() {
+    onRender: function () {
       // // Icons
       var icon = new Wood.Icon({
         icon: 'check'
@@ -72,9 +74,9 @@
         headerOptions: {
           icon: 'sign-in',
           shape: 'circle',
-          backgroundColor: 'white',
+          backgroundColor: 'white'
         },
-        contentView: Wood.Form,
+        contentView: Wood.Assistant,
         contentOptions: {
           inputs: [{
             id: 'username',
@@ -90,18 +92,18 @@
             // defaultValue: 'password',
             type: 'password',
             required: true
-          // }, {
-          //   id: 'date',
-          //   floatingLabelText: '',
-          //   type: 'datetime-local',
-          //   required: true
+              // }, {
+              //   id: 'date',
+              //   floatingLabelText: '',
+              //   type: 'datetime-local',
+              //   required: true
           }],
           submitButton: {
             label: 'Sign In'
           }
         }
       });
-      this.cardFormContainer.show(card);
+      // this.cardFormContainer.show(card);
 
       // var dialog = Wood.FormDialog.show({
       //   title: 'Specify a Date',
@@ -132,85 +134,230 @@
       //   }
       // });
 
-      // List
-      var list = new Wood.Assistant({
+      // Card & List
+      var cardList = new Wood.Card({
+        primaryText: 'To Do',
+        headerOptions: {
+          icon: 'lightbulb-o',
+          shape: 'circle',
+          backgroundColor: 'white'
+        },
+        contentView: Wood.Assistant,
+        contentOptions: {
           items: [{
-              itemView: Wood.Subheader,
-              itemOptions: {
-                  text: "Ingredients"
-              }
+            itemView: Wood.Subheader,
+            itemOptions: {
+              text: 'Ingredients'
+            }
           }, {
-              itemOptions: {
-                  rightIcon: true,
-                  rightIconView: Wood.Checkbox,
-                  rightIconOptions: {
-                      checked: false,
-                      disabled: true,
-                      tooltip: 'hello world'
-                  },
-                  primaryText: "Eggs",
-                  secondaryText: "Caged free for me",
-              }
+            itemView: Wood.InputDropdown,
+            itemOptions: {
+              // defaultValue: 'smart_and_final',
+              floatingLabelText: 'Store',
+              hintText: 'Where are we going?',
+              options: [
+                {
+                  value: 'safeway',
+                  label: 'Safeway'
+                }, {
+                  value: 'whole_foods',
+                  label: 'Whole Foods'
+                }, {
+                  value: 'fresh_and_easy',
+                  label: 'Fresh & Easy'
+                }, {
+                  value: 'stop_n_save',
+                  label: 'Stop N Save'
+                }, {
+                  value: 'smart_and_final',
+                  label: 'Smart & Final'
+                }, {
+                  value: 'grocery_outlet',
+                  label: 'Grocery Outlet'
+                }
+              ]
+            }
           }, {
-              itemOptions: {
-                  rightIcon: true,
-                  rightIconView: Wood.Checkbox,
-                  rightIconOptions: {
-                      checked: true,
-                      disabled: false,
-                      tooltip: 'Hello World'
-                  },
-                  primaryText: "Milk",
-                  secondaryText: "Lowfat or skim",
-              }
+            itemView: Wood.Input,
+            itemOptions: {
+              defaultValue: 'danmurray',
+              floatingLabelText: 'Username',
+              hintText: 'Who are you?'
+            }
           }, {
-              itemOptions: {
-                  rightIcon: true,
-                  rightIconView: Wood.Checkbox,
-                  rightIconOptions: {
-                      checked: false,
-                      disabled: true,
-                      tooltip: 'hello world'
-                  },
-                  primaryText: "Butter",
-                  secondaryText: "I can't beleive it's butter",
-              }
+            itemOptions: {
+              rightIcon: true,
+              rightIconView: Wood.Checkbox,
+              rightIconOptions: {
+                checked: false,
+                disabled: true,
+                tooltip: 'hello world'
+              },
+              primaryText: 'Eggs',
+              secondaryText: 'Caged free for me'
+            }
           }, {
-              itemOptions: {
-                  rightIcon: true,
-                  rightIconView: Wood.Checkbox,
-                  rightIconOptions: {
-                      checked: false,
-                      disabled: true,
-                      tooltip: 'hello world'
-                  },
-                  primaryText: "Bread",
-                  secondaryText: "Wheat not white",
-              }
+            itemOptions: {
+              rightIcon: true,
+              rightIconView: Wood.Checkbox,
+              rightIconOptions: {
+                checked: true,
+                disabled: false
+              },
+              primaryText: 'Milk',
+              secondaryText: 'Lowfat or skim'
+            }
+          }, {
+            itemOptions: {
+              rightIcon: true,
+              rightIconView: Wood.Checkbox,
+              rightIconOptions: {
+                checked: false,
+                disabled: true
+              },
+              primaryText: 'Butter',
+              secondaryText: 'I can\'t beleive it\'s butter'
+            }
+          }, {
+            itemOptions: {
+              rightIcon: true,
+              rightIconView: Wood.Checkbox,
+              rightIconOptions: {
+                checked: false,
+                disabled: true,
+                tooltip: 'hello world'
+              },
+              primaryText: 'Bread',
+              secondaryText: 'Wheat not white'
+            }
           }]
+        }
       });
+      this.cardListContainer.show(cardList);
+
+      // List
+      // var list = new Wood.Assistant({
+      //   items: [{
+      //     itemView: Wood.Subheader,
+      //     itemOptions: {
+      //       text: 'Ingredients'
+      //     }
+      //   }, {
+      //     itemView: Wood.InputDropdown,
+      //     itemOptions: {
+      //       // defaultValue: 'smart_and_final',
+      //       floatingLabelText: 'Store',
+      //       hintText: 'Where are we going?',
+      //       options: [
+      //         {
+      //           value: 'safeway',
+      //           label: 'Safeway'
+      //         }, {
+      //           value: 'whole_foods',
+      //           label: 'Whole Foods'
+      //         }, {
+      //           value: 'fresh_and_easy',
+      //           label: 'Fresh & Easy'
+      //         }, {
+      //           value: 'stop_n_save',
+      //           label: 'Stop N Save'
+      //         }, {
+      //           value: 'smart_and_final',
+      //           label: 'Smart & Final'
+      //         }, {
+      //           value: 'grocery_outlet',
+      //           label: 'Grocery Outlet'
+      //         }
+      //       ]
+      //     }
+      //   }, {
+      //     itemView: Wood.Input,
+      //     itemOptions: {
+      //       defaultValue: 'danmurray',
+      //       floatingLabelText: 'Username',
+      //       hintText: 'Who are you?'
+      //     }
+      //   }, {
+      //     itemOptions: {
+      //       rightIcon: true,
+      //       rightIconView: Wood.Checkbox,
+      //       rightIconOptions: {
+      //         checked: false,
+      //         disabled: true,
+      //         tooltip: 'hello world'
+      //       },
+      //       primaryText: 'Eggs',
+      //       secondaryText: 'Caged free for me'
+      //     }
+      //   }, {
+      //     itemOptions: {
+      //       rightIcon: true,
+      //       rightIconView: Wood.Checkbox,
+      //       rightIconOptions: {
+      //         checked: true,
+      //         disabled: false
+      //       },
+      //       primaryText: 'Milk',
+      //       secondaryText: 'Lowfat or skim'
+      //     }
+      //   }, {
+      //     itemOptions: {
+      //       rightIcon: true,
+      //       rightIconView: Wood.Checkbox,
+      //       rightIconOptions: {
+      //         checked: false,
+      //         disabled: true
+      //       },
+      //       primaryText: 'Butter',
+      //       secondaryText: 'I can\'t beleive it\'s butter'
+      //     }
+      //   }, {
+      //     itemOptions: {
+      //       rightIcon: true,
+      //       rightIconView: Wood.Checkbox,
+      //       rightIconOptions: {
+      //         checked: false,
+      //         disabled: true,
+      //         tooltip: 'hello world'
+      //       },
+      //       primaryText: 'Bread',
+      //       secondaryText: 'Wheat not white'
+      //     }
+      //   }]
+      // });
       // this.listContainer.show(list)
 
       // Dropdown & Tree
       var dropdown = new Wood.Dropdown({
-          buttonOptions: {
-            icon: 'skyatlas',
-            label: 'Skywalkers',
-            color: 'black',
-            backgroundColor: 'white'
-          },
-          contentView: Wood.List,
-          contentOptions: {
-            items: [{
-              itemView: Wood.Tree,
+        buttonOptions: {
+          icon: 'skyatlas',
+          label: 'Skywalkers',
+          color: 'black',
+          backgroundColor: 'white'
+        },
+        contentView: Wood.List,
+        contentOptions: {
+          items: [{
+            itemView: Wood.Tree,
+            itemOptions: {
               itemOptions: {
+                leftIcon: true,
+                leftIconOptions: {
+                  icon: 'empire'
+                },
+                primaryText: 'Anakin Skywalker',
+                secondaryText: 'Darth Vader',
+                rightIcon: true,
+                rightIconView: Wood.Checkbox
+              },
+              children: [{
                 itemOptions: {
                   leftIcon: true,
                   leftIconOptions: {
-                    icon: 'empire',
+                    icon: 'rebel'
                   },
-                  primaryText: 'Anakin Skywalker',
-                  secondaryText: 'Darth Vader',
+                  primaryText: 'Leia Organa Solo',
+                  secondaryText: 'Princess Leia',
                   rightIcon: true,
                   rightIconView: Wood.Checkbox
                 },
@@ -218,134 +365,122 @@
                   itemOptions: {
                     leftIcon: true,
                     leftIconOptions: {
-                      icon: 'rebel',
+                      icon: 'rebel'
                     },
-                    primaryText: 'Leia Organa Solo',
-                    secondaryText: 'Princess Leia',
+                    primaryText: 'Jaina Solo',
+                    secondaryText: 'Definitely Kylo Ren',
                     rightIcon: true,
                     rightIconView: Wood.Checkbox
                   },
-                  children: [{
-                    itemOptions: {
-                      leftIcon: true,
-                      leftIconOptions: {
-                        icon: 'rebel',
-                      },
-                      primaryText: 'Jaina Solo',
-                      secondaryText: 'Definitely Kylo Ren',
-                      rightIcon: true,
-                      rightIconView: Wood.Checkbox
-                    },
-                    children: [],
-                  }, {
-                    itemOptions: {
-                      leftIcon: true,
-                      leftIconOptions: {
-                        icon: 'empire',
-                      },
-                      primaryText: 'Jacen Solo',
-                      secondaryText: 'Darth Caedus',
-                      rightIcon: true,
-                      rightIconView: Wood.Checkbox
-                    },
-                    children: [],
-                  }, {
-                    itemOptions: {
-                      leftIcon: true,
-                      leftIconOptions: {
-                        icon: 'rebel',
-                      },
-                      primaryText: 'Anakin Solo',
-                      secondaryText: 'Lil\' Ani',
-                      rightIcon: true,
-                      rightIconView: Wood.Checkbox
-                    },
-                    children: [],
-                  }],
+                  children: []
                 }, {
                   itemOptions: {
                     leftIcon: true,
                     leftIconOptions: {
-                      icon: 'rebel',
+                      icon: 'empire'
                     },
-                    primaryText: 'Luke Skywalker',
-                    secondaryText: 'A New Hope',
+                    primaryText: 'Jacen Solo',
+                    secondaryText: 'Darth Caedus',
                     rightIcon: true,
                     rightIconView: Wood.Checkbox
                   },
-                  children: [],
+                  children: []
+                }, {
+                  itemOptions: {
+                    leftIcon: true,
+                    leftIconOptions: {
+                      icon: 'rebel'
+                    },
+                    primaryText: 'Anakin Solo',
+                    secondaryText: 'Lil\' Ani',
+                    rightIcon: true,
+                    rightIconView: Wood.Checkbox
+                  },
+                  children: []
                 }]
-              }
-            }, {
-              itemView: Wood.Item,
-              itemOptions: {
-                leftIcon: true,
-                leftIconOptions: {
-                  icon: 'code-fork',
+              }, {
+                itemOptions: {
+                  leftIcon: true,
+                  leftIconOptions: {
+                    icon: 'rebel'
+                  },
+                  primaryText: 'Luke Skywalker',
+                  secondaryText: 'A New Hope',
+                  rightIcon: true,
+                  rightIconView: Wood.Checkbox
                 },
-                primaryText: 'Fork Session',
-                color: 'black',
-              }
-            }]
-          }
-        })
-        // this.dropdownTreeContainer.show(dropdown)
+                children: []
+              }]
+            }
+          }, {
+            itemView: Wood.Item,
+            itemOptions: {
+              leftIcon: true,
+              leftIconOptions: {
+                icon: 'code-fork'
+              },
+              primaryText: 'Fork Session',
+              color: 'black'
+            }
+          }]
+        }
+      });
+      // this.dropdownTreeContainer.show(dropdown)
 
       var dropdown = new Wood.Dropdown({
-          buttonOptions: {
-            icon: 'code-fork',
-            label: 'Fork Session',
-            color: 'black',
-            backgroundColor: 'white'
-          },
-          contentView: Wood.List,
-          contentOptions: {
-            items: [{
-              itemView: Wood.Arbor,
-              itemOptions: {
-                root: 17,
-                collection: new Backbone.Collection([{
-                  "description": "Grandpa",
-                  "id": 17,
-                  "parent": null
-                }, {
-                  "description": "Father",
-                  "id": 71919,
-                  "parent": 17
-                }, {
-                  "description": "Grandson",
-                  "id": 71921,
-                  "parent": 71919
-                }, {
-                  "description": "Granddaughter",
-                  "id": 71922,
-                  "parent": 71919
-                }, {
-                  "description": "Cousin",
-                  "id": 71923,
-                  "parent": 71920
-                }, {
-                  "description": "Uncle",
-                  "id": 71920,
-                  "parent": 17
-                }])
-              }
-            }, {
-              itemView: Wood.Item,
-              itemOptions: {
-                leftIcon: true,
-                leftIconOptions: {
-                  icon: 'code-fork',
-                },
-                primaryText: 'Fork Session',
-                color: 'black',
-              }
-            }]
-          }
-        })
-        // this.dropdownArborContainer.show(dropdown)
-
+        buttonOptions: {
+          icon: 'code-fork',
+          label: 'Fork Session',
+          color: 'black',
+          backgroundColor: 'white'
+        },
+        contentView: Wood.List,
+        contentOptions: {
+          items: [{
+            itemView: Wood.Arbor,
+            itemOptions: {
+              root: 17,
+              collection: new Backbone.Collection([{
+                'description': 'Grandpa',
+                'id': 17,
+                'parent': null
+              }, {
+                'description': 'Father',
+                'id': 71919,
+                'parent': 17
+              }, {
+                'description': 'Grandson',
+                'id': 71921,
+                'parent': 71919
+              }, {
+                'description': 'Granddaughter',
+                'id': 71922,
+                'parent': 71919
+              }, {
+                'description': 'Cousin',
+                'id': 71923,
+                'parent': 71920
+              }, {
+                'description': 'Uncle',
+                'id': 71920,
+                'parent': 17
+              }])
+            }
+          }, {
+            itemView: Wood.Item,
+            itemOptions: {
+              leftIcon: true,
+              leftIconOptions: {
+                icon: 'code-fork'
+              },
+              primaryText: 'Fork Session',
+              color: 'black'
+            }
+          }]
+        }
+      });
+      // this.dropdownArborContainer.show(dropdown)
     },
-    templateHelpers: function() {}
+    templateHelpers: function () {}
   });
 })(window.Wood);

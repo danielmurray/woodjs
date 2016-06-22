@@ -1,0 +1,12 @@
+wood-input-dropdown{
+  position: relative;
+  display: block;
+
+  .popover-container{
+    position: absolute;
+    z-index: 4;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12);
+    width: 100%;
+    top: 55px;
+  }
+}

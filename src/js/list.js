@@ -17,7 +17,6 @@ class Subheader extends Marionette.ItemView {
       text: this.options.text
     };
   }
-
 }
 
 class Divider extends Marionette.ItemView {
@@ -31,9 +30,14 @@ class Divider extends Marionette.ItemView {
 }
 
 class List extends Marionette.CollectionView{
-
   get tagName () {
     return 'wood-list';
+  }
+
+  getChild (index) {
+    return this.children.find(function (view) {
+      return view._index === index;
+    });
   }
 
   getChildView (model, index) {
@@ -43,7 +47,7 @@ class List extends Marionette.CollectionView{
 
 class Assistant extends List {
   getChildView (model, index) {
-    return model.get('itemView') || this.getOption('childView');
+    return model.get('itemView') || this.getOption('childView') || Wood.Item;
   }
 
   childViewOptions (model, index) {

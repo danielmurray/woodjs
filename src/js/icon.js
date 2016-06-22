@@ -86,7 +86,6 @@
         this.disable(this.options.disabled);
       },
       mouseDown: function(e){
-        e.preventDefault();
         var ripple = this.rippleContainer.currentView;
         ripple.mouseDown();
       },

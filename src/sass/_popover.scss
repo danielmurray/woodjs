@@ -1,0 +1,13 @@
+wood-popover{
+  display: none;
+  width: 100%;
+
+  &.expanded{
+    display: block;
+  }
+
+  wood-list{
+    max-height: 200px;
+    overflow: auto;
+  }
+}

@@ -63,6 +63,8 @@
 	
 	var _input = __webpack_require__(4);
 	
+	var _inputdropdown = __webpack_require__(28);
+	
 	var _list = __webpack_require__(3);
 	
 	var _text = __webpack_require__(5);
@@ -92,6 +94,7 @@
 	Wood.Divider = _list.Divider;
 	Wood.Form = _form.Form;
 	Wood.Input = _input.Input;
+	Wood.InputDropdown = _inputdropdown.InputDropdown;
 	Wood.InputList = _form.InputList;
 	Wood.List = _list.List;
 	Wood.Subheader = _list.Subheader;
@@ -418,6 +421,13 @@
 	  }
 	
 	  _createClass(List, [{
+	    key: 'getChild',
+	    value: function getChild(index) {
+	      return this.children.find(function (view) {
+	        return view._index === index;
+	      });
+	    }
+	  }, {
 	    key: 'getChildView',
 	    value: function getChildView(model, index) {
 	      return Wood.Item;
@@ -444,7 +454,7 @@
 	  _createClass(Assistant, [{
 	    key: 'getChildView',
 	    value: function getChildView(model, index) {
-	      return model.get('itemView') || this.getOption('childView');
+	      return model.get('itemView') || this.getOption('childView') || Wood.Item;
 	    }
 	  }, {
 	    key: 'childViewOptions',
@@ -519,14 +529,18 @@
 	      this.hintText = options.hintText || '';
 	      this.required = options.required || false;
 	      this.type = options.type || 'text';
-	      this.value = options.defaultValue || '';
+	      this.value = options.value || options.defaultValue || '';
 	    }
 	  }, {
 	    key: 'keyPress',
-	    value: function keyPress(event) {
-	      this.value = event.target.value;
-	      this.onChange(this.value);
-	      this.triggerMethod('input:change');
+	    value: function keyPress(e) {
+	      if (e.keyCode === 13 || e.keyCode === 38 || e.keyCode === 40) {
+	        e.preventDefault();
+	        // TODO figure out to have
+	        // ignore enter keypress
+	        return;
+	      }
+	      this.value = e.target.value;
 	    }
 	  }, {
 	    key: 'onChange',
@@ -541,7 +555,7 @@
 	    value: function onFocusOut() {
 	      this.$el.removeClass('focused');
 	      this.validate();
-	      this.triggerMethod('input:change');
+	      this.triggerMethod('input:change', this.value);
 	    }
 	  }, {
 	    key: 'templateHelpers',
@@ -612,7 +626,6 @@
 	      return this._filled;
 	    },
 	    set: function set(filled) {
-	      console.log(filled);
 	      if (filled) {
 	        this.$el.addClass('filled');
 	      } else {
@@ -642,11 +655,16 @@
 	      return this._value;
 	    },
 	    set: function set(value) {
-	      this._value = value;
-	      if (this._value === '') {
-	        this.filled = false;
-	      } else {
-	        this.filled = true;
+	      if (this._value !== value) {
+	        if (value === '') {
+	          this.filled = false;
+	        } else {
+	          this.filled = true;
+	        }
+	        this.$('input').val(value);
+	        this._value = value;
+	        this.onChange(this._value);
+	        this.triggerMethod('input:change', this._value);
 	      }
 	    }
 	  }]);
@@ -1238,7 +1256,6 @@
 	      this.disable(this.options.disabled);
 	    },
 	    mouseDown: function mouseDown(e) {
-	      e.preventDefault();
 	      var ripple = this.rippleContainer.currentView;
 	      ripple.mouseDown();
 	    },
@@ -1414,7 +1431,7 @@
 	      class: 'button'
 	    },
 	    events: {
-	      'click': 'click'
+	      'mousedown': 'click'
 	    },
 	    defaults: _.extend({}, Wood.Item.prototype.defaults, {
 	      clickEvent: 'action:click:item',
@@ -2053,6 +2070,422 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 20 */,
+/* 21 */,
+/* 22 */,
+/* 23 */,
+/* 24 */,
+/* 25 */,
+/* 26 */,
+/* 27 */,
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.InputDropdown = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _input = __webpack_require__(4);
+	
+	var _list = __webpack_require__(3);
+	
+	var _popover = __webpack_require__(29);
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // TODO change component name
+	
+	
+	var DropdownList = function (_List) {
+	  _inherits(DropdownList, _List);
+	
+	  function DropdownList() {
+	    _classCallCheck(this, DropdownList);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DropdownList).apply(this, arguments));
+	  }
+	
+	  _createClass(DropdownList, [{
+	    key: 'childViewOptions',
+	    value: function childViewOptions(model, index) {
+	      return {
+	        primaryText: model.get('label')
+	      };
+	    }
+	  }, {
+	    key: 'decrementHoveredIndex',
+	    value: function decrementHoveredIndex() {
+	      if (this.hoveredIndex !== null) {
+	        if (this.hoveredIndex > 0) {
+	          this.hoveredIndex -= 1;
+	        }
+	      } else {
+	        this.hoveredIndex = this.children.length;
+	      }
+	    }
+	  }, {
+	    key: 'filter',
+	    value: function filter(child, index, collection) {
+	      var childLabel = child.get('label').toLowerCase();
+	      var searchTerms = this.searchTerm.split(' ').map(function (s) {
+	        return s.toLowerCase();
+	      });
+	      return searchTerms.every(function (s) {
+	        return childLabel.includes(s);
+	      });
+	    }
+	  }, {
+	    key: 'getValue',
+	    value: function getValue() {
+	      var childView = this.getChild(this.hoveredIndex);
+	      return childView.model;
+	    }
+	  }, {
+	    key: 'getChildView',
+	    value: function getChildView(model, index) {
+	      return Wood.ItemButton;
+	    }
+	  }, {
+	    key: 'incrementHoveredIndex',
+	    value: function incrementHoveredIndex() {
+	      if (this.hoveredIndex !== null) {
+	        if (this.hoveredIndex < this.children.length - 1) {
+	          this.hoveredIndex += 1;
+	        }
+	      } else {
+	        this.hoveredIndex = 0;
+	      }
+	    }
+	  }, {
+	    key: 'initialize',
+	    value: function initialize(options) {
+	      this.hoveredIndex = options.hoveredIndex || null;
+	      this.searchTerm = options.searchTerm || '';
+	    }
+	  }, {
+	    key: 'onItemClick',
+	    value: function onItemClick(itemView) {
+	      var itemModel = itemView.model;
+	      this.triggerMethod('item:select', itemModel);
+	    }
+	  }, {
+	    key: 'scrollToMe',
+	    value: function scrollToMe(itemView) {
+	      // TODO make this elegant
+	      var someWeirdOffest = 266.5;
+	      var popoverHeight = this.$el.height();
+	      var popoverTopOffset = this.$el.scrollTop();
+	      var popoverBottomOffset = popoverTopOffset + popoverHeight;
+	      var itemHeight = itemView.$el.height();
+	      var itemTopOffset = itemView.$el.offset().top - someWeirdOffest;
+	      var itemBottmOffset = itemTopOffset + itemHeight;
+	      if (itemBottmOffset > popoverBottomOffset) {
+	        this.$el.scrollTop(itemBottmOffset + popoverTopOffset - popoverHeight);
+	      } else if (itemTopOffset < 0) {
+	        this.$el.scrollTop(itemTopOffset + popoverTopOffset);
+	      }
+	    }
+	  }, {
+	    key: 'childEvents',
+	    get: function get() {
+	      return {
+	        'action:click:item': 'onItemClick'
+	      };
+	    }
+	  }, {
+	    key: 'hoveredIndex',
+	    get: function get() {
+	      return this._hoveredIndex;
+	    },
+	    set: function set(index) {
+	      if (this.hoveredIndex != null) {
+	        var oldChild = this.getChild(this._hoveredIndex);
+	        oldChild.$el.removeClass('hover');
+	      }
+	
+	      this._hoveredIndex = index;
+	      if (index !== null) {
+	        var newChild = this.getChild(index);
+	        newChild.$el.addClass('hover');
+	        this.scrollToMe(newChild);
+	      }
+	    }
+	  }, {
+	    key: 'searchTerm',
+	    get: function get() {
+	      return this._searchTerm;
+	    },
+	    set: function set(term) {
+	      this.hoveredIndex = null;
+	      this._searchTerm = term;
+	      this.render();
+	    }
+	  }]);
+	
+	  return DropdownList;
+	}(_list.List);
+	
+	var InputDropdown = function (_Marionette$LayoutVie) {
+	  _inherits(InputDropdown, _Marionette$LayoutVie);
+	
+	  function InputDropdown() {
+	    _classCallCheck(this, InputDropdown);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(InputDropdown).apply(this, arguments));
+	  }
+	
+	  _createClass(InputDropdown, [{
+	    key: 'events',
+	    value: function events() {
+	      return {
+	        'keydown': 'keyPress',
+	        'focusin': 'onFocusIn',
+	        'focusout': 'onFocusOut'
+	      };
+	    }
+	  }, {
+	    key: 'keyPress',
+	    value: function keyPress(e) {
+	      var keynum = e.keyCode;
+	      if (keynum === 38) {
+	        // Move selection up
+	        this.dropdownList.decrementHoveredIndex();
+	      }
+	
+	      if (keynum === 40) {
+	        // Move selection down
+	        this.dropdownList.incrementHoveredIndex();
+	      }
+	
+	      if (keynum === 13) {
+	        // Act on current selection
+	        e.stopImmediatePropagation();
+	        this.value = this.dropdownList.getValue();
+	      }
+	    }
+	  }, {
+	    key: 'initialize',
+	    value: function initialize(options) {
+	      this.inputOptions = {
+	        id: options.id,
+	        disabled: options.disabled,
+	        floatingLabelText: options.floatingLabelText,
+	        hintText: options.hintText,
+	        required: options.required,
+	        type: options.type,
+	        defaultValue: options.defaultValue
+	      };
+	      this._value = options.defaultValue;
+	      this.dropdownOptions = new Backbone.Collection(options.options);
+	    }
+	  }, {
+	    key: 'onFocusIn',
+	    value: function onFocusIn() {
+	      this.popover.show();
+	    }
+	  }, {
+	    key: 'onFocusOut',
+	    value: function onFocusOut() {
+	      this.popover.hide();
+	    }
+	  }, {
+	    key: 'onInputChange',
+	    value: function onInputChange(inputView, inputValue) {
+	      this.dropdownList.searchTerm = inputValue;
+	    }
+	  }, {
+	    key: 'onItemHover',
+	    value: function onItemHover(itemView) {}
+	  }, {
+	    key: 'onItemSelect',
+	    value: function onItemSelect(itemModel) {
+	      this.value = itemModel;
+	    }
+	  }, {
+	    key: 'onRender',
+	    value: function onRender() {
+	      this.input = new _input.Input(_.extend({}, this.inputOptions, {
+	        value: this.label
+	      }));
+	      this.inputContainer.show(this.input);
+	
+	      this.popover = new _popover.Popover({
+	        contentView: DropdownList,
+	        contentViewOptions: {
+	          collection: this.dropdownOptions
+	        }
+	      });
+	      this.popoverContainer.show(this.popover);
+	
+	      this.dropdownList = this.popover.getContent();
+	      this.listenTo(this.dropdownList, 'item:select', this.onItemSelect);
+	    }
+	  }, {
+	    key: 'regions',
+	    value: function regions() {
+	      return {
+	        inputContainer: '#input-container',
+	        popoverContainer: '#popover-container'
+	      };
+	    }
+	  }, {
+	    key: 'templateHelpers',
+	    value: function templateHelpers() {
+	      return {};
+	    }
+	  }, {
+	    key: 'childEvents',
+	    get: function get() {
+	      return {
+	        'input:change': 'onInputChange'
+	      };
+	    }
+	  }, {
+	    key: 'tagName',
+	    get: function get() {
+	      return 'wood-input-dropdown';
+	    }
+	  }, {
+	    key: 'template',
+	    get: function get() {
+	      return _.template('\n      <div id="input-container" class="input-container"></div>\n      <div id="popover-container" class="popover-container"></div>\n    ');
+	    }
+	  }, {
+	    key: 'label',
+	    get: function get() {
+	      if (this._value) {
+	        return this._value.get('label');
+	      }
+	    }
+	  }, {
+	    key: 'value',
+	    get: function get() {
+	      if (this._value) {
+	        return value.get('value');
+	      }
+	    },
+	    set: function set(value) {
+	      var valueModel = this.dropdownOptions.get(value);
+	      if (valueModel) {
+	        this._value = valueModel;
+	        this.input.value = this.label;
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	  }]);
+	
+	  return InputDropdown;
+	}(Marionette.LayoutView);
+	
+	exports.InputDropdown = InputDropdown;
+
+/***/ },
+/* 29 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// TODO change component name
+	
+	var Popover = function (_Marionette$LayoutVie) {
+	  _inherits(Popover, _Marionette$LayoutVie);
+	
+	  function Popover() {
+	    _classCallCheck(this, Popover);
+	
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Popover).apply(this, arguments));
+	  }
+	
+	  _createClass(Popover, [{
+	    key: 'getContent',
+	    value: function getContent() {
+	      return this.content;
+	    }
+	  }, {
+	    key: 'getContentView',
+	    value: function getContentView() {
+	      return this.contentView;
+	    }
+	  }, {
+	    key: 'getContentViewOptions',
+	    value: function getContentViewOptions() {
+	      return this.contentViewOptions;
+	    }
+	  }, {
+	    key: 'hide',
+	    value: function hide() {
+	      this.$el.removeClass('expanded');
+	    }
+	  }, {
+	    key: 'initialize',
+	    value: function initialize(options) {
+	      this.contentView = options.contentView || null;
+	      this.contentViewOptions = options.contentViewOptions || null;
+	    }
+	  }, {
+	    key: 'onRender',
+	    value: function onRender() {
+	      var ContenViewClass = this.getContentView();
+	      var contenViewOptions = this.getContentViewOptions();
+	      this.content = new ContenViewClass(contenViewOptions);
+	      this.contentContainer.show(this.content);
+	    }
+	  }, {
+	    key: 'regions',
+	    value: function regions() {
+	      return {
+	        contentContainer: '#content-container'
+	      };
+	    }
+	  }, {
+	    key: 'show',
+	    value: function show() {
+	      this.$el.addClass('expanded');
+	    }
+	  }, {
+	    key: 'templateHelpers',
+	    value: function templateHelpers() {
+	      return {};
+	    }
+	  }, {
+	    key: 'tagName',
+	    get: function get() {
+	      return 'wood-popover';
+	    }
+	  }, {
+	    key: 'template',
+	    get: function get() {
+	      return _.template('\n      <div id="content-container" class="content-container"></div>\n    ');
+	    }
+	  }]);
+	
+	  return Popover;
+	}(Marionette.LayoutView);
+	
+	exports.Popover = Popover;
 
 /***/ }
 /******/ ]);
