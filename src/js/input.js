@@ -1,5 +1,4 @@
 class Input extends Marionette.LayoutView {
-
   get attributes () {
     return {
       class: 'wood input'
@@ -46,7 +45,6 @@ class Input extends Marionette.LayoutView {
   }
 
   set filled (filled) {
-    console.log(filled)
     if (filled) {
       this.$el.addClass('filled');
     } else {
@@ -85,11 +83,16 @@ class Input extends Marionette.LayoutView {
   }
 
   set value (value) {
-    this._value = value;
-    if (this._value === '') {
-      this.filled = false;
-    } else {
-      this.filled = true;
+    if (this._value !== value) {
+      if (value === '') {
+        this.filled = false;
+      } else {
+        this.filled = true;
+      }
+      this.$('input').val(value);
+      this._value = value;
+      this.onChange(this._value);
+      this.triggerMethod('input:change', this._value);
     }
   }
 
@@ -114,13 +117,17 @@ class Input extends Marionette.LayoutView {
     this.hintText = options.hintText || '';
     this.required = options.required || false;
     this.type = options.type || 'text';
-    this.value = options.defaultValue || '';
+    this.value = options.value || options.defaultValue || '';
   }
 
-  keyPress (event) {
-    this.value = event.target.value
-    this.onChange(this.value);
-    this.triggerMethod('input:change');
+  keyPress (e) {
+    if (e.keyCode === 13 || e.keyCode === 38 || e.keyCode === 40) {
+      e.preventDefault();
+      // TODO figure out to have
+      // ignore enter keypress
+      return;
+    }
+    this.value = e.target.value;
   }
 
   onChange (value) {
@@ -134,7 +141,7 @@ class Input extends Marionette.LayoutView {
   onFocusOut () {
     this.$el.removeClass('focused');
     this.validate();
-    this.triggerMethod('input:change');
+    this.triggerMethod('input:change', this.value);
   }
 
   templateHelpers () {

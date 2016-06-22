@@ -451,7 +451,7 @@ wood-item {
   display: block; }
   wood-item.button {
     cursor: pointer; }
-    wood-item.button:hover {
+    wood-item.button.hover, wood-item.button:hover {
       background-color: rgba(0, 0, 0, 0.098);
       transition: background-color 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
   wood-item .item-wrapper {
@@ -607,10 +607,19 @@ wood-item {
     color: #f44336;
     transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0; }
 
+wood-input-dropdown {
+  position: relative;
+  display: block; }
+  wood-input-dropdown .popover-container {
+    position: absolute;
+    z-index: 4;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    top: 55px; }
+
 wood-list {
   display: block;
-  background-color: white;
-  margin: 0 8px; }
+  background-color: white; }
 
 wood-divider {
   display: block;
@@ -625,6 +634,15 @@ wood-subheader {
   line-height: 48px;
   padding-left: 16px;
   width: 100%; }
+
+wood-popover {
+  display: none;
+  width: 100%; }
+  wood-popover.expanded {
+    display: block; }
+  wood-popover wood-list {
+    max-height: 200px;
+    overflow: auto; }
 
 @keyframes ripple {
   0% {

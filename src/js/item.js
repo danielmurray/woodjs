@@ -59,7 +59,7 @@
       class: 'button'
     },
     events:{
-      'click': 'click'
+      'mousedown': 'click'
     },
     defaults: _.extend({}, Wood.Item.prototype.defaults, {
       clickEvent: 'action:click:item',

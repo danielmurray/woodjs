@@ -19,6 +19,7 @@ require('./tree');
 // ES2015 Components
 import {InputList, Form} from './form.js';
 import {Input} from './input.js';
+import {InputDropdown} from './inputdropdown.js';
 import {Assistant, Divider, List, Subheader} from './list.js';
 import {Header} from './text.js';
 
@@ -26,6 +27,7 @@ Wood.Assistant = Assistant;
 Wood.Divider = Divider;
 Wood.Form = Form;
 Wood.Input = Input;
+Wood.InputDropdown = InputDropdown;
 Wood.InputList = InputList;
 Wood.List = List;
 Wood.Subheader = Subheader;
