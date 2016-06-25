@@ -1,0 +1,88 @@
+<html style="width:100%;height:100%;">
+    <head>
+        <!-- dependencies -->
+        <link rel="stylesheet" href="../bower_components/datatables-scroller/css/dataTables.scroller.css"/>
+        <link rel="stylesheet" href="../bower_components/datatables-tabletools/css/dataTables.tableTools.css"/>
+
+        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="../bower_components/bootstrap-dialog/dist/css/bootstrap-dialog.min.css"/>
+        <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css"/>
+
+        <!-- library -->
+        <link rel="stylesheet" href="../dist/css/Wood.css"/>
+    </head>
+    <body style="width:100%;height:100%;">
+        <style>
+          body{
+            width:100%;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background-color: rgba(0,0,0,0.16)
+          }
+
+          #body{
+            width:100%;
+            height:100%;
+            display:flex;
+            justify-content: center;
+            align-items:center;
+          }
+
+          .demo-page{
+            display: flex;
+            flex-direction: column;
+            width:100%;
+            height: 100%;
+            display:flex;
+            align-items:center;
+            overflow-y: scroll;
+          }
+
+          .display-row{
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+          }
+        </style>
+        <h1>Component Library</h1>
+        <div id="body"></div>
+
+        <!-- dependencies -->
+        <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+        <script type="text/javascript" src="../bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="../bower_components/datatables-scroller/js/dataTables.scroller.js"></script>
+        <script type="text/javascript" src="../bower_components/datatables-tableTools/js/dataTables.tableTools.js"></script>
+        <script type="text/javascript" src="../bower_components/datatables-colResize/dataTables.colResize.js"></script>
+
+        <script type="text/javascript" src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../bower_components/bootstrap-dialog/dist/js/bootstrap-dialog.js"></script>
+
+        <script type="text/javascript" src="../bower_components/underscore/underscore-min.js"></script>
+        <script type="text/javascript" src="../bower_components/underscore.string/dist/underscore.string.min.js"></script>
+        <script type="text/javascript" src="../bower_components/backbone/backbone.js"></script>
+        <script type="text/javascript" src="../bower_components/backbone.babysitter/lib/backbone.babysitter.js"></script>
+        <script type="text/javascript" src="../bower_components/backbone.wreqr/lib/backbone.wreqr.js"></script>
+        <script type="text/javascript" src="../bower_components/marionette/lib/backbone.marionette.js"></script>
+
+        <!-- library -->
+        <script type="text/javascript" src="../dist/js/Wood.js"></script>
+
+        <!-- library -->
+        <script type="text/javascript" src="demo.js"></script>
+
+        <!-- initialization -->
+        <script type="text/javascript">
+          var app = new Backbone.Marionette.Application();
+          app.addRegions({
+          	body: '#body'
+          });
+
+          $(document).ready(function() {
+            var demoPage = new Wood.DemoPage();
+            app.body.show(demoPage)
+          });
+        </script>
+    </body>
+</html>

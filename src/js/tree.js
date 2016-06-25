@@ -30,7 +30,7 @@
       var tree = this.getTree();
       this.treeContainer.show(tree);
 
-      for( childEventName in tree.childEvents ){
+      for( var childEventName in tree.childEvents ){
         this.bubbleChildEvent(childEventName)
       }
     },
@@ -70,6 +70,9 @@
     },
     filter: function(child, index, collection){
       return this.tree.filter(child, index, collection)
+    },
+    viewComparator: function(a,b){
+      return this.tree.viewComparator(a,b)
     }
   });
 
@@ -97,6 +100,9 @@
     },
     filter: function(child, index, collection){
       return true;
+    },
+    viewComparator: function(a, b){
+      return false;
     },
     getCollection: function(){
       return new Backbone.Collection(this.options.children);

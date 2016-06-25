@@ -24,17 +24,17 @@
       '<div id="dropdown-arbor-container"></div>' +
       ''),
     regions: {
-      // iconContainer: '#icon',
-      // iconButtonContainer: '#icon-button',
-      // iconTooltipContainer: '#icon-tooltip',
-      // iconMaterialContainer: '#icon-material',
-      // flatButtonContainer: '#flat-button',
-      // raisedButtonContainer: '#raised-button',
+      iconContainer: '#icon',
+      iconButtonContainer: '#icon-button',
+      iconTooltipContainer: '#icon-tooltip',
+      iconMaterialContainer: '#icon-material',
+      flatButtonContainer: '#flat-button',
+      raisedButtonContainer: '#raised-button',
       cardFormContainer: '#card-form-container',
-      cardListContainer: '#card-list-container'
-      // listContainer: '#list-container',
-      // dropdownTreeContainer: '#dropdown-tree-container',
-      // dropdownArborContainer: '#dropdown-arbor-container',
+      cardListContainer: '#card-list-container',
+      listContainer: '#list-container',
+      dropdownTreeContainer: '#dropdown-tree-container',
+      dropdownArborContainer: '#dropdown-arbor-container'
     },
     events: {},
     initialize: function (options) {
@@ -45,72 +45,67 @@
       var icon = new Wood.Icon({
         icon: 'check'
       });
-      // this.iconContainer.show(icon);
+      this.iconContainer.show(icon);
       var iconButton = new Wood.IconButton({
         icon: 'check'
       });
-      // this.iconButtonContainer.show(iconButton);
+      this.iconButtonContainer.show(iconButton);
       var iconTooltip = new Wood.IconButton({
         icon: 'check',
         tooltip: 'Tooltip'
       });
-      // this.iconTooltipContainer.show(iconTooltip);
+      this.iconTooltipContainer.show(iconTooltip);
       var iconMaterial = new Wood.IconButton({
         iconClass: 'material',
         icon: 'android',
         tooltip: 'Material Icon'
       });
-      // this.iconMaterialContainer.show(iconMaterial);
+      this.iconMaterialContainer.show(iconMaterial);
 
       // Buttons
       var flatButton = new Wood.FlatButton();
-      // this.flatButtonContainer.show(flatButton)
+      this.flatButtonContainer.show(flatButton);
       var raisedButton = new Wood.RaisedButton();
-      // this.raisedButtonContainer.show(raisedButton);
+      this.raisedButtonContainer.show(raisedButton);
 
       // Card & Form
-      var card = new Wood.Card({
-        primaryText: 'Sign In',
-        headerOptions: {
-          icon: 'sign-in',
-          shape: 'circle',
-          backgroundColor: 'white'
-        },
-        contentView: Wood.Assistant,
-        contentOptions: {
-          inputs: [{
-            id: 'username',
-            floatingLabelText: 'Username',
-            hintText: 'Are you the Keymaster?',
-            defaultValue: 'username',
-            required: true,
-            disabled: true
-          }, {
-            id: 'password',
-            floatingLabelText: 'Password',
-            hintText: 'I am the Gatekeeper.',
-            // defaultValue: 'password',
-            type: 'password',
-            required: true
-              // }, {
-              //   id: 'date',
-              //   floatingLabelText: '',
-              //   type: 'datetime-local',
-              //   required: true
-          }],
-          submitButton: {
-            label: 'Sign In'
-          }
-        }
-      });
+      // var card = new Wood.Card({
+      //   primaryText: 'Sign In',
+      //   headerOptions: {
+      //     icon: 'sign-in',
+      //     shape: 'circle',
+      //     backgroundColor: 'white'
+      //   },
+      //   contentView: Wood.Assistant,
+      //   contentOptions: {
+      //     inputs: [{
+      //       id: 'username',
+      //       floatingLabelText: 'Username',
+      //       hintText: 'Are you the Keymaster?',
+      //       defaultValue: 'username',
+      //       required: true,
+      //       disabled: true
+      //     }, {
+      //       id: 'password',
+      //       floatingLabelText: 'Password',
+      //       hintText: 'I am the Gatekeeper.',
+      //       defaultValue: 'password',
+      //       type: 'password',
+      //       required: true
+      //     }],
+      //     submitButton: {
+      //       label: 'Sign In'
+      //     }
+      //   }
+      // });
       // this.cardFormContainer.show(card);
 
-      // var dialog = Wood.FormDialog.show({
+      // Wood.FormDialog.show({
       //   title: 'Specify a Date',
-      //   onSubmit:function(data){
-      //     console.log(data)
+      //   onSubmit: function (data) {
+      //     console.log(data);
       //   },
-      //   formOptions:{
+      //   formOptions: {
       //     inputs: [{
       //       id: 'startdate',
       //       view: Wood.Input,
@@ -118,15 +113,15 @@
       //         floatingLabelText: '',
       //         type: 'datetime-local',
       //         isRequired: true
-      //       },
-      //     },{
+      //       }
+      //     }, {
       //       id: 'enddate',
       //       view: Wood.Input,
       //       options: {
       //         floatingLabelText: '',
       //         type: 'datetime-local',
       //         isRequired: true
-      //       },
+      //       }
       //     }],
       //     submitButton: {
       //       label: 'Submit'
@@ -325,161 +320,161 @@
       //     }
       //   }]
       // });
-      // this.listContainer.show(list)
+      // this.listContainer.show(list);
 
       // Dropdown & Tree
-      var dropdown = new Wood.Dropdown({
-        buttonOptions: {
-          icon: 'skyatlas',
-          label: 'Skywalkers',
-          color: 'black',
-          backgroundColor: 'white'
-        },
-        contentView: Wood.List,
-        contentOptions: {
-          items: [{
-            itemView: Wood.Tree,
-            itemOptions: {
-              itemOptions: {
-                leftIcon: true,
-                leftIconOptions: {
-                  icon: 'empire'
-                },
-                primaryText: 'Anakin Skywalker',
-                secondaryText: 'Darth Vader',
-                rightIcon: true,
-                rightIconView: Wood.Checkbox
-              },
-              children: [{
-                itemOptions: {
-                  leftIcon: true,
-                  leftIconOptions: {
-                    icon: 'rebel'
-                  },
-                  primaryText: 'Leia Organa Solo',
-                  secondaryText: 'Princess Leia',
-                  rightIcon: true,
-                  rightIconView: Wood.Checkbox
-                },
-                children: [{
-                  itemOptions: {
-                    leftIcon: true,
-                    leftIconOptions: {
-                      icon: 'rebel'
-                    },
-                    primaryText: 'Jaina Solo',
-                    secondaryText: 'Definitely Kylo Ren',
-                    rightIcon: true,
-                    rightIconView: Wood.Checkbox
-                  },
-                  children: []
-                }, {
-                  itemOptions: {
-                    leftIcon: true,
-                    leftIconOptions: {
-                      icon: 'empire'
-                    },
-                    primaryText: 'Jacen Solo',
-                    secondaryText: 'Darth Caedus',
-                    rightIcon: true,
-                    rightIconView: Wood.Checkbox
-                  },
-                  children: []
-                }, {
-                  itemOptions: {
-                    leftIcon: true,
-                    leftIconOptions: {
-                      icon: 'rebel'
-                    },
-                    primaryText: 'Anakin Solo',
-                    secondaryText: 'Lil\' Ani',
-                    rightIcon: true,
-                    rightIconView: Wood.Checkbox
-                  },
-                  children: []
-                }]
-              }, {
-                itemOptions: {
-                  leftIcon: true,
-                  leftIconOptions: {
-                    icon: 'rebel'
-                  },
-                  primaryText: 'Luke Skywalker',
-                  secondaryText: 'A New Hope',
-                  rightIcon: true,
-                  rightIconView: Wood.Checkbox
-                },
-                children: []
-              }]
-            }
-          }, {
-            itemView: Wood.Item,
-            itemOptions: {
-              leftIcon: true,
-              leftIconOptions: {
-                icon: 'code-fork'
-              },
-              primaryText: 'Fork Session',
-              color: 'black'
-            }
-          }]
-        }
-      });
+      // var dropdown = new Wood.Dropdown({
+      //   buttonOptions: {
+      //     icon: 'skyatlas',
+      //     label: 'Skywalkers',
+      //     color: 'black',
+      //     backgroundColor: 'white'
+      //   },
+      //   contentView: Wood.List,
+      //   contentOptions: {
+      //     items: [{
+      //       itemView: Wood.Tree,
+      //       itemOptions: {
+      //         itemOptions: {
+      //           leftIcon: true,
+      //           leftIconOptions: {
+      //             icon: 'empire'
+      //           },
+      //           primaryText: 'Anakin Skywalker',
+      //           secondaryText: 'Darth Vader',
+      //           rightIcon: true,
+      //           rightIconView: Wood.Checkbox
+      //         },
+      //         children: [{
+      //           itemOptions: {
+      //             leftIcon: true,
+      //             leftIconOptions: {
+      //               icon: 'rebel'
+      //             },
+      //             primaryText: 'Leia Organa Solo',
+      //             secondaryText: 'Princess Leia',
+      //             rightIcon: true,
+      //             rightIconView: Wood.Checkbox
+      //           },
+      //           children: [{
+      //             itemOptions: {
+      //               leftIcon: true,
+      //               leftIconOptions: {
+      //                 icon: 'rebel'
+      //               },
+      //               primaryText: 'Jaina Solo',
+      //               secondaryText: 'Definitely Kylo Ren',
+      //               rightIcon: true,
+      //               rightIconView: Wood.Checkbox
+      //             },
+      //             children: []
+      //           }, {
+      //             itemOptions: {
+      //               leftIcon: true,
+      //               leftIconOptions: {
+      //                 icon: 'empire'
+      //               },
+      //               primaryText: 'Jacen Solo',
+      //               secondaryText: 'Darth Caedus',
+      //               rightIcon: true,
+      //               rightIconView: Wood.Checkbox
+      //             },
+      //             children: []
+      //           }, {
+      //             itemOptions: {
+      //               leftIcon: true,
+      //               leftIconOptions: {
+      //                 icon: 'rebel'
+      //               },
+      //               primaryText: 'Anakin Solo',
+      //               secondaryText: 'Lil\' Ani',
+      //               rightIcon: true,
+      //               rightIconView: Wood.Checkbox
+      //             },
+      //             children: []
+      //           }]
+      //         }, {
+      //           itemOptions: {
+      //             leftIcon: true,
+      //             leftIconOptions: {
+      //               icon: 'rebel'
+      //             },
+      //             primaryText: 'Luke Skywalker',
+      //             secondaryText: 'A New Hope',
+      //             rightIcon: true,
+      //             rightIconView: Wood.Checkbox
+      //           },
+      //           children: []
+      //         }]
+      //       }
+      //     }, {
+      //       itemView: Wood.Item,
+      //       itemOptions: {
+      //         leftIcon: true,
+      //         leftIconOptions: {
+      //           icon: 'code-fork'
+      //         },
+      //         primaryText: 'Fork Session',
+      //         color: 'black'
+      //       }
+      //     }]
+      //   }
+      // });
       // this.dropdownTreeContainer.show(dropdown)
-
-      var dropdown = new Wood.Dropdown({
-        buttonOptions: {
-          icon: 'code-fork',
-          label: 'Fork Session',
-          color: 'black',
-          backgroundColor: 'white'
-        },
-        contentView: Wood.List,
-        contentOptions: {
-          items: [{
-            itemView: Wood.Arbor,
-            itemOptions: {
-              root: 17,
-              collection: new Backbone.Collection([{
-                'description': 'Grandpa',
-                'id': 17,
-                'parent': null
-              }, {
-                'description': 'Father',
-                'id': 71919,
-                'parent': 17
-              }, {
-                'description': 'Grandson',
-                'id': 71921,
-                'parent': 71919
-              }, {
-                'description': 'Granddaughter',
-                'id': 71922,
-                'parent': 71919
-              }, {
-                'description': 'Cousin',
-                'id': 71923,
-                'parent': 71920
-              }, {
-                'description': 'Uncle',
-                'id': 71920,
-                'parent': 17
-              }])
-            }
-          }, {
-            itemView: Wood.Item,
-            itemOptions: {
-              leftIcon: true,
-              leftIconOptions: {
-                icon: 'code-fork'
-              },
-              primaryText: 'Fork Session',
-              color: 'black'
-            }
-          }]
-        }
-      });
-      // this.dropdownArborContainer.show(dropdown)
+      //
+      // var dropdown = new Wood.Dropdown({
+      //   buttonOptions: {
+      //     icon: 'code-fork',
+      //     label: 'Fork Session',
+      //     color: 'black',
+      //     backgroundColor: 'white'
+      //   },
+      //   contentView: Wood.List,
+      //   contentOptions: {
+      //     items: [{
+      //       itemView: Wood.Arbor,
+      //       itemOptions: {
+      //         root: 17,
+      //         collection: new Backbone.Collection([{
+      //           'description': 'Grandpa',
+      //           'id': 17,
+      //           'parent': null
+      //         }, {
+      //           'description': 'Father',
+      //           'id': 71919,
+      //           'parent': 17
+      //         }, {
+      //           'description': 'Grandson',
+      //           'id': 71921,
+      //           'parent': 71919
+      //         }, {
+      //           'description': 'Granddaughter',
+      //           'id': 71922,
+      //           'parent': 71919
+      //         }, {
+      //           'description': 'Cousin',
+      //           'id': 71923,
+      //           'parent': 71920
+      //         }, {
+      //           'description': 'Uncle',
+      //           'id': 71920,
+      //           'parent': 17
+      //         }])
+      //       }
+      //     }, {
+      //       itemView: Wood.Item,
+      //       itemOptions: {
+      //         leftIcon: true,
+      //         leftIconOptions: {
+      //           icon: 'code-fork'
+      //         },
+      //         primaryText: 'Fork Session',
+      //         color: 'black'
+      //       }
+      //     }]
+      //   }
+      // });
+      // this.dropdownArborContainer.show(dropdown);
     },
     templateHelpers: function () {}
   });

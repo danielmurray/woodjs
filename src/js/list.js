@@ -41,6 +41,7 @@ class List extends Marionette.CollectionView{
   }
 
   getChildView (model, index) {
+    console.log(model)
     return Wood.Item;
   }
 }
