@@ -11,7 +11,6 @@ require('./input');
 require('./item');
 require('./spinner');
 require('./ripple');
-require('./table');
 require('./tooltip');
 require('./toolbar');
 require('./tree');

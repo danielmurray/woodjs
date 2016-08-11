@@ -746,13 +746,6 @@ wood-spinner-overlay .overlay {
   cursor: wait;
   opacity: 0.8; }
 
-.dataTables_wrapper .title {
-  font-size: 24px;
-  float: left; }
-
-.dataTables_wrapper div.DTTT_container {
-  margin-bottom: 0; }
-
 wood-header {
   display: flex;
   display: -ms-flexbox;
